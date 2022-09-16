@@ -16,7 +16,7 @@
         <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
 
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
-          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="message">
+          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
 
       </textarea>
         <div class="btn">
@@ -28,14 +28,36 @@
       </div>
       <div class="step-two-form">
         <p><label>STEP 2 - Select Parameters</label></p>
-        <p>CODON TABLE</p>
+        <!-- <p>CODON TABLE</p>
         <select formControlName="condt">
           <option *ngFor="let item of data">
             {{ item }}
           </option>
+        </select> -->
+        <!-- <p>The default settings will fulfill the needs of most users.</p> -->
+        <p>Database</p>
+        <select formControlName="database">
+          <option *ngFor="let item of data">
+            {{ item }}
+          </option>
         </select>
-        <p>The default settings will fulfill the needs of most users.</p>
-
+        <p>Database</p>
+        <select formControlName="evalue">
+          <option *ngFor="let item of data">
+            {{ item }}
+          </option>
+        </select>
+        <p>Database</p>
+        <select formControlName="asp">
+          <option *ngFor="let item of data">
+            {{ item }}
+          </option>
+        </select>
+        <select formControlName="format">
+          <option *ngFor="let item of data">
+            {{ item }}
+          </option>
+        </select>
         <button (click)="toggleinput()" id="btn"> {{buttonName}}</button>
         <p>(Click here, if you want to view or change the default settings.)</p>
         <div *ngIf="show2">
