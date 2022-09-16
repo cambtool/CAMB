@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
+}
+.page-size{
+    width: 1200px;
+    margin: 0 auto;
+}
+.header {
+    padding: 10px 0;
+    box-shadow: 3px 3px 5px 0 #cccccc6b;
+    background-color: #fff;
+}
+.header-logo {
+    display: inline-block;
+    width: 20%;
+    vertical-align: middle;
+}
+.header-logo img {
+    width: 100%;
+}
+.header-navigation {
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+}
+.header-navigation ul li {
+    display: inline-block;
+}
+.header-navigation ul li a {
+    text-decoration: none;
+    color: #014371;
+    padding: 36px 10px;
+    font-weight: 500;
+    font-size: 15px;
+}
+.header-navigation ul {
+    margin: 0;
+    padding: 0;
+}
+.info-navigation {
+    display: inline-block;
+    width: 29.3%;
+    vertical-align: middle;
+    text-align: right;
+}
+.info-navigation ul li {
+    display: inline-block;
+    padding: 0 9px;
+    vertical-align: middle;
+}
+.info-navigation ul li:last-child{
+    padding-right: 0;
+}
+.info-navigation ul li a {
+    text-decoration: none;
+    color: #014371;
+    font-weight: 500;
+}
+.info-navigation ul li img {
+    width: 23px;
+}
+.info-navigation ul li input{
+    padding: 8px 28px;
+    border-radius: 5px;
+    border: 2px solid #014371;
+    outline: none;
+}
+#gsearch {
+    background-image: url(../../assets/images/search.png);
+    background-repeat: no-repeat;
+    background-position: center right 6px;
+    background-size: 18px;
+}
+.info-navigation ul{
+    margin: 0;
+    padding: 0;
+}
+
+.sub-menu {
+  display: none;
+}
+.header-navigation ul li{
+  position: relative;
+}
+::ng-deep .header-navigation ul li:hover .sub-menu{
+  display: block !important;
+  position: absolute;
+  left: 6px;
+  top: 53px;
+  width: 197px;
+  background-color: #fff;
+  box-shadow: 3px 3px 5px 0 #cccccc6b;
+}
+
+.sub-menu ul li a{
+  display: block;
+  font-size: 14px;
+  padding: 20px 10px !important;
+  text-align: left;
+  display: block;
+}
+.sub-menu ul li {
+  display: block;
+}
