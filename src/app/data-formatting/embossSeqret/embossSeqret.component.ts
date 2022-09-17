@@ -14,33 +14,34 @@ export class EmbossSeqretComponent implements OnInit {
   show2 = false;
   show3 = false;
   isSubmitted = false;
-  FirtORF: any = ['YES', 'NO',];
-  lastORF: any = ['Yes', 'No']
-  reverse: any = ['Yes', 'No']
-  size: any = ['1']
+  stype: any = ['Protein', 'DNA', 'RNA'];
+  feature: any = ['true', 'false'];
+  firstonly: any = ['true', 'false'];
+  reverse: any = ['true', 'false'];
+  outputcase: any = ['Non', 'Lower', 'Upper'];
+  seqrange: any = ['Started End'];
   public buttonName: any = 'More option...';
 
   constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient
   ) { }
   registrationForm = this.fb.group({
-    message: new FormControl(''),
-    condt: new FormControl(''),
+    sequence: new FormControl(''),
+    stype: new FormControl(''),
+    inputformat: new FormControl(''),
+    outputformat: new FormControl(''),
+    feature: new FormControl(''),
+    firstonly: new FormControl(''),
+    reverse: new FormControl(''),
+    outputcase: new FormControl(''),
+    seqrange: new FormControl(''),
     email: new FormControl(''),
     title: new FormControl(''),
-    first: new FormControl(''),
-    last: new FormControl(''),
-    reverse: new FormControl(''),
-    size: new FormControl(''),
 
 
   });
   ngOnInit() {
-    this.service.getData()
-      .pipe()
-      .subscribe((res) => {
-        console.log(res.parameters);
-        this.data = res.parameters
-      });
+    this.inputformat();
+    this.outputformat();
   }
   toggle() {
     // this.show = !this.show;
@@ -65,6 +66,29 @@ export class EmbossSeqretComponent implements OnInit {
   get cityName() {
     return this.registrationForm.get('cityName');
   }
+  inputformat() {
+    this.service.getformat('inputformat')
+      .pipe()
+      .subscribe((res) => {
+        this.data = res.values.values
+        // console.log(res.parameters);
+        // this.data = res.parameters
+        console.log(this.data);
+
+      });
+  }
+  outputformat() {
+    this.service.getformat('outputformat')
+      .pipe()
+      .subscribe((res) => {
+        this.data = res.values.values
+        // console.log(res.parameters);
+        // this.data = res.parameters
+        console.log(this.data);
+
+      });
+  }
+
 
   onSubmit(xml: any): void {
     console.log(this.registrationForm);

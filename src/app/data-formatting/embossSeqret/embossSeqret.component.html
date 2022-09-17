@@ -35,60 +35,72 @@
           </option>
         </select> -->
         <!-- <p>The default settings will fulfill the needs of most users.</p> -->
-        <p>Database</p>
-        <select formControlName="database">
-          <option *ngFor="let item of data">
+        <p>stype</p>
+        <select formControlName="stype">
+          <option *ngFor="let Stype of stype" [ngValue]="stype">
+            {{ Stype }}
+          </option>
+        </select>
+        <p>inputformat</p>
+        <select formControlName="inputformat">
+          <option *ngFor="let item of data" [ngValue]="data.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>outputformat</p>
+        <select formControlName="outputformat">
+          <option *ngFor="let item of data" [ngValue]="data">
             {{ item }}
           </option>
         </select>
-        <p>Database</p>
-        <select formControlName="evalue">
-          <option *ngFor="let item of data">
-            {{ item }}
-          </option>
-        </select>
-        <p>Database</p>
-        <select formControlName="asp">
-          <option *ngFor="let item of data">
-            {{ item }}
-          </option>
-        </select>
-        <select formControlName="format">
-          <option *ngFor="let item of data">
-            {{ item }}
+        <p>feature</p>
+        <select formControlName="feature">
+          <option *ngFor="let Feature of feature" [ngValue]="feature">
+            {{ Feature }}
           </option>
         </select>
         <button (click)="toggleinput()" id="btn"> {{buttonName}}</button>
         <p>(Click here, if you want to view or change the default settings.)</p>
         <div *ngIf="show2">
           <div class="more-option">
-            <p>FIRST ORF </p>
-            <select formControlName="first">
-              <option *ngFor="let FirtORF of FirtORF" [ngValue]="FirtORF" placeholder=" FIRST ORF">
-                {{ FirtORF }}
+            <p>firstonly </p>
+            <select formControlName="firstonly">
+              <option *ngFor="let Firstonly of firstonly" [ngValue]="firstonly" placeholder=" FIRST ORF">
+                {{ Firstonly }}
               </option>
             </select>
           </div>
-          <div class="more-option">
-            <p>LAST ORF </p>
-            <select formControlName="last">
+          <!-- <div class="more-option">
+            <p>feature </p>
+            <select formControlName="feature">
               <option *ngFor="let lastORF of lastORF" [ngValue]="lastORF">
                 {{ lastORF }}
               </option>
             </select>
-          </div>
+          </div> -->
           <div class="more-option">
             <p>REVERSE</p>
             <select formControlName="reverse">
-              <p>REVERSE</p>
-              <option *ngFor="let reverse of reverse" [ngValue]="reverse">
-                {{ reverse }}
+              <option *ngFor="let Reverse of reverse" [ngValue]="reverse">
+                {{ Reverse }}
               </option>
             </select>
           </div>
           <div class="more-option">
-            <p>SIZE</p>
-            <input formControlName="size">
+            <p>outputcase</p>
+            <select formControlName="outputcase">
+              <option *ngFor="let Outputcase of outputcase" [ngValue]="outputcase">
+                {{ Outputcase }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>seqrange</p>
+            <select formControlName="seqrange">
+              <option *ngFor="let Seqrange of seqrange" [ngValue]="seqrange">
+                {{ Seqrange }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
