@@ -1,0 +1,127 @@
+<div class="pack-head">
+  <div class="page-size">
+    <h1>CEQRET</h1>
+  </div>
+</div>
+<div class="page-size">
+  <div class="form">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+      <h2>EMBOSS Sixpack</h2>
+      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
+        visual
+        manner.</p>
+      <!-- <label for="textbox">Step:1 - Enter your input sequence </label> -->
+      <div class="step-one-form">
+        <label>Step:1 - Enter your input sequence </label>
+        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
+
+        <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
+          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+
+      </textarea>
+        <div class="btn">
+          <button (click)="toggle()" id="equence-btn">
+            Use a examples equence
+          </button>
+          <button (click)="handleClear()">Clear</button>
+        </div>
+      </div>
+      <div class="step-two-form">
+        <p><label>STEP 2 - Select Parameters</label></p>
+        <!-- <p>CODON TABLE</p>
+        <select formControlName="condt">
+          <option *ngFor="let item of data">
+            {{ item }}
+          </option>
+        </select> -->
+        <!-- <p>The default settings will fulfill the needs of most users.</p> -->
+        <p>stype</p>
+        <select formControlName="stype">
+          <option *ngFor="let Stype of stype" [ngValue]="stype">
+            {{ Stype }}
+          </option>
+        </select>
+        <p>inputformat</p>
+        <select formControlName="inputformat">
+          <option *ngFor="let item of data" [ngValue]="data.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>outputformat</p>
+        <select formControlName="outputformat">
+          <option *ngFor="let item of data" [ngValue]="data">
+            {{ item }}
+          </option>
+        </select>
+        <p>feature</p>
+        <select formControlName="feature">
+          <option *ngFor="let Feature of feature" [ngValue]="feature">
+            {{ Feature }}
+          </option>
+        </select>
+        <button (click)="toggleinput()" id="btn"> {{buttonName}}</button>
+        <p>(Click here, if you want to view or change the default settings.)</p>
+        <div *ngIf="show2">
+          <div class="more-option">
+            <p>firstonly </p>
+            <select formControlName="firstonly">
+              <option *ngFor="let Firstonly of firstonly" [ngValue]="firstonly" placeholder=" FIRST ORF">
+                {{ Firstonly }}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="more-option">
+            <p>feature </p>
+            <select formControlName="feature">
+              <option *ngFor="let lastORF of lastORF" [ngValue]="lastORF">
+                {{ lastORF }}
+              </option>
+            </select>
+          </div> -->
+          <div class="more-option">
+            <p>REVERSE</p>
+            <select formControlName="reverse">
+              <option *ngFor="let Reverse of reverse" [ngValue]="reverse">
+                {{ Reverse }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>outputcase</p>
+            <select formControlName="outputcase">
+              <option *ngFor="let Outputcase of outputcase" [ngValue]="outputcase">
+                {{ Outputcase }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>seqrange</p>
+            <select formControlName="seqrange">
+              <option *ngFor="let Seqrange of seqrange" [ngValue]="seqrange">
+                {{ Seqrange }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="step-three-form">
+        <label>STEP 3 - Submit your job</label>
+        <p>
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
+          Be notified by email (Tick this box if you want to be notified by email when the results are available)
+        </p>
+        <div *ngIf="show3">
+          <div class="job-frm">
+            <input id="textbox" type="text" placeholder="EMAil" formControlName="email">
+            <input id="textbox" type="text" placeholder="TITLE" formControlName="title">
+            <p>
+              If available, the title will be included in the subject of the notification email and can be used as a way
+              to
+              identify your analysis</p>
+          </div>
+        </div>
+        <button id="btnn" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

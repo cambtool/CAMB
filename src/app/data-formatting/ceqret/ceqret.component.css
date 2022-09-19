@@ -4,7 +4,7 @@
 }
 .pack-head {
   padding: 3% 0;
-  background-color:#014371;
+  background-color:#3e3e3f;
 }
 .pack-head h1{
   font-size: 3rem;
@@ -14,7 +14,7 @@
 }
 .form h2 {
   font-size: 2.5rem;
-  color: #014371;
+  color: #3e3e3f;
   font-weight: 400;
   margin: 0;
   padding: 23px 0;
@@ -34,7 +34,7 @@
   margin-right: 23px;
 }
 .btn button, .step-two-form  button, .step-three-form button{
-  background-color: #014371;
+  background-color: #3e3e3f;
   color: #fff;
   padding: 13px 18px;
   border-radius: 6px;
@@ -50,24 +50,25 @@
   position: absolute;
   top: -15px;
   font-size: 18px;
+
 }
 .step-two-form input, .job-frm input {
   width: 35%;
   padding: 7px 6px;
-  outline-color: #014371;
+  outline-color: #3e3e3f;
 }
 
 .more-option input, .job-frm input {
   width: 31%;
   margin-right: 20px;
-  outline-color: #014371;
+  outline-color: #3e3e3f;
   position: relative;
 }
 .step-two-form select, .more-option input {
   width: 94% !important;
   padding: 7px 6px;
   margin-right: 20px;
-  outline-color: #014371;
+  outline-color: #3e3e3f;
 }
 .more-option input:last-child, .job-frm input:last-child{
   margin-right: 0;

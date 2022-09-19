@@ -7,10 +7,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DataformatingService } from './dataformating.service';
+import { CeqretComponent } from './ceqret/ceqret.component';
 
 @NgModule({
   declarations: [
-    EmbossSeqretComponent
+    EmbossSeqretComponent,
+    CeqretComponent
 
   ],
   imports: [
