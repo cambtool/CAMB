@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,17 +8,17 @@ export class DataformatingService {
 
   constructor(private http: HttpClient) { }
   getformat(format: string) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/parameterdetails/' + format;
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/' + format;
+
+    let option: any = {
+      body: format,
+      oberve: "response",
+      responseType: "blob",
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Accept": "application/xml"
+      })
+    }
     return this.http.get<any>(url)
   }
-  // getoutputformat() {
-  //   const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/parameterdetails/outputformat';
-  //   return this.http.get<any>(url)
-  // }
-  // postData() {
-  //     return this.http.post<any>(
-  //         this.rootUrl + "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run",
-  //         sortedtasks
-  //     );
-  // }
 }

@@ -44,15 +44,14 @@ export class EmbossSeqretComponent implements OnInit {
 
   });
   async ngOnInit() {
-    this.stypeList = await this.service.getformat('stype').toPromise();
-
-    this.inputformat = await this.service.getformat('inputformat').toPromise();
-    this.outputformat = await this.service.getformat('outputformat').toPromise();
-    this.feature = await this.service.getformat('feature').toPromise();
-    this.firstonly = await this.service.getformat('firstonly').toPromise();
-    this.reverse = await this.service.getformat('reverse').toPromise();
-    this.outputcase = await this.service.getformat('outputcase').toPromise();
-    this.seqrange = await this.service.getformat('seqrange').toPromise();
+    this.stypeList = await this.service.getformat('emboss_seqret/parameterdetails/stype').toPromise();
+    this.inputformat = await this.service.getformat('emboss_seqret/parameterdetails/inputformat').toPromise();
+    this.outputformat = await this.service.getformat('emboss_seqret/parameterdetails/outputformat').toPromise();
+    this.feature = await this.service.getformat('emboss_seqret/parameterdetails/feature').toPromise();
+    this.firstonly = await this.service.getformat('emboss_seqret/parameterdetails/firstonly').toPromise();
+    this.reverse = await this.service.getformat('emboss_seqret/parameterdetails/reverse').toPromise();
+    this.outputcase = await this.service.getformat('emboss_seqret/parameterdetails/outputcase').toPromise();
+    this.seqrange = await this.service.getformat('emboss_seqret/parameterdetails/seqrange').toPromise();
 
   }
   toggle() {
@@ -87,8 +86,13 @@ export class EmbossSeqretComponent implements OnInit {
       // console.log(JSON.stringify(this.registrationForm.value));
     }
     let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
+
+
     const headers = new HttpHeaders()
     this.http.post(url, xml).subscribe(res => console.log("Data Post Done"));
+    // const content = JSON.stringify(xml);
+
 
   }
 }
+

@@ -9,38 +9,41 @@ import { DataformatingService } from '../dataformating.service';
   styleUrls: ['./ceqret.component.css']
 })
 export class CeqretComponent implements OnInit {
-  data: any = [];
+  sequence: any = [];
+  lastorf: any = [];
   name = '';
   show: boolean = false;
   show2 = false;
   show3 = false;
   isSubmitted = false;
-  stype: any = ['Protein', 'DNA', 'RNA'];
-  feature: any = ['true', 'false'];
-  firstonly: any = ['true', 'false'];
-  reverse: any = ['true', 'false'];
-  outputcase: any = ['Non', 'Lower', 'Upper'];
-  seqrange: any = ['Started End'];
+  codontable: any = [];
+  reverse: any = [];
+  orfminsize: any = [];
+  firstorf: any = [];
+  data: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private http: HttpClient, private service: DataformatingService,) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient) { }
   registrationForm = this.fb.group({
     sequence: new FormControl(''),
-    stype: new FormControl(''),
-    inputformat: new FormControl(''),
-    outputformat: new FormControl(''),
-    feature: new FormControl(''),
-    firstonly: new FormControl(''),
+    lastorf: new FormControl(''),
+    codontable: new FormControl(''),
     reverse: new FormControl(''),
-    outputcase: new FormControl(''),
-    seqrange: new FormControl(''),
+    orfminsize: new FormControl(''),
+    firstorf: new FormControl(''),
     email: new FormControl(''),
     title: new FormControl(''),
 
 
   });
-  ngOnInit() {
-    // this.inputformat();
-    // this.outputformat();
+  async ngOnInit() {
+    this.codontable = await this.service.getformat('emboss_sixpack/parameterdetails/codontable').toPromise();
+    this.firstorf = await this.service.getformat('emboss_sixpack/parameterdetails/firstorf').toPromise();
+    this.lastorf = await this.service.getformat('emboss_sixpack/parameterdetails/lastorf').toPromise();
+    this.reverse = await this.service.getformat('emboss_sixpack/parameterdetails/reverse').toPromise();
+    this.orfminsize = await this.service.getformat('emboss_sixpack/parameterdetails/orfminsize').toPromise();
+    this.sequence = await this.service.getformat('emboss_sixpack/parameterdetails/sequence').toPromise();
+    // this.outputcase = await this.service.getformat('parameterdetails/outputcase').toPromise();
+    // this.seqrange = await this.service.getformat('parameterdetails/seqrange').toPromise();
   }
   toggle() {
     // this.show = !this.show;
@@ -65,37 +68,15 @@ export class CeqretComponent implements OnInit {
   get cityName() {
     return this.registrationForm.get('cityName');
   }
-
-  inputformat() {
-    this.service.getformat('inputformat')
-      .pipe()
-      .subscribe((res) => {
-        this.data = res.values.values
-        // console.log(res.parameters);
-        // this.data = res.parameters
-        console.log(this.data);
-
-      });
-  }
-  outputformat() {
-    this.service.getformat('outputformat')
-      .pipe()
-      .subscribe((res) => {
-        this.data = res.values.values
-        // console.log(res.parameters);
-        // this.data = res.parameters
-        console.log(this.data);
-
-      });
-  }
-
   onSubmit(xml: any): void {
+    console.log(xml);
+
     console.log(this.registrationForm);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     } else {
-      console.log(JSON.stringify(this.registrationForm.value));
+      // console.log(JSON.stringify(this.registrationForm.value));
     }
     let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
     const headers = new HttpHeaders()
