@@ -5,7 +5,7 @@
 </div>
 <div class="page-size">
   <div class="form">
-    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+    <form [formGroup]="registrationForm">
       <h2>EMBOSS Sixpack</h2>
       <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
         visual
@@ -13,8 +13,17 @@
       <!-- <label for="textbox">Step:1 - Enter your input sequence </label> -->
       <div class="step-one-form">
         <label>Step:1 - Enter your input sequence </label>
-        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
 
+        <div class="step-one-drop-down">
+          <p>Enter a type of</p>
+          <select formControlName="stype">
+            <option *ngFor="let Stype of stypeList.values.values" [ngValue]="Stype.value">
+              {{ Stype.label }}
+            </option>
+          </select>
+        </div>
+
+        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
           placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
 
@@ -35,38 +44,39 @@
           </option>
         </select> -->
         <!-- <p>The default settings will fulfill the needs of most users.</p> -->
-        <p>stype</p>
+        <!-- <p>stype</p>
         <select formControlName="stype">
-          <option *ngFor="let Stype of stype" [ngValue]="stype">
+          <option *ngFor="let Stype of stypeList" [ngValue]="stypeList">
             {{ Stype }}
           </option>
-        </select>
+        </select> -->
         <p>inputformat</p>
         <select formControlName="inputformat">
-          <option *ngFor="let item of data" [ngValue]="data.value">
+          <option *ngFor="let item of inputformat.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
         <p>outputformat</p>
         <select formControlName="outputformat">
-          <option *ngFor="let item of data" [ngValue]="data">
-            {{ item }}
+          <option *ngFor="let item of outputformat.values.values" [ngValue]="item.value">
+            {{ item.label }}
           </option>
         </select>
         <p>feature</p>
         <select formControlName="feature">
-          <option *ngFor="let Feature of feature" [ngValue]="feature">
-            {{ Feature }}
+          <option *ngFor="let Feature of feature.values.values" [ngValue]="Feature.value">
+            {{ Feature.label }}
           </option>
         </select>
-        <button (click)="toggleinput()" id="btn"> {{buttonName}}</button>
-        <p>(Click here, if you want to view or change the default settings.)</p>
-        <div *ngIf="show2">
+        <!-- <button (click)="toggleinput()" id="btn"> {{buttonName}}</button>
+        <p>(Click here, if you want to view or change the default settings.)</p> -->
+        <!-- *ngIf="show2" -->
+        <div>
           <div class="more-option">
             <p>firstonly </p>
             <select formControlName="firstonly">
-              <option *ngFor="let Firstonly of firstonly" [ngValue]="firstonly" placeholder=" FIRST ORF">
-                {{ Firstonly }}
+              <option *ngFor="let item of firstonly.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
+                {{ item.label }}
               </option>
             </select>
           </div>
@@ -81,24 +91,24 @@
           <div class="more-option">
             <p>REVERSE</p>
             <select formControlName="reverse">
-              <option *ngFor="let Reverse of reverse" [ngValue]="reverse">
-                {{ Reverse }}
+              <option *ngFor="let Reverse of reverse.values.values" [ngValue]="Reverse.value">
+                {{ Reverse.label }}
               </option>
             </select>
           </div>
           <div class="more-option">
             <p>outputcase</p>
             <select formControlName="outputcase">
-              <option *ngFor="let Outputcase of outputcase" [ngValue]="outputcase">
-                {{ Outputcase }}
+              <option *ngFor="let Outputcase of outputcase.values.values" [ngValue]="Outputcase.value">
+                {{ Outputcase.label }}
               </option>
             </select>
           </div>
           <div class="more-option">
             <p>seqrange</p>
             <select formControlName="seqrange">
-              <option *ngFor="let Seqrange of seqrange" [ngValue]="seqrange">
-                {{ Seqrange }}
+              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
+                {{ Seqrange.label }}
               </option>
             </select>
           </div>
@@ -120,7 +130,7 @@
               identify your analysis</p>
           </div>
         </div>
-        <button id="btnn" type="submit">Submit</button>
+        <button id="btnn" (click)="onSubmit(registrationForm.value)" type="submit">Submit</button>
       </div>
     </form>
   </div>

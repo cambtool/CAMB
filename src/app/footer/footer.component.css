@@ -1,8 +1,11 @@
+.page-size {
+  width: 1200px;
+  margin: 0 auto;
+}
 .footer {
   background-color: #e4e8eb;
   padding: 4% 0;
   margin-top: 262px;
-
 }
 .footer-navigation ul {
   margin: 0;
@@ -36,7 +39,9 @@
   margin: 0;
   padding-bottom: 20px;
 }
-.facebook a, .twitter a, .youtube a {
+.facebook a,
+.twitter a,
+.youtube a {
   background-image: url(../../assets/images/facebook.png) !important;
   background-position: center;
   background-repeat: no-repeat;
