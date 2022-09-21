@@ -1,0 +1,94 @@
+.page-size {
+  width: 1200px;
+  margin: 0 auto;
+}
+.pack-head {
+  padding: 3% 0;
+  background-color: #1c1c1d;
+}
+.pack-head h1 {
+  font-size: 3rem;
+  margin: 0;
+  color: #fff;
+  font-weight: 400;
+}
+.form h2 {
+  font-size: 2.5rem;
+  color: #014371;
+  font-weight: 400;
+  margin: 0;
+  padding: 23px 0;
+}
+.step-one-form,
+.step-two-form,
+.step-three-form {
+  background-color: #f7f7f7;
+  border: 2px solid #eee;
+  padding: 6% 1%;
+  position: relative;
+  margin-top: 3%;
+}
+.btn {
+  text-align: right;
+  margin-top: 14px;
+}
+#equence-btn {
+  margin-right: 23px;
+}
+.btn button,
+.step-two-form button,
+.step-three-form button {
+  background-color: #1c1c1d;
+  color: #fff;
+  padding: 13px 18px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 18px;
+}
+.step-one-form label,
+.step-two-form label,
+.step-three-form label {
+  background-color: #e5e5e5;
+  padding: 0.1em 0.5em;
+  border: 2px solid #d8d8d8;
+  position: absolute;
+  top: -15px;
+  font-size: 18px;
+}
+.step-two-form input,
+.job-frm input {
+  width: 35%;
+  padding: 7px 6px;
+  outline-color: #1c1c1d;
+}
+
+.more-option input,
+.job-frm input {
+  width: 31%;
+  margin-right: 20px;
+  outline-color: #1c1c1d;
+  position: relative;
+}
+.step-two-form select,
+.more-option input {
+  width: 94% !important;
+  padding: 7px 6px;
+  margin-right: 20px;
+  outline-color: #1c1c1d;
+}
+.more-option input:last-child,
+.job-frm input:last-child {
+  margin-right: 0;
+}
+.more-option {
+  display: inline-block;
+  width: 25%;
+}
+.step-one-drop-down select {
+  width: 99.5%;
+  padding: 7px 6px;
+  margin-bottom: 23px;
+  outline-color: #1c1c1d;
+}

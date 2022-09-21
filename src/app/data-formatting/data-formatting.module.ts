@@ -8,11 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DataformatingService } from './dataformating.service';
 import { CeqretComponent } from './ceqret/ceqret.component';
+import { PhylogencyComponent } from './Phylogency/Phylogency.component';
 
 @NgModule({
   declarations: [
     EmbossSeqretComponent,
-    CeqretComponent
+    CeqretComponent,
+    PhylogencyComponent
 
   ],
   imports: [
