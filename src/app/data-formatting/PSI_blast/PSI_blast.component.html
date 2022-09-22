@@ -1,0 +1,179 @@
+<div class="pack-head">
+  <div class="page-size">
+    <h1>EMBL-EBI Web Services</h1>
+  </div>
+</div>
+<div class="page-size">
+  <div class="form">
+    <form [formGroup]="registrationForm">
+      <h2>Job Dispatcher RESTful Web Services</h2>
+      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
+        visual
+        manner.</p>
+      <div class="step-one-form">
+        <label>Step:1 - Enter your input sequence </label>
+
+        <div class="step-one-drop-down">
+          <p>Enter a type of</p>
+          <select formControlName="matrix">
+            <option *ngFor="let Matrix of matrix.values.values" [ngValue]="matrix.value">
+              {{ Matrix.label }}
+            </option>
+          </select>
+        </div>
+
+        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
+        <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
+          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+
+      </textarea>
+        <div class="btn">
+          <button (click)="toggle()" id="equence-btn">
+            Use a examples equence
+          </button>
+          <button (click)="handleClear()">Clear</button>
+        </div>
+      </div>
+      <div class="step-two-form">
+        <p><label>STEP 2 - Select Parameters</label></p>
+        <p>gapopen</p>
+        <select formControlName="gapopen">
+          <option *ngFor="let item of gapopen.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>gapext</p>
+        <select formControlName="gapext">
+          <option *ngFor="let item of gapext.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>expthr</p>
+        <select formControlName="expthr">
+          <option *ngFor="let Feature of expthr.values.values" [ngValue]="expthr.value">
+            {{ Feature.label }}
+          </option>
+        </select>
+        <div>
+          <div class="more-option">
+            <p>psithr </p>
+            <select formControlName="psithr">
+              <option *ngFor="let item of psithr.values.values" [ngValue]="item.value" placeholder=" psithr">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>scores</p>
+            <select formControlName="scores">
+              <option *ngFor="let Scores of scores.values.values" [ngValue]="scores.value">
+                {{ Scores.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>alignments</p>
+            <select formControlName="alignments">
+              <option *ngFor="let Alignments of alignments.values.values" [ngValue]="alignments.value">
+                {{ Alignments.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>dropoff</p>
+            <select formControlName="dropoff">
+              <option *ngFor="let Dropoff of dropoff.values.values" [ngValue]="dropoff.value">
+                {{ Dropoff.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>finaldropoff</p>
+            <select formControlName="alignView">
+              <option *ngFor="let Finaldropoff of finaldropoff.values.values" [ngValue]="finaldropoff.value">
+                {{ Finaldropoff.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>filter</p>
+            <select formControlName="filter">
+              <option *ngFor="let Filter of filter.values.values" [ngValue]="filter.value">
+                {{ Filter.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>seqrange</p>
+            <select formControlName="seqrange">
+              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="seqrange.value">
+                {{ Seqrange.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>database</p>
+            <select formControlName="database">
+              <option *ngFor="let Database of database.values.values" [ngValue]="database.value">
+                {{ Database.label }}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="more-option">
+            <p>previousjobid</p>
+            <select formControlName="previousjobid">
+              <option *ngFor="let previousjobid of previousjobid" [ngValue]="previousjobid.values">
+                {{ previousjobid.name}}
+              </option>
+            </select>
+          </div> -->
+          <!-- <div class="more-option">
+            <p>selectedHits</p>
+            <select formControlName="selectedHits">
+              <option *ngFor="let SelectedHits of selectedHits.values.values" [ngValue]="selectedHits.value">
+                {{ SelectedHits.label }}
+              </option>
+            </select>
+          </div> -->
+          <!-- <div class="more-option">
+            <p>cpfile</p>
+            <select formControlName="cpfile">
+              <option *ngFor="let Cpfile of cpfile.values.values" [ngValue]="cpfile.value">
+                {{ Cpfile.label }}
+              </option>
+            </select>
+          </div> -->
+          <!--
+          <div class="more-option">
+            <p>patfile</p>
+            <select formControlName="patfile">
+              <option *ngFor="let patfile of patfile.values.values" [ngValue]="patfile.value">
+                {{ patfile.label }}
+              </option>
+            </select>
+          </div> -->
+
+        </div>
+      </div>
+
+      <div class="step-three-form">
+        <label>STEP 3 - Submit your job</label>
+        <p>
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
+          Be notified by email (Tick this box if you want to be notified by email when the results are available)
+        </p>
+        <div *ngIf="show3">
+          <div class="job-frm">
+            <input id="textbox" type="text" placeholder="EMAil" formControlName="email">
+            <input id="textbox" type="text" placeholder="TITLE" formControlName="title">
+            <p>
+              If available, the title will be included in the subject of the notification email and can be used as a way
+              to
+              identify your analysis</p>
+          </div>
+        </div>
+        <button id="btnn" (click)="onSubmit(registrationForm.value)" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

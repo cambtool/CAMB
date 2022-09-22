@@ -9,12 +9,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DataformatingService } from './dataformating.service';
 import { CeqretComponent } from './ceqret/ceqret.component';
 import { PhylogencyComponent } from './Phylogency/Phylogency.component';
+import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
 
 @NgModule({
   declarations: [
     EmbossSeqretComponent,
     CeqretComponent,
-    PhylogencyComponent
+    PhylogencyComponent,
+    PSI_blastComponent
 
   ],
   imports: [
