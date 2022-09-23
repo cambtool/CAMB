@@ -10,7 +10,7 @@ import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
 
 const routes: Routes = [
   { path: 'EMBOSS', component: EmbossSeqretComponent },
-  { path: 'ceqret', component: CeqretComponent },
+  { path: 'Sixpack', component: CeqretComponent },
   { path: 'Phylogeny', component: PhylogencyComponent },
   { path: 'PSi', component: PSI_blastComponent },
   { path: 'EBI', component: EmblEbiComponent },
