@@ -5,37 +5,53 @@
     </div>
     <div class="header-navigation">
       <ul>
-        <li><a href="#">Data Formatting and Conversions</a>
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>Data Formatting</mat-label>
+            <mat-select style="background-color: red" matNativeControl required>
+              <option style="background-color: red" routerLink="/dataFormatting/EMBOSS">Emboss Seqret</option>
+              <option style="background-color: red" routerLink="/dataFormatting/ceqret">EMBOSS Sixpack</option>
+              <option style="background-color: red" routerLink="/dataFormatting/Phylogeny">Simple Phylogeny</option>
+              <option style="background-color: red" routerLink="/dataFormatting/PSi">PSI-BLAST</option>
+              <option style="background-color: red" routerLink="/dataFormatting/EBI">EMBL-EBI</option>
+            </mat-select>
+          </mat-form-field> -->
+        <!-- <a class="dropDown" href="#">Data Formatting and Conversions</a>
           <div class="sub-menu">
             <ul>
               <li><a routerLink="/dataFormatting/EMBOSS">EMBOSS Seqret</a></li>
               <li><a routerLink="/dataFormatting/ceqret">EMBOSS Sixpack</a></li>
               <li><a routerLink="/dataFormatting/Phylogeny">Simple Phylogeny</a></li>
               <li><a routerLink="/dataFormatting/PSi">PSI-BLAST</a></li>
+              <li><a routerLink="/dataFormatting/EBI">EMBL-EBI</a></li>
             </ul>
-          </div>
-        </li>
-        <li><a href="#">DNA Analysis</a>
-          <div class="sub-menu">
-            <ul>
-              <li><a href="#">DNA Analysis</a></li>
-              <li><a href="#">DNA Analysis</a></li>
-              <li><a href="#">DNA Analysis</a></li>
-            </ul>
-          </div>
-        </li>
-        <li><a href="#">Protein Analysis</a>
-          <div class="sub-menu">
-            <ul>
-              <li><a href="#">Protein Analysis</a></li>
-              <li><a href="#">Protein Analysis</a></li>
-              <li><a href="#">Protein Analysis</a></li>
-              <li><a href="#">Protein Analysis</a></li>
+          </div> -->
+        <mat-form-field appearance="fill">
+          <mat-label class="Menu-head">Data Formatting</mat-label>
+          <mat-select>
+            <mat-option routerLink="/dataFormatting/EMBOSS">Emboss Seqret</mat-option>
+            <mat-option routerLink="/dataFormatting/ceqret">EMBOSS Sixpack</mat-option>
+            <mat-option routerLink="/dataFormatting/Phylogeny">Simple Phylogeny</mat-option>
+            <mat-option routerLink="/dataFormatting/PSi">PSI-BLAST</mat-option>
+            <mat-option routerLink="/dataFormatting/EBI">EMBL-EBI</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label class="Menu-head">Dna Analysis</mat-label>
+          <mat-select>
+            <mat-option value="1">Dna Analysis</mat-option>
+            <mat-option value="2">Option 2</mat-option>
+            <mat-option value="3">Option 3</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-
-            </ul>
-          </div>
-        </li>
+        <mat-form-field appearance="fill">
+          <mat-label class="Menu-head">Protein Analysis</mat-label>
+          <mat-select>
+            <mat-option value="1">Protein Analysis</mat-option>
+            <mat-option value="2">Option 2</mat-option>
+            <mat-option value="3">Option 3</mat-option>
+          </mat-select>
+        </mat-form-field>
       </ul>
     </div>
     <div class="info-navigation">

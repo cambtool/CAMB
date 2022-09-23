@@ -10,7 +10,7 @@ body{
     margin: 0 auto;
 }
 .header {
-    padding: 10px 0;
+    padding: 20px 0;
     box-shadow: 3px 3px 5px 0 #cccccc6b;
     background-color: #fff;
 }
@@ -24,7 +24,7 @@ body{
 }
 .header-navigation {
     display: inline-block;
-    width: 50%;
+    width: 53%;
     vertical-align: middle;
     text-align: center;
     position: relative;
@@ -45,7 +45,7 @@ body{
 }
 .info-navigation {
     display: inline-block;
-    width: 29.3%;
+    width: 27%;
     vertical-align: middle;
     text-align: right;
 }
@@ -66,20 +66,21 @@ body{
     width: 23px;
 }
 .info-navigation ul li input{
-    padding: 8px 28px;
-    border-radius: 5px;
-    border: 2px solid #014371;
-    outline: none;
+  padding: 8px 28px;
+  border-radius: 5px;
+  border: 1px solid #014371;
+  outline: none;
+  padding-left: 12px;
 }
 #gsearch {
-    background-image: url(../../assets/images/search.png);
-    background-repeat: no-repeat;
-    background-position: center right 6px;
-    background-size: 18px;
+  background-image: url(../../assets/images/search.png);
+  background-repeat: no-repeat;
+  background-position: center right 6px;
+  background-size: 15px;
 }
 .info-navigation ul{
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .sub-menu {
@@ -88,12 +89,19 @@ body{
 .header-navigation ul li{
   position: relative;
 }
+.header-navigation ul li .dropDown{
+  background-image: url(../../assets/images/arrow-down.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 10px;
+  padding-right: 17px;
+}
 ::ng-deep .header-navigation ul li:hover .sub-menu{
   display: block !important;
   position: absolute;
   left: 6px;
   top: 53px;
-  width: 197px;
+  width: 220px;
   background-color: #fff;
   box-shadow: 3px 3px 5px 0 #cccccc6b;
 }
@@ -101,10 +109,34 @@ body{
 .sub-menu ul li a{
   display: block;
   font-size: 14px;
-  padding: 20px 10px !important;
+  padding: 15px 12px !important;
   text-align: left;
   display: block;
 }
 .sub-menu ul li {
   display: block;
 }
+
+.mat-form-field {
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+
+}
+::ng-deep.Menu-head {
+  color: #014371;
+  font-weight: 500;
+  padding-bottom: 23px !important;
+}
+::ng-deep.mat-select-arrow {
+  color: #014371 !important;
+}
+::ng-deep.mat-form-field-wrapper{
+  padding: 0;
+}
+::ng-deep.mat-form-field-hide-placeholder .mat-select-placeholder {
+  padding-bottom: 10px;
+}
+

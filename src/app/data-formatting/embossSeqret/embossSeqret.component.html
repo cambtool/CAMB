@@ -6,13 +6,13 @@
 <div class="page-size">
   <div class="form">
     <form [formGroup]="registrationForm">
-      <h2>EMBOSS Seqret</h2>
+
       <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
         visual
         manner.</p>
       <!-- <label for="textbox">Step:1 - Enter your input sequence </label> -->
       <div class="step-one-form">
-        <label>Step:1 - Enter your input sequence </label>
+        <h2>Step:1 - Enter your input sequence </h2>
 
         <div class="step-one-drop-down">
           <p>Enter a type of</p>
@@ -36,20 +36,20 @@
         </div>
       </div>
       <div class="step-two-form">
-        <p><label>STEP 2 - Select Parameters</label></p>
-        <p>inputformat</p>
+        <h2>STEP 2 - Select Parameters</h2>
+        <p>Inputformat</p>
         <select formControlName="inputformat">
           <option *ngFor="let item of inputformat.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>outputformat</p>
+        <p>Outputformat</p>
         <select formControlName="outputformat">
           <option *ngFor="let item of outputformat.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>feature</p>
+        <p>Feature</p>
         <select formControlName="feature">
           <option *ngFor="let Feature of feature.values.values" [ngValue]="Feature.value">
             {{ Feature.label }}
@@ -60,7 +60,7 @@
         <!-- *ngIf="show2" -->
         <div>
           <div class="more-option">
-            <p>firstonly </p>
+            <p>Firstonly </p>
             <select formControlName="firstonly">
               <option *ngFor="let item of firstonly.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
                 {{ item.label }}
@@ -76,7 +76,7 @@
             </select>
           </div> -->
           <div class="more-option">
-            <p>REVERSE</p>
+            <p>Reverse</p>
             <select formControlName="reverse">
               <option *ngFor="let Reverse of reverse.values.values" [ngValue]="Reverse.value">
                 {{ Reverse.label }}
@@ -84,7 +84,7 @@
             </select>
           </div>
           <div class="more-option">
-            <p>outputcase</p>
+            <p>Outputcase</p>
             <select formControlName="outputcase">
               <option *ngFor="let Outputcase of outputcase.values.values" [ngValue]="Outputcase.value">
                 {{ Outputcase.label }}
@@ -92,7 +92,7 @@
             </select>
           </div>
           <div class="more-option">
-            <p>seqrange</p>
+            <p>Seqrange</p>
             <select formControlName="seqrange">
               <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
                 {{ Seqrange.label }}
@@ -102,15 +102,15 @@
         </div>
       </div>
       <div class="step-three-form">
-        <label>STEP 3 - Submit your job</label>
+        <h2>STEP 3 - Submit your job</h2>
         <p>
           <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
           Be notified by email (Tick this box if you want to be notified by email when the results are available)
         </p>
         <div *ngIf="show3">
           <div class="job-frm">
-            <input id="textbox" type="text" placeholder="EMAil" formControlName="email">
-            <input id="textbox" type="text" placeholder="TITLE" formControlName="title">
+            <input id="textbox" type="text" placeholder="Email" formControlName="email">
+            <input id="textbox" type="text" placeholder="Title" formControlName="title">
             <p>
               If available, the title will be included in the subject of the notification email and can be used as a way
               to

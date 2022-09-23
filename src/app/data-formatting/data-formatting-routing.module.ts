@@ -5,6 +5,7 @@ import { DataformatingService } from './dataformating.service';
 import { CeqretComponent } from './ceqret/ceqret.component';
 import { PhylogencyComponent } from './Phylogency/Phylogency.component';
 import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
+import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'ceqret', component: CeqretComponent },
   { path: 'Phylogeny', component: PhylogencyComponent },
   { path: 'PSi', component: PSI_blastComponent },
+  { path: 'EBI', component: EmblEbiComponent },
 
 ];
 

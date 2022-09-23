@@ -1,6 +1,6 @@
 <div class="pack-head">
   <div class="page-size">
-    <h1>PSI BLAST Web Services</h1>
+    <h1>EMBL-EBI Web Services</h1>
   </div>
 </div>
 <div class="page-size">
@@ -11,7 +11,7 @@
         visual
         manner.</p>
       <div class="step-one-form">
-        <label>Step:1 - Enter your input sequence </label>
+        <h2>Step:1 - Enter your input sequence </h2>
 
         <div class="step-one-drop-down">
           <p>Enter a type of Matrix</p>
@@ -48,39 +48,39 @@
             {{ item.label }}
           </option>
         </select>
-        <p>Expthr</p>
-        <select formControlName="expthr">
-          <option *ngFor="let Feature of expthr.values.values" [ngValue]="expthr.value">
-            {{ Feature.label }}
+        <p>Task</p>
+        <select formControlName="task">
+          <option *ngFor="let Task of task.values.values" [ngValue]="task.value">
+            {{ Task.label }}
           </option>
         </select>
         <div>
           <div class="more-option">
-            <p>Psithr </p>
-            <select formControlName="psithr">
-              <option *ngFor="let item of psithr.values.values" [ngValue]="item.value" placeholder=" psithr">
+            <p>Program </p>
+            <select formControlName="program">
+              <option *ngFor="let item of program.values.values" [ngValue]="program.value" placeholder=" psithr">
                 {{ item.label }}
               </option>
             </select>
           </div>
           <div class="more-option">
-            <p>Scores</p>
+            <p>scores</p>
             <select formControlName="scores">
-              <option *ngFor="let Scores of scores.values.values" [ngValue]="scores.value">
-                {{ Scores.label }}
+              <option *ngFor="let scores of scores.values.values" [ngValue]="scores.value">
+                {{ scores.label }}
               </option>
             </select>
           </div>
           <div class="more-option">
-            <p>Alignments</p>
+            <p>alignments</p>
             <select formControlName="alignments">
               <option *ngFor="let Alignments of alignments.values.values" [ngValue]="alignments.value">
                 {{ Alignments.label }}
               </option>
             </select>
           </div>
-          <div class="more-option part">
-            <p>Dropoff</p>
+          <div class="more-option">
+            <p>dropoff</p>
             <select formControlName="dropoff">
               <option *ngFor="let Dropoff of dropoff.values.values" [ngValue]="dropoff.value">
                 {{ Dropoff.label }}
@@ -88,15 +88,15 @@
             </select>
           </div>
           <div class="more-option">
-            <p>Finaldropoff</p>
-            <select formControlName="alignView">
-              <option *ngFor="let Finaldropoff of finaldropoff.values.values" [ngValue]="finaldropoff.value">
-                {{ Finaldropoff.label }}
+            <p>Exp</p>
+            <select formControlName="exp">
+              <option *ngFor="let Exp of exp.values.values" [ngValue]="exp.value">
+                {{ Exp.label }}
               </option>
             </select>
           </div>
           <div class="more-option">
-            <p>Filter</p>
+            <p>filter</p>
             <select formControlName="filter">
               <option *ngFor="let Filter of filter.values.values" [ngValue]="filter.value">
                 {{ Filter.label }}
@@ -104,15 +104,15 @@
             </select>
           </div>
           <div class="more-option">
-            <p>Seqrange</p>
+            <p>seqrange</p>
             <select formControlName="seqrange">
               <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="seqrange.value">
                 {{ Seqrange.label }}
               </option>
             </select>
           </div>
-          <div class="more-option part">
-            <p>Database</p>
+          <div class="more-option">
+            <p>database</p>
             <select formControlName="database">
               <option *ngFor="let Database of database.values.values" [ngValue]="database.value">
                 {{ Database.label }}
@@ -120,40 +120,86 @@
             </select>
           </div>
           <div class="more-option">
-            <p>Previousjobid</p>
-            <select formControlName="previousjobid">
-              <option [ngValue]="previousjobid.value">
-                {{ previousjobid.type}}
+            <p>Match_scores</p>
+            <select formControlName="match_scores">
+              <option *ngFor="let Match_scores of match_scores.values.values" [ngValue]="match_scores.values">
+                {{ Match_scores.label}}
               </option>
             </select>
           </div>
           <div class="more-option">
-            <p>{{ selectedHits.name }}</p>
-            <select formControlName="selectedHits">
-              <option [ngValue]="selectedHits.value">
-                {{ selectedHits.type }}
+            <p>Hsps</p>
+            <select formControlName="hsps">
+              <option *ngFor="let Hsps of hsps.values.values" [ngValue]="hsps.value">
+                {{ Hsps.label }}
               </option>
             </select>
-
           </div>
           <div class="more-option">
-            <p>Cpfile</p>
-            <select formControlName="cpfile">
-              <option [ngValue]="cpfile.value">
-                {{ cpfile.type }}
+            <p>Gapalign</p>
+            <select formControlName="gapalign">
+              <option *ngFor="let Gapalign of gapalign.values.values" [ngValue]="gapalign.value">
+                {{ Gapalign.label }}
               </option>
             </select>
           </div>
 
-          <div class="more-option part">
-            <p>Patfile</p>
-            <select formControlName="patfile">
-              <option [ngValue]="patfile.value">
-                {{ patfile.type }}
+          <div class="more-option">
+            <p>Wordsize</p>
+            <select formControlName="wordsize">
+              <option *ngFor="let Wordsize of wordsize.values.values" [ngValue]="wordsize.value">
+                {{ Wordsize.label }}
               </option>
             </select>
           </div>
-
+          <div class="more-option">
+            <p>Taxids</p>
+            <select formControlName="taxids">
+              <option *ngFor="let Taxids of taxids.values.values" [ngValue]="taxids.value">
+                {{ Taxids.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>Compstats</p>
+            <select formControlName="compstats">
+              <option *ngFor="let Compstats of compstats.values.values" [ngValue]="Compstats.value">
+                {{ Compstats.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>Align</p>
+            <select formControlName="align">
+              <option *ngFor="let Align of align.values.values" [ngValue]="align.value">
+                {{ Align.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>Transltable</p>
+            <select formControlName="transltable">
+              <option *ngFor="let Transltable of transltable.values.values" [ngValue]="transltable.value">
+                {{ Transltable.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>Stype</p>
+            <select formControlName="stype">
+              <option *ngFor="let Stype of stype.values.values" [ngValue]="stype.value">
+                {{ Stype.label }}
+              </option>
+            </select>
+          </div>
+          <div class="more-option">
+            <p>negative_taxids</p>
+            <select formControlName="negative_taxids">
+              <option *ngFor="let Negative_taxids of negative_taxids.values.values" [ngValue]="negative_taxids.value">
+                {{ Negative_taxids.label }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
 

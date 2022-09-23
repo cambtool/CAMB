@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="step-two-form">
-        <p><label>STEP 2 - Select Parameters</label></p>
+        <h2>STEP 2 - Select Parameters</h2>
         <p>Tree</p>
         <select formControlName="tree">
           <option *ngFor="let item of tree.values.values" [ngValue]="item.value">
@@ -68,15 +68,15 @@
         </div>
       </div>
       <div class="step-three-form">
-        <label>STEP 3 - Submit your job</label>
+        <h2>STEP 3 - Submit your job</h2>
         <p>
           <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
           Be notified by email (Tick this box if you want to be notified by email when the results are available)
         </p>
         <div *ngIf="show3">
           <div class="job-frm">
-            <input id="textbox" type="text" placeholder="EMAil" formControlName="email">
-            <input id="textbox" type="text" placeholder="TITLE" formControlName="title">
+            <input id="textbox" type="text" placeholder="Email" formControlName="email">
+            <input id="textbox" type="text" placeholder="Title" formControlName="title">
             <p>
               If available, the title will be included in the subject of the notification email and can be used as a way
               to

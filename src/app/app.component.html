@@ -1,3 +1,6 @@
 <app-header></app-header>
-
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="overlay"></div>
+  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+</ng-container>
 <app-footer></app-footer>
