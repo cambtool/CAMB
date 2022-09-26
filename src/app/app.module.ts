@@ -18,6 +18,7 @@ import { LoaderInterceptorService } from './interceptors/loader-interceptor.serv
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatFormFieldModule,
+    FormsModule
 
   ],
   exports: [
