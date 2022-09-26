@@ -7,13 +7,13 @@ import { Camp } from '../interface/camp';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  a: any = {
-    name: "sss"
-  }
+  // a: any = {
+  //   name: "sss"
+  // }
   // inputa: any;
   // values = [true, false, 'true', 'false', 'TRUE', 'FALSE', 'sampletext', 1, undefined, null, (() => { }), {}, []];
   constructor() {
-    console.log(this.a)
+    // console.log(this.a)
   }
 
   ngOnInit() {
@@ -51,9 +51,9 @@ export class HeaderComponent implements OnInit {
     // }
   }
 
-  isBoolean = (val: any) => {
-    const boolValuesRegex = /true|false/; // Add other /true|false|1|0|on|off/
-    if (val === undefined || val === null) return false;
-    return boolValuesRegex.test(val.toString().toLowerCase());
-  }
+  // isBoolean = (val: any) => {
+  //   const boolValuesRegex = /true|false/; // Add other /true|false|1|0|on|off/
+  //   if (val === undefined || val === null) return false;
+  //   return boolValuesRegex.test(val.toString().toLowerCase());
+  // }
 }
