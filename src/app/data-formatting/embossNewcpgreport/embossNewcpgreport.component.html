@@ -1,6 +1,6 @@
 <div class="pack-head">
   <div class="page-size">
-    <h1>EMBOSS Seqret</h1>
+    <h1>Emboss Newcpgreport</h1>
   </div>
 </div>
 <div class="page-size">
@@ -11,16 +11,7 @@
         visual
         manner.</p>
       <div class="step-one-form">
-        <h2>Step:1 - Enter your input sequence </h2>
-
-        <div class="step-one-drop-down">
-          <p>Enter a type of</p>
-          <select formControlName="stype">
-            <option *ngFor="let Stype of stypeList.values.values" [ngValue]="Stype.value">
-              {{ Stype.label }}
-            </option>
-          </select>
-        </div>
+        <h2>Step:1 - Enter your input </h2>
 
         <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
@@ -36,54 +27,30 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Inputformat</p>
-        <select formControlName="inputformat">
-          <option *ngFor="let item of inputformat.values.values" [ngValue]="item.value">
+        <p>Window</p>
+        <select formControlName="window">
+          <option *ngFor="let item of window.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Outputformat</p>
-        <select formControlName="outputformat">
-          <option *ngFor="let item of outputformat.values.values" [ngValue]="item.value">
+        <p>Minlen</p>
+        <select formControlName="minlen">
+          <option *ngFor="let item of minlen.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Feature</p>
-        <select formControlName="feature">
-          <option *ngFor="let Feature of feature.values.values" [ngValue]="Feature.value">
+        <p>Minoe</p>
+        <select formControlName="minoe">
+          <option *ngFor="let Feature of minoe.values.values" [ngValue]="Feature.value">
             {{ Feature.label }}
           </option>
         </select>
         <div>
           <div class="more-option">
-            <p>Firstonly </p>
-            <select formControlName="firstonly">
-              <option *ngFor="let item of firstonly.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
+            <p>Minpc </p>
+            <select formControlName="minpc">
+              <option *ngFor="let item of minpc.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
                 {{ item.label }}
-              </option>
-            </select>
-          </div>
-          <div class="more-option">
-            <p>Reverse</p>
-            <select formControlName="reverse">
-              <option *ngFor="let Reverse of reverse.values.values" [ngValue]="Reverse.value">
-                {{ Reverse.label }}
-              </option>
-            </select>
-          </div>
-          <div class="more-option">
-            <p>Outputcase</p>
-            <select formControlName="outputcase">
-              <option *ngFor="let Outputcase of outputcase.values.values" [ngValue]="Outputcase.value">
-                {{ Outputcase.label }}
-              </option>
-            </select>
-          </div>
-          <div class="more-option">
-            <p>Seqrange</p>
-            <select formControlName="seqrange">
-              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
-                {{ Seqrange.label }}
               </option>
             </select>
           </div>

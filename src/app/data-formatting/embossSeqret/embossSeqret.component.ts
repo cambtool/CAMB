@@ -52,7 +52,6 @@ export class EmbossSeqretComponent implements OnInit {
     this.reverse = await this.service.getformat('emboss_seqret/parameterdetails/reverse').toPromise();
     this.outputcase = await this.service.getformat('emboss_seqret/parameterdetails/outputcase').toPromise();
     this.seqrange = await this.service.getformat('emboss_seqret/parameterdetails/seqrange').toPromise();
-
   }
   toggle() {
     this.registrationForm.controls.sequence.setValue("ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
@@ -63,36 +62,14 @@ export class EmbossSeqretComponent implements OnInit {
   handleClear() {
     this.name = ' ';
   }
-
-  // async  parameterDetails(val: string) {
-  //     this.service.getformat(val)
-  //       .subscribe((res) => {
-  //         // console.log(res.values.values);
-  //         return res.values.values;
-  //       });
-  //     // console.log('after data', this.data);
-
-  //     // return this.data
-  //   }
-
   onSubmit(xml: any): void {
-    console.log(xml);
-
-    console.log(this.registrationForm);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
-    } else {
-      // console.log(JSON.stringify(this.registrationForm.value));
     }
     let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-
-
     const headers = new HttpHeaders()
     this.http.post(url, xml).subscribe(res => console.log("Data Post Done"));
-    // const content = JSON.stringify(xml);
-
-
   }
 }
 

@@ -7,10 +7,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DataformatingService } from './dataformating.service';
-import { CeqretComponent } from './ceqret/ceqret.component';
+import { CeqretComponent } from './embossSixpack/ceqret.component';
 import { PhylogencyComponent } from './Phylogency/Phylogency.component';
 import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
 import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
+import { EmbossNewcpgreportComponent } from './embossNewcpgreport/embossNewcpgreport.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
     CeqretComponent,
     PhylogencyComponent,
     PSI_blastComponent,
-    EmblEbiComponent
+    EmblEbiComponent,
+    EmbossNewcpgreportComponent
 
   ],
   imports: [
