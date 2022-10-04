@@ -45,16 +45,12 @@
             {{ Feature.label }}
           </option>
         </select>
-        <div>
-          <div class="more-option">
-            <p>Minpc </p>
-            <select formControlName="minpc">
-              <option *ngFor="let item of minpc.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
-                {{ item.label }}
-              </option>
-            </select>
-          </div>
-        </div>
+        <p>Minpc </p>
+        <select formControlName="minpc">
+          <option *ngFor="let item of minpc.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
       <div class="step-three-form">
         <h2>STEP 3 - Submit your job</h2>

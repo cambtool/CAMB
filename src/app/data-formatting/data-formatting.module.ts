@@ -11,7 +11,6 @@ import { CeqretComponent } from './embossSixpack/ceqret.component';
 import { PhylogencyComponent } from './Phylogency/Phylogency.component';
 import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
 import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
-import { EmbossNewcpgreportComponent } from './embossNewcpgreport/embossNewcpgreport.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { EmbossNewcpgreportComponent } from './embossNewcpgreport/embossNewcpgre
     PhylogencyComponent,
     PSI_blastComponent,
     EmblEbiComponent,
-    EmbossNewcpgreportComponent
+
 
   ],
   imports: [

@@ -32,8 +32,6 @@ export class CeqretComponent implements OnInit {
     firstorf: new FormControl(''),
     email: new FormControl(''),
     title: new FormControl(''),
-
-
   });
   async ngOnInit() {
     this.codontable = await this.service.getformat('emboss_sixpack/parameterdetails/codontable').toPromise();
@@ -41,14 +39,13 @@ export class CeqretComponent implements OnInit {
     this.lastorf = await this.service.getformat('emboss_sixpack/parameterdetails/lastorf').toPromise();
     this.reverse = await this.service.getformat('emboss_sixpack/parameterdetails/reverse').toPromise();
     this.orfminsize = await this.service.getformat('emboss_sixpack/parameterdetails/orfminsize').toPromise();
-    this.sequence = await this.service.getformat('emboss_sixpack/parameterdetails/sequence').toPromise();
+    // this.sequence = await this.service.getformat('emboss_sixpack/parameterdetails/sequence').toPromise();
     // this.outputcase = await this.service.getformat('parameterdetails/outputcase').toPromise();
     // this.seqrange = await this.service.getformat('parameterdetails/seqrange').toPromise();
   }
   toggle() {
     // this.show = !this.show;
-    this.name =
-      "ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG"
+    this.registrationForm.controls.sequence.setValue("ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
   }
   toggleinput() {
     this.show2 = !this.show2
@@ -61,7 +58,7 @@ export class CeqretComponent implements OnInit {
     this.show3 = !this.show3
   }
   handleClear() {
-    this.name = ' ';
+    this.registrationForm.controls.sequence.setValue('');
   }
 
 
@@ -69,18 +66,15 @@ export class CeqretComponent implements OnInit {
     return this.registrationForm.get('cityName');
   }
   onSubmit(xml: any): void {
-    console.log(xml);
-
-    console.log(this.registrationForm);
+    let formdata = new FormData();
+    formdata.append("email", this.registrationForm.get('email')?.value);
+    formdata.append("sequence", this.registrationForm.get('sequence')?.value);
+    formdata.append("stype", this.registrationForm.get('stype')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
-    } else {
-      // console.log(JSON.stringify(this.registrationForm.value));
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-    const headers = new HttpHeaders()
-    this.http.post(url, xml).subscribe(res => console.log("Data Post Done"));
-
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/run";
+    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
   }
 }

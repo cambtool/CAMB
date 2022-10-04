@@ -97,25 +97,19 @@ export class EmblEbiComponent implements OnInit {
     this.show3 = !this.show3
   }
   handleClear() {
-    this.name = ' ';
+    this.registrationForm.controls.sequence.setValue('');
   }
   onSubmit(xml: any): void {
-    console.log(xml);
-
-    console.log(this.registrationForm);
+    let formdata = new FormData();
+    formdata.append("email", this.registrationForm.get('email')?.value);
+    formdata.append("sequence", this.registrationForm.get('sequence')?.value);
+    formdata.append("stype", this.registrationForm.get('stype')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
-    } else {
-      // console.log(JSON.stringify(this.registrationForm.value));
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-
-
-    const headers = new HttpHeaders()
-    this.http.post(url, xml).subscribe(res => console.log("Data Post Done"));
-    // const content = JSON.stringify(xml);
-
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/run";
+    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
 
   }
 

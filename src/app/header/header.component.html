@@ -13,15 +13,17 @@
             <mat-option routerLink="/dataFormatting/Phylogeny">Simple Phylogeny</mat-option>
             <mat-option routerLink="/dataFormatting/PSi">PSI-BLAST</mat-option>
             <mat-option routerLink="/dataFormatting/EBI">EMBL-EBI</mat-option>
-            <mat-option routerLink="/dataFormatting/Newcpgreport">New-cpgreport</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label class="Menu-head">Dna Analysis</mat-label>
           <mat-select>
-            <mat-option value="1">Dna Analysis</mat-option>
-            <mat-option value="2">Option 2</mat-option>
-            <mat-option value="3">Option 3</mat-option>
+            <mat-option routerLink="/dataAnalysis/Newcpgreport">New-cpgreport</mat-option>
+            <mat-option routerLink="/dataAnalysis/GeneWise">GeneWise</mat-option>
+            <mat-option routerLink="/dataAnalysis/seqcksum">SeqckSum</mat-option>
+            <mat-option routerLink="/dataAnalysis/Isochore">Isochore</mat-option>
+            <mat-option routerLink="/dataAnalysis/CPGPLOT">CPGPLOT</mat-option>
+
           </mat-select>
         </mat-form-field>
 

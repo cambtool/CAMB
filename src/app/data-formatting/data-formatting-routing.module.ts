@@ -6,7 +6,6 @@ import { CeqretComponent } from './embossSixpack/ceqret.component';
 import { PhylogencyComponent } from './Phylogency/Phylogency.component';
 import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
 import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
-import { EmbossNewcpgreportComponent } from './embossNewcpgreport/embossNewcpgreport.component';
 
 
 const routes: Routes = [
@@ -15,7 +14,7 @@ const routes: Routes = [
   { path: 'Phylogeny', component: PhylogencyComponent },
   { path: 'PSi', component: PSI_blastComponent },
   { path: 'EBI', component: EmblEbiComponent },
-  { path: 'Newcpgreport', component: EmbossNewcpgreportComponent },
+
 
 ];
 
