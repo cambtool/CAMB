@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { DataformatingService } from '../dataformating.service';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-embossSeqret',
   templateUrl: './embossSeqret.component.html',
@@ -23,9 +24,11 @@ export class EmbossSeqretComponent implements OnInit {
   outputcase: any = [];
   seqrange: any = [];
   data: any = [];
+  jobId: any = '';
   public buttonName: any = 'More option...';
 
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient,
+    private toaster: ToastrService
   ) {
 
   }
@@ -72,7 +75,17 @@ export class EmbossSeqretComponent implements OnInit {
       false;
     }
     let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => {
+      this.jobId = res;
+      console.log(this.jobId);
+      if (this.jobId != null) {
+        this.service.getStatus(this.jobId).subscribe(
+          data => {
+            this.toaster.success(data.toString())
+          }
+        )
+      }
+    });
   }
 }
 

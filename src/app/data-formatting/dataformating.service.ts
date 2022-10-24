@@ -24,4 +24,8 @@ export class DataformatingService {
     // return this.http.post(this.baseURL + 'https://www.ebi.ac.uk/Tools/services/rest/' + format, body, { 'headers': headers })
     return this.http.get<any>(url)
   }
+  getStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest//emboss_seqret/status/' + jobId
+    return this.http.get(url);
+  }
 }
