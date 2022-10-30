@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { DataformatingService } from '../dataformating.service';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-ceqret',
@@ -22,7 +25,10 @@ export class CeqretComponent implements OnInit {
   firstorf: any = [];
   data: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient) { }
+  jobStatus: any;
+  jobId: any;
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient,
+    private toaster: ToastrService, public dialog: MatDialog) { }
   registrationForm = this.fb.group({
     sequence: new FormControl(''),
     lastorf: new FormControl(''),
@@ -69,12 +75,58 @@ export class CeqretComponent implements OnInit {
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
-    formdata.append("stype", this.registrationForm.get('stype')?.value);
+    formdata.append("lastorf", this.registrationForm.get('lastorf')?.value);
+    formdata.append("codontable", this.registrationForm.get('codontable')?.value);
+    formdata.append("reverse", this.registrationForm.get('reverse')?.value);
+    formdata.append("orfminsize", this.registrationForm.get('orfminsize')?.value);
+    formdata.append("firstorf", this.registrationForm.get('firstorf')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/run";
-    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+    this.service.emboss_sixpack_Run(formdata).subscribe(
+      success => {
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+        if (error.status == 200) {
+          this.jobId = error.error.text
+          if (this.jobId != null) {
+            this.service.getEmboss_SixpackStatus(this.jobId).subscribe(
+              data => {
+                this.toaster.success(data.toString())
+              }, (error) => {
+                if (error.status == 200) {
+                  this.jobStatus = error.error.text
+                  this.toaster.info(this.jobStatus)
+                  setTimeout(() => {
+                    // if (this.jobStatus != "FAILURE") {
+                    this.service.getEmboss_sixpackResult(this.jobId, 'out').subscribe(
+                      success => {
+                        console.log(success);
+                      },
+                      error => {
+                        console.log(error);
+                        if (error.status == 200) {
+                          let result = error.error.text;
+                          const dialogRef = this.dialog.open(ResultComponent, {
+                            data: {
+                              text: result
+                            }
+                          });
+                        }
+                      }
+                    )
+                    // }
+                  }, 2000);
+                }
+              }
+            )
+          }
+        }
+      }
+    )
   }
 }

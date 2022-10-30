@@ -25,7 +25,35 @@ export class DataformatingService {
     return this.http.get<any>(url)
   }
   getStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest//emboss_seqret/status/' + jobId
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/status/' + jobId
+    return this.http.get(url);
+  }
+  Run(obj: FormData) {
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
+    return this.http.post(url, obj, options)
+  }
+  getResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+  emboss_sixpack_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_SixpackStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_sixpackResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
 }

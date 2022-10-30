@@ -26,33 +26,42 @@
       </div>
       <div class="step-two-form">
         <p><label>STEP 2 - Select Parameters</label></p>
-        <p>codontable</p>
-        <select formControlName="codontable">
-          <option *ngFor="let item of codontable.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>outputformat</p>
-        <select formControlName="orfminsize">
-          <option *ngFor="let item of orfminsize.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>feature</p>
-        <select formControlName="firstorf">
-          <option *ngFor="let Feature of firstorf.values.values" [ngValue]="Feature.value">
-            {{ Feature.label }}
-          </option>
-        </select>
         <div>
-          <!-- <div class="more-option">
-            <p>firstonly </p>
-            <select formControlName="firstonly">
-              <option *ngFor="let item of firstonly.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
+          <div class="more-option">
+            <p>CONDON Table</p>
+            <select formControlName="codontable">
+              <option *ngFor="let item of codontable.values.values" [ngValue]="item.value">
                 {{ item.label }}
               </option>
             </select>
-          </div> -->
+          </div>
+          <div class="more-option">
+            <p>ORF MIN SIZE</p>
+            <!-- <select formControlName="orfminsize">
+          <option *ngFor="let item of orfminsize.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select> -->
+            <input formControlName="orfminsize" />
+          </div>
+          <div class="more-option">
+            <p>FIRST ORF</p>
+            <select formControlName="firstorf">
+              <option *ngFor="let Feature of firstorf.values.values" [ngValue]="Feature.value">
+                {{ Feature.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div class="more-option">
+            <p>LAST ORF </p>
+            <select formControlName="firstonly">
+              <option *ngFor="let item of lastorf.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
           <div class="more-option">
             <p>REVERSE</p>
             <select formControlName="reverse">

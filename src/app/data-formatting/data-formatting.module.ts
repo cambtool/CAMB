@@ -11,6 +11,8 @@ import { CeqretComponent } from './embossSixpack/ceqret.component';
 import { PhylogencyComponent } from './Phylogency/Phylogency.component';
 import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
 import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
     PhylogencyComponent,
     PSI_blastComponent,
     EmblEbiComponent,
-
+    ResultComponent
 
   ],
   imports: [
@@ -30,6 +32,8 @@ import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatDialogModule
+
   ],
   exports: [
     CommonModule,

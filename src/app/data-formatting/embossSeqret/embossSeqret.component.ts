@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { DataformatingService } from '../dataformating.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { ResultComponent } from '../result/result.component';
 @Component({
   selector: 'app-embossSeqret',
   templateUrl: './embossSeqret.component.html',
@@ -25,10 +27,11 @@ export class EmbossSeqretComponent implements OnInit {
   seqrange: any = [];
   data: any = [];
   jobId: any = '';
+  jobStatus: string = '';
   public buttonName: any = 'More option...';
 
   constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient,
-    private toaster: ToastrService
+    private toaster: ToastrService, public dialog: MatDialog
   ) {
 
   }
@@ -67,25 +70,91 @@ export class EmbossSeqretComponent implements OnInit {
   }
   onSubmit(xml: any): void {
     let formdata = new FormData();
+    console.log(this.registrationForm.value);
+
     formdata.append("email", this.registrationForm.get('email')?.value);
-    formdata.append("sequence", this.registrationForm.get('sequence')?.value);
     formdata.append("stype", this.registrationForm.get('stype')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
+    formdata.append("inputformat", this.registrationForm.get('inputformat')?.value);
+    formdata.append("outputformat", this.registrationForm.get('outputformat')?.value);
+    formdata.append("feature", this.registrationForm.get('feature')?.value);
+    formdata.append("firstonly", this.registrationForm.get('firstonly')?.value);
+    formdata.append("reverse", this.registrationForm.get('reverse')?.value);
+    formdata.append("outputcase", this.registrationForm.get('outputcase')?.value);
+    formdata.append("seqrange", this.registrationForm.get('seqrange')?.value);
+    formdata.append("sequence", this.registrationForm.get('sequence')?.value);
+
+
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => {
-      this.jobId = res;
-      console.log(this.jobId);
+    this.service.Run(formdata).subscribe((data) => {
+      console.log(data);
+      this.jobId = data;
       if (this.jobId != null) {
         this.service.getStatus(this.jobId).subscribe(
           data => {
             this.toaster.success(data.toString())
+          }, (error) => {
+            this.toaster.success(error.toString())
           }
         )
       }
-    });
+    }, res => {
+      console.log(res);
+      // console.log(res.error.text);
+      if (res.status == 200) {
+        this.jobId = res.error.text;
+        if (this.jobId != null) {
+          this.service.getStatus(this.jobId).subscribe(
+            data => {
+              this.toaster.success(data.toString())
+            }, (error) => {
+              if (error.status == 200) {
+                this.jobStatus = error.error.text
+                this.toaster.info(this.jobStatus)
+                setTimeout(() => {
+                  // if (this.jobStatus != "FAILURE") {
+                  this.service.getResult(this.jobId, 'out').subscribe(
+                    success => {
+                      console.log(success);
+
+                    },
+                    error => {
+                      console.log(error);
+                      if (error.status == 200) {
+                        let result = error.error.text;
+                        const dialogRef = this.dialog.open(ResultComponent, {
+                          data: {
+                            text: result
+                          }
+                        });
+                      }
+                    }
+                  )
+                  // }
+                }, 2000);
+
+              }
+            }
+          )
+        }
+      }
+    })
+
+
+    // this.service.Run(formdata).subscribe(res => {
+    //   this.jobId = res;
+    //   console.log(this.jobId);
+    //   if (this.jobId != null) {
+    //     this.service.getStatus(this.jobId).subscribe(
+    //       data => {
+    //         this.toaster.success(data.toString())
+    //       }
+    //     )
+    //   }
+    // });
   }
 }
 
