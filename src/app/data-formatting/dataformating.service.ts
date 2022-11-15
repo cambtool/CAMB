@@ -56,4 +56,20 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
+  phylogency_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/simple_phylogeny/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getPhylogencyStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/simple_phylogeny/status/' + jobId
+    return this.http.get(url);
+  }
+  getPhylogencyResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
 }

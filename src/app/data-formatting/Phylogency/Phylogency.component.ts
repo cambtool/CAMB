@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { DataformatingService } from '../dataformating.service';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-Phylogency',
@@ -22,7 +25,10 @@ export class PhylogencyComponent implements OnInit {
   kimura: any = [];
   data: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient) { }
+  jobId: any;
+  jobStatus: any;
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient,
+    private toaster: ToastrService, public dialog: MatDialog) { }
   registrationForm = this.fb.group({
     sequence: new FormControl(''),
     tossgaps: new FormControl(''),
@@ -44,7 +50,32 @@ export class PhylogencyComponent implements OnInit {
     this.sequence = await this.service.getformat('simple_phylogeny/parameterdetails/sequence').toPromise();
   }
   toggle() {
-    this.registrationForm.controls.sequence.setValue("ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
+    this.registrationForm.controls.sequence.setValue(`CLUSTAL O(1.2.3) multiple sequence alignment
+    UniProt/Swiss-Prot|P26898|IL2RA_SHEEP      MEPSLLMWRFFVFIVVPGCVTEACHDDPPSLRNA----------MFKVLRYE----VGTM
+    UniProt/Swiss-Prot|P01590|IL2RA_MOUSE      MEPRLLMLGFLSLTIVPSCRAELCLYDPPEVPNA----------TFKALSYK----NGTI
+    UniProt/Swiss-Prot|P41690|IL2RA_FELCA      MEPSLLLWGILTFVVVHGHVTELCDENPPDIQHA----------TFKALTYK----TGTM
+    UniProt/Swiss-Prot|P01589|IL2RA_HUMAN      MDSYLLMWGLLTFIMVPGCQAELCDDDPPEIPHA----------TFKAMAYK----EGTM
+    UniProt/Swiss-Prot|Q5MNY4|IL2RA_MACMU      MDPYLLMWGLLTFITVPGCQAELCDDDPPKITHA----------TFKAVAYK----EGTM
+    UniProt/Swiss-Prot|Q95118|IL2RG_BOVIN      MLKPPLPLRSLLFLQLPLLGVGLNPKFLTPSGNEDIGGKPGTGGDFFLTSTPAGTLDVST
+    UniProt/Swiss-Prot|P40321|IL2RG_CANFA      MLKPPLPLRSLLFLQLSLLGVGLNSTVPMPNGNEDIT------PDFFLTATPSETLSVSS
+    UniProt/Swiss-Prot|P26896|IL2RB_RAT        MATVDLSWRLPLYILLLLLATT--------------------------------WVSAAV
+    UniProt/Swiss-Prot|Q8BZM1|GLMN_MOUSE       ------------------------------------------------------------
+    UniProt/Swiss-Prot|P36835|IL2_CAPHI        ------------------------------------------------------------
+    UniProt/Swiss-Prot|Q7JFM4|IL2_AOTVO        ------------------------------------------------------------
+    UniProt/Swiss-Prot|Q29416|IL2_CANFA        ------------------------------------------------------------
+
+    UniProt/Swiss-Prot|P26898|IL2RA_SHEEP      INCDCKAGFRRVS---AVMRCVGDSSHSAWNNRCFCNSTSPAKNPV--------------
+    UniProt/Swiss-Prot|P01590|IL2RA_MOUSE      LNCECKRGFRRLKE-LVYMRCLGN----SWSSNCQCTSNSHDKS-R--------------
+    UniProt/Swiss-Prot|P41690|IL2RA_FELCA      LNCECKKGFRRISNGSAFMLCAGNSSHSSWENQCRCISTSPRAT-D--------------
+    UniProt/Swiss-Prot|P01589|IL2RA_HUMAN      LNCECKRGFRRIKSGSLYMLCTGNSSHSSWDNQCQCTSSATRNT-T--------------
+    UniProt/Swiss-Prot|Q5MNY4|IL2RA_MACMU      LNCECKRGFRRIKSGSPYMLCTGNSSHSSWDNQCQCTSSAARNT-T--------------
+    UniProt/Swiss-Prot|Q95118|IL2RG_BOVIN      LPLPKVQC---FVFNVEYMNCTWNSSSEPQPNNLTLHYGYRNFNGDDKLQECGHYLFS--
+    UniProt/Swiss-Prot|P40321|IL2RG_CANFA      LPLPEVQC---FVFNVEYMNCTWNSSSEPRPTNLTLHYWYKNSN-DDKVQECGHYLFS--
+    UniProt/Swiss-Prot|P26896|IL2RB_RAT        NDCSHLKC---FYNSRANVSCMWSPEEALNVTSCHIHAK-SDMRHWNKTCELTPVRQASW
+    UniProt/Swiss-Prot|Q8BZM1|GLMN_MOUSE       ---------------------MAVEELQSIIKRCQILEE-HDFKEEDF----GLFQLAGQ
+    UniProt/Swiss-Prot|P36835|IL2_CAPHI        ------------------------------------------------------------
+    UniProt/Swiss-Prot|Q7JFM4|IL2_AOTVO        ------------------------------------------------------------
+    UniProt/Swiss-Prot|Q29416|IL2_CANFA        ------------------------------------------------------------`);
   }
   toggleinput() {
     this.show2 = !this.show2
@@ -66,13 +97,63 @@ export class PhylogencyComponent implements OnInit {
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
-    formdata.append("stype", this.registrationForm.get('stype')?.value);
+    // formdata.append("tossgaps", this.registrationForm.get('tossgaps')?.value);
+    // formdata.append("tree", this.registrationForm.get('tree')?.value);
+    // formdata.append("clustering", this.registrationForm.get('clustering')?.value);
+    // formdata.append("pim", this.registrationForm.get('pim')?.value);
+    // formdata.append("kimura", this.registrationForm.get('kimura')?.value);
+    // formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/simple_phylogeny/run";
-    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+    this.service.phylogency_Run(formdata).subscribe(
+      success => {
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+        if (error.status == 200) {
+          this.jobId = error.error.text
+          if (this.jobId != null) {
+            this.service.getPhylogencyStatus(this.jobId).subscribe(
+              data => {
+                this.toaster.success(data.toString())
+              }, (error) => {
+                if (error.status == 200) {
+                  this.jobStatus = error.error.text
+                  this.toaster.info(this.jobStatus)
+                  setTimeout(() => {
+                    // if (this.jobStatus != "FAILURE") {
+                    this.service.getPhylogencyResult(this.jobId, 'out').subscribe(
+                      success => {
+                        console.log(success);
+                      },
+                      error => {
+                        console.log(error);
+                        if (error.status == 200) {
+                          let result = error.error.text;
+                          const dialogRef = this.dialog.open(ResultComponent, {
+                            data: {
+                              text: result
+                            }
+                          });
+                        }
+                      }
+                    )
+                    // }
+                  }, 3000);
+                }
+                else {
+                  this.toaster.error(error.error)
+                }
+              }
+            )
+          }
+        } else {
+          this.toaster.error(error.error)
+        }
+      })
   }
 
 }

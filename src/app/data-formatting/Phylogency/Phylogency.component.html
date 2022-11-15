@@ -7,12 +7,11 @@
   <div class="form">
     <form [formGroup]="registrationForm">
       <h2>Simple Phylogeny</h2>
-      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-        visual
-        manner.</p>
+      <p>This tool provides access to phylogenetic tree generation methods from the ClustalW2 package. Please note this
+        is NOT a multiple sequence alignment tool.</p>
       <div class="step-one-form">
         <label>Step:1 - Enter your input sequence </label>
-        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
+        <p>Enter or paste a multiple sequence alignment in any supported format:</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
           placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
 
@@ -26,19 +25,19 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Tree</p>
+        <p>Tree Format</p>
         <select formControlName="tree">
           <option *ngFor="let item of tree.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Kimura</p>
+        <p>Distance Correction</p>
         <select formControlName="kimura">
           <option *ngFor="let item of kimura.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Tossgaps</p>
+        <p>Exclude Gaps</p>
         <select formControlName="tossgaps">
           <option *ngFor="let Tossgaps of tossgaps.values.values" [ngValue]="tossgaps.value">
             {{ Tossgaps.label }}
@@ -46,7 +45,7 @@
         </select>
         <div>
           <div class="more-option">
-            <p>Clustering</p>
+            <p>Clustering Method</p>
             <select formControlName="clustering">
               <option *ngFor="let Clustering of clustering.values.values" [ngValue]="clustering.value">
                 {{ Clustering.label }}
@@ -57,7 +56,7 @@
         </div>
         <div>
           <div class="more-option">
-            <p>Pim</p>
+            <p>PIM</p>
             <select formControlName="pim">
               <option *ngFor="let Pim of pim.values.values" [ngValue]="pim.value">
                 {{ Pim.label }}
