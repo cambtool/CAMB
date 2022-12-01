@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { DataformatingService } from '../dataformating.service';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -93,15 +93,18 @@ export class EmbossSeqretComponent implements OnInit {
       console.log(data);
       this.jobId = data;
       if (this.jobId != null) {
+        // (error: any)=>{
+        //   this.toaster.error(error);
         this.service.getStatus(this.jobId).subscribe(
           data => {
             this.toaster.success(data.toString())
           }, (error) => {
-            this.toaster.success(error.toString())
+            this.toaster.error(error.toString())
           }
         )
       }
-    }, res => {
+    },
+    res => {
       console.log(res);
       // console.log(res.error.text);
       if (res.status == 200) {
@@ -134,27 +137,26 @@ export class EmbossSeqretComponent implements OnInit {
                     }
                   )
                   // }
-                }, 2000);
+                }, 15000);
 
               }
             }
           )
         }
       }
-    })
+    }
+    )
+
 
 
     // this.service.Run(formdata).subscribe(res => {
     //   this.jobId = res;
-    //   console.log(this.jobId);
-    //   if (this.jobId != null) {
-    //     this.service.getStatus(this.jobId).subscribe(
-    //       data => {
-    //         this.toaster.success(data.toString())
-    //       }
-    //     )
-    //   }
-    // });
+    // },(error: any)=>{
+    //   this.toaster.error(error);
+    //   this.registrationForm.reset();
+
+    // },
+    // );
   }
 }
 

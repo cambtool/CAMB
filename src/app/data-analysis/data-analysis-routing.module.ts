@@ -6,6 +6,8 @@ import { GeneWiseComponent } from './geneWise/geneWise.component';
 import { SeqckSumComponent } from './SeqckSum/SeqckSum.component';
 import { IsochoreComponent } from './isochore/isochore.component';
 import { CPGPLOTComponent } from './CPGPLOT/CPGPLOT.component';
+import { EmbosTranseqComponent } from './embosTranseq/embosTranseq.component';
+import { BackTranseqComponent } from './backTranseq/backTranseq.component';
 
 const routes: Routes = [
   { path: 'Newcpgreport', component: EmbossNewcpgreportComponent },
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'seqcksum', component: SeqckSumComponent },
   { path: 'Isochore', component: IsochoreComponent },
   { path: 'CPGPLOT', component: CPGPLOTComponent },
+  {path: 'Transeq',component: EmbosTranseqComponent} ,
+  {path: 'BackTranSeq',component: BackTranseqComponent}
 ]
 
 @NgModule({

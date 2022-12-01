@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { DataformatingService } from '../dataformating.service';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-Embl-Ebi',
@@ -10,6 +13,8 @@ import { DataformatingService } from '../dataformating.service';
 })
 export class EmblEbiComponent implements OnInit {
   name = '';
+  jobId: any = '';
+  jobStatus: string = '';
   show: boolean = false;
   show2 = false;
   show3 = false;
@@ -37,8 +42,9 @@ export class EmblEbiComponent implements OnInit {
   transltable: any = []
   stype: any = []
   data: any = [];
+  sequence:any=[]
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient  , private toaster: ToastrService, public dialog: MatDialog) { }
   registrationForm = this.fb.group({
     matrix: new FormControl(''),
     sequence: new FormControl(''),
@@ -89,6 +95,7 @@ export class EmblEbiComponent implements OnInit {
     this.stype = await this.service.getformat('ncbiblast/parameterdetails/stype').toPromise();
     this.seqrange = await this.service.getformat('ncbiblast/parameterdetails/seqrange').toPromise();
     this.database = await this.service.getformat('ncbiblast/parameterdetails/database').toPromise();
+    this.sequence = await this.service.getformat('ncbiblast/parameterdetails/sequence').toPromise();
   }
   toggle() {
     this.registrationForm.controls.sequence.setValue("ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
@@ -104,12 +111,85 @@ export class EmblEbiComponent implements OnInit {
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
     formdata.append("stype", this.registrationForm.get('stype')?.value);
+    formdata.append("program", this.registrationForm.get('program')?.value);
+    formdata.append("matrix", this.registrationForm.get('matrix')?.value);
+    formdata.append("alignments", this.registrationForm.get('alignments')?.value);
+    formdata.append("exp", this.registrationForm.get('exp')?.value);
+    formdata.append("match_scores", this.registrationForm.get('match_scores')?.value);
+    formdata.append("gapopen", this.registrationForm.get('gapopen')?.value);
+    formdata.append("gapext", this.registrationForm.get('gapext')?.value);
+    formdata.append("filter", this.registrationForm.get('filter')?.value);
+    formdata.append("gapalign", this.registrationForm.get('gapalign')?.value);
+    formdata.append("wordsize", this.registrationForm.get('wordsize')?.value);
+    formdata.append("taxids", this.registrationForm.get('taxids')?.value);
+    formdata.append("negative_taxids", this.registrationForm.get('negative_taxids')?.value);
+    formdata.append("compstats", this.registrationForm.get('compstats')?.value);
+    formdata.append("align", this.registrationForm.get('align')?.value);
+    formdata.append("transltable", this.registrationForm.get('transltable')?.value);
+    formdata.append("seqrange", this.registrationForm.get('seqrange')?.value);
+    formdata.append("database", this.registrationForm.get('database')?.value);
+    formdata.append("task", this.registrationForm.get('task')?.value);
+    formdata.append("scores", this.registrationForm.get('scores')?.value);
+    formdata.append("dropoff", this.registrationForm.get('dropoff')?.value);
+
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/run";
-    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+    this.service.ncbiblast_Run(formdata).subscribe((data) => {
+      console.log(data);
+      this.jobId = data;
+      if (this.jobId != null) {
+        this.service.getncbiblastStatus(this.jobId).subscribe(
+          data => {
+            this.toaster.success(data.toString())
+          }, (error) => {
+            this.toaster.success(error.toString())
+          }
+        )
+      }
+    }, res => {
+      console.log(res);
+      // console.log(res.error.text);
+      if (res.status == 200) {
+        this.jobId = res.error.text;
+        if (this.jobId != null) {
+          this.service.getncbiblastStatus(this.jobId).subscribe(
+            data => {
+              this.toaster.success(data.toString())
+            }, (error) => {
+              if (error.status == 200) {
+                this.jobStatus = error.error.text
+                this.toaster.info(this.jobStatus)
+                setTimeout(() => {
+                  // if (this.jobStatus != "FAILURE") {
+                  this.service.getncbiblastResult(this.jobId, 'out').subscribe(
+                    success => {
+                      console.log(success);
+
+                    },
+                    error => {
+                      console.log(error);
+                      if (error.status == 200) {
+                        let result = error.error.text;
+                        const dialogRef = this.dialog.open(ResultComponent, {
+                          data: {
+                            text: result
+                          }
+                        });
+                      }
+                    }
+                  )
+                  // }
+                }, 15000);
+
+              }
+            }
+          )
+        }
+      }
+    })
+
 
   }
 

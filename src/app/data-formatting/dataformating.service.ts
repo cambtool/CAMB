@@ -1,32 +1,48 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { throwError } from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataformatingService {
   baseURL: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private toaster: ToastrService,) { }
   getformat(format: string) {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/' + format;
-    // const headers = { 'content-type': 'application/json' }
-    // const body = JSON.stringify(format);
-    // console.log(body)
-    // let option: any = {
-    //   body: format,
-    //   oberve: "response",
-    //   responseType: "blob",
-    //   headers: new HttpHeaders({
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/xml"
-    //   })
-    // }
+    const headers = { 'content-type': 'application/json' }
+    const body = JSON.stringify(format);
+    console.log(body)
+    let option: any = {
+      body: format,
+      oberve: "response",
+      responseType: "blob",
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Accept": "application/xml"
+      })
+    }
     // return this.http.post(this.baseURL + 'https://www.ebi.ac.uk/Tools/services/rest/' + format, body, { 'headers': headers })
     return this.http.get<any>(url)
   }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('An error occurred:', error.error);
+    } else {
+      console.log(`Backend returned code ${error.status}, body was: `, error.error);
+    }
+    return throwError (error.error);
+  }
+
+
   getStatus(jobId: any) {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/status/' + jobId
-    return this.http.get(url);
+    return this.http.get(url).pipe(
+      catchError(this.handleError)
+    )
   }
   Run(obj: FormData) {
     let headers = new HttpHeaders({
@@ -34,7 +50,8 @@ export class DataformatingService {
     });
     let options = { headers: headers };
     let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-    return this.http.post(url, obj, options)
+    return this.http.post(url, obj, options).pipe(catchError(this.handleError))
+
   }
   getResult(jobId: any, statusType: any) {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/result/' + jobId + '/' + statusType
@@ -72,4 +89,24 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
+
+
+  ncbiblast_Run(obj: FormData) {
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/run";
+    return this.http.post(url, obj, options)
+  }
+  getncbiblastStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/status/' + jobId
+    return this.http.get(url);
+  }
+
+  getncbiblastResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
 }

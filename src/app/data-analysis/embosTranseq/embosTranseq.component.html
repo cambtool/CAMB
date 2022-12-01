@@ -1,0 +1,85 @@
+<div class="pack-head">
+  <div class="page-size">
+    <h1>TRANSEQ</h1>
+  </div>
+</div>
+<div class="page-size">
+  <div class="form">
+    <form [formGroup]="registrationForm">
+
+      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
+        visual
+        manner.</p>
+      <div class="step-one-form">
+        <h2>Step:1 - Enter your input </h2>
+
+        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
+        <p>sequence :</p>
+        <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
+          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+
+        </textarea>
+        <div class="btn">
+          <button (click)="toggle()" id="equence-btn">
+            Use a examples equence
+          </button>
+          <button (click)="handleClear()">Clear</button>
+        </div>
+      </div>
+      <div class="step-two-form">
+        <h2>STEP 2 - Select Parameters</h2>
+        <p>Frame</p>
+        <select formControlName="frame">
+          <option *ngFor="let item of frame.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>Codontable</p>
+        <select formControlName="codontable">
+          <option *ngFor="let item of codontable.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>Regions</p>
+        <select formControlName="regions">
+          <option *ngFor="let Feature of regions.values.values" [ngValue]="Feature.value">
+            {{ Feature.label }}
+          </option>
+        </select>
+        <p>Trim </p>
+        <select formControlName="trim">
+          <option *ngFor="let item of trim.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>Reverse </p>
+        <select formControlName="reverse">
+          <option *ngFor="let item of reverse.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
+
+      <div class="step-three-form">
+        <h2>STEP 3 - Submit your job</h2>
+        <p>
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
+          Be notified by email (Tick this box if you want to be notified by email when the results are available)
+        </p>
+        <div *ngIf="show3">
+          <div class="job-frm">
+            <input id="textbox" type="text" placeholder="Email" formControlName="email">
+            <input id="textbox" type="text" placeholder="Title" formControlName="title">
+            <p>
+              If available, the title will be included in the subject of the notification email and can be used as a
+              way
+              to
+              identify your analysis</p>
+          </div>
+        </div>
+        <button id="btnn" (click)="onSubmit(registrationForm.value)" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
