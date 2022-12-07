@@ -1,3 +1,193 @@
-<p>
-  FASTM works!
-</p>
+<div class="pack-head">
+  <div class="page-size">
+    <h1>FASTM</h1>
+  </div>
+</div>
+<div class="page-size">
+  <div class="form">
+    <form [formGroup]="registrationForm">
+
+      <p>This tool provides sequence similarity searching against protein databases using the FASTM suite of programs.
+         FASTM provides a heuristic search with a protein query. FASTX and FASTY translate a DNA query.
+         Optimal searches are available with SSEARCH (local), GGSEARCH (global) and GLSEARCH (global query, local database).</p>
+      <div class="step-one-form">
+        <h2>Step:1 - Enter your input </h2>
+
+        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
+        <p>sequence :</p>
+        <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
+          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+
+        </textarea>
+        <div class="btn">
+          <button (click)="toggle()" id="equence-btn">
+            Use a examples equence
+          </button>
+          <button (click)="handleClear()">Clear</button>
+        </div>
+      </div>
+      <div class="step-two-form">
+        <h2>STEP 2 - Select Parameters</h2>
+        <p>program</p>
+        <select formControlName="program">
+          <option *ngFor="let item of program.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>stype</p>
+        <select formControlName="stype">
+          <option *ngFor="let item of stype.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>matrix</p>
+        <select formControlName="matrix">
+          <option *ngFor="let Feature of matrix.values.values" [ngValue]="Feature.value">
+            {{ Feature.label }}
+          </option>
+        </select>
+        <p>match_scores </p>
+        <select formControlName="match_scores">
+          <option *ngFor="let item of match_scores.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>gapopen </p>
+        <select formControlName="gapopen">
+          <option *ngFor="let item of gapopen.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>gapext </p>
+        <select formControlName="gapext">
+          <option *ngFor="let item of gapext.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>hsps </p>
+        <select formControlName="hsps">
+          <option *ngFor="let item of hsps.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>expupperlim </p>
+        <select formControlName="expupperlim">
+          <option *ngFor="let item of expupperlim.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>explowlim </p>
+        <select formControlName="explowlim">
+          <option *ngFor="let item of explowlim.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>strand </p>
+        <select formControlName="strand">
+          <option *ngFor="let item of strand.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>hist </p>
+        <select formControlName="hist">
+          <option *ngFor="let item of hist.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>scores </p>
+        <select formControlName="scores">
+          <option *ngFor="let item of scores.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>alignments </p>
+        <select formControlName="alignments">
+          <option *ngFor="let item of alignments.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>scoreformat </p>
+        <select formControlName="scoreformat">
+          <option *ngFor="let item of scoreformat.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>stats </p>
+        <select formControlName="gapopen">
+          <option *ngFor="let item of stats.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <!-- <p>annotfeats </p>
+        <select formControlName="annotfeats">
+          <option *ngFor="let item of annotfeats.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>annotsym </p>
+        <select formControlName="annotsym">
+          <option *ngFor="let item of annotsym.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select> -->
+        <p>dbrange </p>
+        <select formControlName="dbrange">
+          <option *ngFor="let item of dbrange.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>seqrange </p>
+        <select formControlName="seqrange">
+          <option *ngFor="let item of seqrange.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>filter </p>
+        <select formControlName="filter">
+          <option *ngFor="let item of filter.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <!-- <p>transltable </p>
+        <select formControlName="transltable">
+          <option *ngFor="let item of transltable.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select> -->
+        <p>database </p>
+        <select formControlName="database">
+          <option *ngFor="let item of database.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+        <p>ktup </p>
+        <select formControlName="ktup">
+          <option *ngFor="let item of ktup.values.values" [ngValue]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
+
+      <div class="step-three-form">
+        <h2>STEP 3 - Submit your job</h2>
+        <p>
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
+          Be notified by email (Tick this box if you want to be notified by email when the results are available)
+        </p>
+        <div *ngIf="show3">
+          <div class="job-frm">
+            <input id="textbox" type="text" placeholder="Email" formControlName="email">
+            <input id="textbox" type="text" placeholder="Title" formControlName="title">
+            <p>
+              If available, the title will be included in the subject of the notification email and can be used as a
+              way
+              to
+              identify your analysis</p>
+          </div>
+        </div>
+        <button id="btnn" (click)="onSubmit(registrationForm.value)" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
