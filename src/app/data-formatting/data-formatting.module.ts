@@ -13,6 +13,8 @@ import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
 import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ResultComponent } from './result/result.component';
+import { FASTAComponent } from './FASTA/FASTA.component';
+import { FASTMComponent } from './FASTM/FASTM.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ResultComponent } from './result/result.component';
     PhylogencyComponent,
     PSI_blastComponent,
     EmblEbiComponent,
-    ResultComponent
+    ResultComponent,
+    FASTAComponent,
+    FASTMComponent
 
   ],
   imports: [

@@ -2,10 +2,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { FASTAComponent } from './PDBeChem.component';
 
+import { FASTAComponent } from './FASTA.component';
 
-describe('PDBeChemComponent', () => {
+describe('FASTAComponent', () => {
   let component: FASTAComponent;
   let fixture: ComponentFixture<FASTAComponent>;
 
