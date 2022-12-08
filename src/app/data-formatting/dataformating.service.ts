@@ -274,4 +274,24 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_isochore/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
+
+
+
+  genewise_Run(obj: FormData) {
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/genewise/run";
+    return this.http.post(url, obj, options)
+  }
+  genewiseStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/genewise/status/' + jobId
+    return this.http.get(url);
+  }
+
+  genewiseResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/genewise/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
 }
