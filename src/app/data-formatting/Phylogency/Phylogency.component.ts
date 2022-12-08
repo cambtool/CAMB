@@ -12,7 +12,6 @@ import { ResultComponent } from '../result/result.component';
   styleUrls: ['./Phylogency.component.css']
 })
 export class PhylogencyComponent implements OnInit {
-  sequence: any = [];
   tossgaps: any = [];
   name = '';
   show: boolean = false;
@@ -47,7 +46,6 @@ export class PhylogencyComponent implements OnInit {
     this.tossgaps = await this.service.getformat('simple_phylogeny/parameterdetails/tossgaps').toPromise();
     this.clustering = await this.service.getformat('simple_phylogeny/parameterdetails/clustering').toPromise();
     this.pim = await this.service.getformat('simple_phylogeny/parameterdetails/pim').toPromise();
-    this.sequence = await this.service.getformat('simple_phylogeny/parameterdetails/sequence').toPromise();
   }
   toggle() {
     this.registrationForm.controls.sequence.setValue(`CLUSTAL O(1.2.3) multiple sequence alignment

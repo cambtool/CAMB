@@ -60,7 +60,7 @@ export class EmbossSeqretComponent implements OnInit {
     this.seqrange = await this.service.getformat('emboss_seqret/parameterdetails/seqrange').toPromise();
   }
   toggle() {
-    this.registrationForm.controls.sequence.setValue("ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
+    this.registrationForm.controls.sequence.setValue("ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
   }
   checkbox() {
     this.show3 = !this.show3
@@ -89,63 +89,56 @@ export class EmbossSeqretComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    this.service.Run(formdata).subscribe((data) => {
-      console.log(data);
-      this.jobId = data;
-      if (this.jobId != null) {
-        // (error: any)=>{
-        //   this.toaster.error(error);
-        this.service.getStatus(this.jobId).subscribe(
-          data => {
-            this.toaster.success(data.toString())
-          }, (error) => {
-            this.toaster.error(error.toString())
-          }
-        )
-      }
-    },
-    res => {
-      console.log(res);
-      // console.log(res.error.text);
-      if (res.status == 200) {
-        this.jobId = res.error.text;
-        if (this.jobId != null) {
-          this.service.getStatus(this.jobId).subscribe(
-            data => {
-              this.toaster.success(data.toString())
-            }, (error) => {
-              if (error.status == 200) {
-                this.jobStatus = error.error.text
-                this.toaster.info(this.jobStatus)
-                setTimeout(() => {
-                  // if (this.jobStatus != "FAILURE") {
-                  this.service.getResult(this.jobId, 'out').subscribe(
-                    success => {
-                      console.log(success);
-
-                    },
-                    error => {
-                      console.log(error);
-                      if (error.status == 200) {
-                        let result = error.error.text;
-                        const dialogRef = this.dialog.open(ResultComponent, {
-                          data: {
-                            text: result
-                          }
-                        });
+    this.service.EMB_Run(formdata).subscribe(
+      success => {
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+        if (error.status == 200) {
+          this.jobId = error.error.text
+          if (this.jobId != null) {
+            this.service.EMBStatus(this.jobId).subscribe(
+              data => {
+                this.toaster.success(data.toString())
+              }, (error) => {
+                if (error.status == 200) {
+                  this.jobStatus = error.error.text
+                  this.toaster.info(this.jobStatus)
+                  setTimeout(() => {
+                    // if (this.jobStatus != "FAILURE") {
+                    this.service.EMBResult(this.jobId, 'out').subscribe(
+                      success => {
+                        console.log(success);
+                      },
+                      error => {
+                        console.log(error);
+                        if (error.status == 200) {
+                          let result = error.error.text;
+                          const dialogRef = this.dialog.open(ResultComponent, {
+                            data: {
+                              text: result
+                            }
+                          });
+                        }
                       }
-                    }
-                  )
-                  // }
-                }, 15000);
-
+                    )
+                    // }
+                  }, 3000);
+                }
+                else {
+                  this.toaster.error(error.error)
+                }
               }
-            }
-          )
+            )
+          }
+        } else {
+          this.toaster.error(error.error)
         }
-      }
-    }
-    )
+      })
+
+
+
 
 
 

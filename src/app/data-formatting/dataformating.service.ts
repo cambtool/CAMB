@@ -38,25 +38,25 @@ export class DataformatingService {
   }
 
 
-  getStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/status/' + jobId
-    return this.http.get(url).pipe(
-      catchError(this.handleError)
-    )
-  }
-  Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-    return this.http.post(url, obj, options).pipe(catchError(this.handleError))
+  // getStatus(jobId: any) {
+  //   const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/status/' + jobId
+  //   return this.http.get(url).pipe(
+  //     catchError(this.handleError)
+  //   )
+  // }
+  // Run(obj: FormData) {
+  //   let headers = new HttpHeaders({
+  //     "Content-Type": "multipart/form-data"
+  //   });
+  //   let options = { headers: headers };
+  //   let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
+  //   return this.http.post(url, obj, options).pipe(catchError(this.handleError))
 
-  }
-  getResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/result/' + jobId + '/' + statusType
-    return this.http.get(url);
-  }
+  // }
+  // getResult(jobId: any, statusType: any) {
+  //   const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/result/' + jobId + '/' + statusType
+  //   return this.http.get(url);
+  // }
 
 
 
@@ -294,4 +294,25 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/genewise/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
+
+
+  EMB_Run(obj: FormData) {
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
+    return this.http.post(url, obj, options)
+  }
+  EMBStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/status/' + jobId
+    return this.http.get(url);
+  }
+
+  EMBResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
+
 }
