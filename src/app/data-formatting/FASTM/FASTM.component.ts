@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { DataformatingService } from '../dataformating.service';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-FASTM',
@@ -16,7 +19,8 @@ export class FASTMComponent implements OnInit {
   show2 = false;
   show3 = false;
   isSubmitted = false;
-
+  jobId: any;
+  jobStatus: any;
   program: any = [];
   stype: any = [];
   matrix:any=[];
@@ -39,7 +43,7 @@ export class FASTMComponent implements OnInit {
   ktup:any=[];
   sequence: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient , private toaster: ToastrService,public dialog: MatDialog) { }
   registrationForm = this.fb.group({
 
     program: new FormControl(''),
@@ -91,13 +95,20 @@ export class FASTMComponent implements OnInit {
     this.ktup = await this.service.getformat('fastm/parameterdetails/ktup').toPromise();
   }
   toggle() {
-    this.registrationForm.controls.sequence.setValue(">P00001 MPPYTVVY, VETWQEGSLK,YGQLPKFQDGD,VEDLRCKYI,GCLDAFPLLSAY,   GCLDAFPLLSAY,   VGRLSARPKLKAFL");
+    this.registrationForm.controls.sequence.setValue(`>P00001
+  MPPYTVVY,
+  VETWQEGSLK,
+  YGQLPKFQDGD,
+  VEDLRCKYI,
+  GCLDAFPLLSAY,
+  GCLDAFPLLSAY,
+  VGRLSARPKLKAFL`);
   }
   checkbox() {
     this.show3 = !this.show3
   }
   handleClear() {
-    this.registrationForm.controls.asequence.setValue('');
+    this.registrationForm.controls.sequence.setValue('');
   }
   onSubmit(xml: any): void {
     let formdata = new FormData();
@@ -110,8 +121,55 @@ export class FASTMComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/fastm/run";
-    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+    // let url = "https://www.ebi.ac.uk/Tools/services/rest/fastm/run";
+    // this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+    this.service.FASTM_Run(formdata).subscribe(
+      success => {
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+        if (error.status == 200) {
+          this.jobId = error.error.text
+          if (this.jobId != null) {
+            this.service.FASTMStatus(this.jobId).subscribe(
+              data => {
+                this.toaster.success(data.toString())
+              }, (error) => {
+                if (error.status == 200) {
+                  this.jobStatus = error.error.text
+                  this.toaster.info(this.jobStatus)
+                  setTimeout(() => {
+                    // if (this.jobStatus != "FAILURE") {
+                    this.service.FASTMResult(this.jobId, 'out').subscribe(
+                      success => {
+                        console.log(success);
+                      },
+                      error => {
+                        console.log(error);
+                        if (error.status == 200) {
+                          let result = error.error.text;
+                          const dialogRef = this.dialog.open(ResultComponent, {
+                            data: {
+                              text: result
+                            }
+                          });
+                        }
+                      }
+                    )
+                    // }
+                  }, 3000);
+                }
+                else {
+                  this.toaster.error(error.error)
+                }
+              }
+            )
+          }
+        } else {
+          this.toaster.error(error.error)
+        }
+      })
   }
 
 }

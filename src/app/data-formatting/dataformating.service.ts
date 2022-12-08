@@ -109,4 +109,45 @@ export class DataformatingService {
     return this.http.get(url);
   }
 
+
+  FASTM_Run(obj: FormData) {
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/fastm/run";
+    return this.http.post(url, obj, options)
+  }
+  FASTMStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fastm/status/' + jobId
+    return this.http.get(url);
+  }
+
+ FASTMResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fastm/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
+
+
+  FASTA_Run(obj: FormData) {
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/fasta/run";
+    return this.http.post(url, obj, options)
+  }
+  FASTAStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fasta/status/' + jobId
+    return this.http.get(url);
+  }
+
+ FASTAResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fasta/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
+
+
 }
