@@ -15,6 +15,7 @@ import { IsochoreComponent } from './isochore/isochore.component';
 import { CPGPLOTComponent } from './CPGPLOT/CPGPLOT.component';
 import { EmbosTranseqComponent } from './embosTranseq/embosTranseq.component';
 import { BackTranseqComponent } from './backTranseq/backTranseq.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { BackTranseqComponent } from './backTranseq/backTranseq.component';
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatDialogModule
   ]
 })
 export class DataAnalysisModule { }

@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { DataformatingService } from 'src/app/data-formatting/dataformating.service';
+import { ResultComponent } from 'src/app/data-formatting/result/result.component';
 
 @Component({
   selector: 'app-SeqckSum',
@@ -14,13 +17,14 @@ export class SeqckSumComponent implements OnInit {
   show2 = false;
   show3 = false;
   isSubmitted = false;
-
+  jobId: any;
+  jobStatus: any;
   stype: any = [];
   cksmethod: any = [];
   length: any = [];
   data: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient ,private toaster: ToastrService,public dialog: MatDialog) { }
   registrationForm = this.fb.group({
     sequence: new FormControl(''),
     stype: new FormControl(''),
@@ -36,7 +40,7 @@ export class SeqckSumComponent implements OnInit {
     this.length = await this.service.getformat('seqcksum/parameterdetails/length').toPromise();
   }
   toggle() {
-    this.registrationForm.controls.sequence.setValue("ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
+    this.registrationForm.controls.sequence.setValue("ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
   }
   checkbox() {
     this.show3 = !this.show3
@@ -53,7 +57,58 @@ export class SeqckSumComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/seqcksum/run";
-    this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+    // let url = "https://www.ebi.ac.uk/Tools/services/rest/seqcksum/run";
+    // this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
+
+
+    this.service.SEQ_Run(formdata).subscribe(
+      success => {
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+        if (error.status == 200) {
+          this.jobId = error.error.text
+          if (this.jobId != null) {
+            this.service.SEQStatus(this.jobId).subscribe(
+              data => {
+                this.toaster.success(data.toString())
+              }, (error) => {
+                if (error.status == 200) {
+                  this.jobStatus = error.error.text
+                  this.toaster.info(this.jobStatus)
+                  setTimeout(() => {
+                    // if (this.jobStatus != "FAILURE") {
+                    this.service.SEQResult(this.jobId, 'out').subscribe(
+                      success => {
+                        console.log(success);
+                      },
+                      error => {
+                        console.log(error);
+                        if (error.status == 200) {
+                          let result = error.error.text;
+                          const dialogRef = this.dialog.open(ResultComponent, {
+                            data: {
+                              text: result
+                            }
+                          });
+                        }
+                      }
+                    )
+                    // }
+                  }, 3000);
+                }
+                else {
+                  this.toaster.error(error.error)
+                }
+              }
+            )
+          }
+        } else {
+          this.toaster.error(error.error)
+        }
+      })
+
+
   }
 }
