@@ -1,0 +1,3 @@
+::ng-deep .cdk-overlay-pane {
+  overflow-y: scroll !important;
+}
