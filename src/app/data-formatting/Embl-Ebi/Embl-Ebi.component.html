@@ -153,11 +153,12 @@
           </div>
           <div class="more-option">
             <p>Taxids</p>
-            <select formControlName="taxids">
-              <option *ngFor="let Taxids of taxids.values.values" [ngValue]="taxids.value">
-                {{ Taxids.label }}
+            <!-- <select formControlName="taxids">
+              <option *ngFor="let Taxids of taxids.values" [ngValue]="taxids.value">
+                {{ Taxids.name }}
               </option>
-            </select>
+            </select> -->
+            <input type="text" formControlName="taxids">
           </div>
           <div class="more-option">
             <p>Compstats</p>
@@ -193,11 +194,12 @@
           </div>
           <div class="more-option">
             <p>negative_taxids</p>
-            <select formControlName="negative_taxids">
+            <!-- <select formControlName="negative_taxids">
               <option *ngFor="let Negative_taxids of negative_taxids.values.values" [ngValue]="negative_taxids.value">
                 {{ Negative_taxids.label }}
               </option>
-            </select>
+            </select> -->
+            <input type="test" formControlName="negative_taxids">
           </div>
         </div>
       </div>

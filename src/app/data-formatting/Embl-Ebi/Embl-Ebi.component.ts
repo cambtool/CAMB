@@ -19,6 +19,7 @@ export class EmblEbiComponent implements OnInit {
   show2 = false;
   show3 = false;
   isSubmitted = false;
+  taxids: any = []
   negative_taxids: any = []
   gapopen: any = []
   gapext: any = []
@@ -36,7 +37,7 @@ export class EmblEbiComponent implements OnInit {
   gapalign: any = []
   wordsize: any = []
   seqrange: any = []
-  taxids: any = []
+
   compstats: any = []
   align: any = []
   transltable: any = []
@@ -96,9 +97,12 @@ export class EmblEbiComponent implements OnInit {
     this.seqrange = await this.service.getformat('ncbiblast/parameterdetails/seqrange').toPromise();
     this.database = await this.service.getformat('ncbiblast/parameterdetails/database').toPromise();
     this.sequence = await this.service.getformat('ncbiblast/parameterdetails/sequence').toPromise();
+
+    console.log(this.taxids);
+
   }
   toggle() {
-    this.registrationForm.controls.sequence.setValue("ENA|HZ245980|HZ245980.1 JP 2015518816-A/6284: MODIFIED POLYNUCLEOTIDES FOR THE PRODUCTION OF ONCOLOGY-RELATED PROTEINS AND PEPTIDES. ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
+    this.registrationForm.controls.sequence.setValue("ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
   }
   checkbox() {
     this.show3 = !this.show3
@@ -121,8 +125,8 @@ export class EmblEbiComponent implements OnInit {
     formdata.append("filter", this.registrationForm.get('filter')?.value);
     formdata.append("gapalign", this.registrationForm.get('gapalign')?.value);
     formdata.append("wordsize", this.registrationForm.get('wordsize')?.value);
-    formdata.append("taxids", this.registrationForm.get('taxids')?.value);
-    formdata.append("negative_taxids", this.registrationForm.get('negative_taxids')?.value);
+    // formdata.append("taxids", this.registrationForm.get('taxids')?.value);
+    // formdata.append("negative_taxids", this.registrationForm.get('negative_taxids')?.value);
     formdata.append("compstats", this.registrationForm.get('compstats')?.value);
     formdata.append("align", this.registrationForm.get('align')?.value);
     formdata.append("transltable", this.registrationForm.get('transltable')?.value);
@@ -136,61 +140,59 @@ export class EmblEbiComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    this.service.ncbiblast_Run(formdata).subscribe((data) => {
-      console.log(data);
-      this.jobId = data;
-      if (this.jobId != null) {
-        this.service.getncbiblastStatus(this.jobId).subscribe(
-          data => {
-            this.toaster.success(data.toString())
-          }, (error) => {
-            this.toaster.success(error.toString())
-          }
-        )
-      }
-    }, res => {
-      console.log(res);
-      // console.log(res.error.text);
-      if (res.status == 200) {
-        this.jobId = res.error.text;
-        if (this.jobId != null) {
-          this.service.getncbiblastStatus(this.jobId).subscribe(
-            data => {
-              this.toaster.success(data.toString())
-            }, (error) => {
-              if (error.status == 200) {
-                this.jobStatus = error.error.text
-                this.toaster.info(this.jobStatus)
-                setTimeout(() => {
-                  // if (this.jobStatus != "FAILURE") {
-                  this.service.getncbiblastResult(this.jobId, 'out').subscribe(
-                    success => {
-                      console.log(success);
-
-                    },
-                    error => {
-                      console.log(error);
-                      if (error.status == 200) {
-                        let result = error.error.text;
-                        const dialogRef = this.dialog.open(ResultComponent, {
-                          data: {
-                            text: result
-                          }
-                        });
+    this.service.ncbiblast_Run(formdata).subscribe(
+      success => {
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+        if (error.status == 200) {
+          this.jobId = error.error.text
+          if (this.jobId != null) {
+            this.service.getncbiblastStatus(this.jobId).subscribe(
+              data => {
+                this.toaster.success(data.toString())
+              }, (error) => {
+                if (error.status == 200) {
+                  this.jobStatus = error.error.text
+                  this.toaster.info(this.jobStatus)
+                  setTimeout(() => {
+                    // if (this.jobStatus != "FAILURE") {
+                    this.service.getncbiblastResult(this.jobId, 'out').subscribe(
+                      success => {
+                        console.log(success);
+                      },
+                      error => {
+                        console.log(error);
+                        if (error.status == 200) {
+                          let result = error.error.text;
+                          const dialogRef = this.dialog.open(ResultComponent, {
+                            data: {
+                              text: result
+                            }
+                          });
+                        }
                       }
-                    }
-                  )
-                  // }
-                }, 15000);
-
+                    )
+                    // }
+                  }, 15000);
+                }
+                else {
+                  this.toaster.error(error.error)
+                }
               }
-            }
-          )
+            )
+          }
+        } else {
+          this.toaster.error(error.error)
         }
-      }
-    })
+      })
 
 
   }
 
 }
+
+
+
+

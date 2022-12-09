@@ -315,4 +315,21 @@ export class DataformatingService {
   }
 
 
+  PSI_Run(obj: FormData) {
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/psiblast/run";
+    return this.http.post(url, obj, options)
+  }
+  PSIStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/psiblast/status/' + jobId
+    return this.http.get(url);
+  }
+
+  PSIResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/psiblast/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
 }
