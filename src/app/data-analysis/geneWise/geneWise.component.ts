@@ -35,7 +35,7 @@ export class GeneWiseComponent implements OnInit {
   asequence: any = [];
   bsequence: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient , private toaster: ToastrService,public dialog: MatDialog) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient, private toaster: ToastrService, public dialog: MatDialog) { }
   registrationForm = this.fb.group({
 
     para: new FormControl(''),
@@ -129,7 +129,7 @@ export class GeneWiseComponent implements OnInit {
                       }
                     )
                     // }
-                  }, 3000);
+                  }, 15000);
                 }
                 else {
                   this.toaster.error(error.error)

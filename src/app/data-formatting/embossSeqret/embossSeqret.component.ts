@@ -120,6 +120,8 @@ export class EmbossSeqretComponent implements OnInit {
                               text: result
                             }
                           });
+                        } else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )
