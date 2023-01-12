@@ -370,4 +370,58 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepstats/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
+
+
+  emboss_pepwindow_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_pepwindow/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_pepwindowStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepwindow/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_pepwindowResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepwindow/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
+
+  emboss_statists_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/saps/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_statistsStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/saps/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_statistsResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/saps/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
+
+  emboss_water_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_water/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_waterStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_water/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_waterResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_water/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
 }

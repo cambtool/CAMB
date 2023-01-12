@@ -10,13 +10,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { PepStatsComponent } from './pepStats/pepStats.component';
+import { PepWindowComponent } from './pepWindow/pepWindow.component';
+import { SequenceStatistsComponent } from './sequenceStatists/sequenceStatists.component';
+import { EmbossWaterComponent } from './embossWater/embossWater.component';
 
 
 @NgModule({
   declarations: [
     ProtienAnalysisComponent,
     PepinfoComponent,
-    PepStatsComponent
+    PepStatsComponent,
+    PepWindowComponent,
+    SequenceStatistsComponent,
+    EmbossWaterComponent
   ],
   imports: [
     CommonModule,
