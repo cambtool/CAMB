@@ -1,0 +1,66 @@
+<div class="pack-head">
+  <div class="page-size">
+    <h1>EMBOSS Pepstats</h1>
+  </div>
+</div>
+<div class="page-size">
+  <div class="form">
+    <form [formGroup]="registrationForm">
+      <h2>EMBOSS Pepstats</h2>
+      <p>Pepstats calculates statistics for your protein such as molecular weight, isoelectric point etc.</p>
+      <div class="step-one-form">
+        <label>Step:1 - Enter your input sequence </label>
+        <p>Enter or paste a PROTEIN sequence in any supported format:</p>
+        <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
+          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+
+      </textarea>
+        <div class="btn">
+          <button (click)="toggle()" id="equence-btn">
+            Use a examples equence
+          </button>
+          <button (click)="handleClear()">Clear</button>
+        </div>
+      </div>
+      <div class="step-two-form">
+        <p><label>STEP 2 - Select Parameters</label></p>
+        <div>
+          <div class="more-option">
+            <p>INCLUDE TERMINI CHARGES</p>
+            <select formControlName="termini">
+              <option *ngFor="let item of termini.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="more-option">
+          <p>USE MONOISOTOPIC WEIGHTS</p>
+          <select formControlName="mono">
+            <option *ngFor="let item of mono.values.values" [ngValue]="item.value">
+              {{ item.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="step-three-form">
+        <label>STEP 3 - Submit your job</label>
+        <p>
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
+          Be notified by email (Tick this box if you want to be notified by email when the results are available)
+        </p>
+        <div *ngIf="show3">
+          <div class="job-frm">
+            <input id="textbox" type="text" placeholder="EMAil" formControlName="email">
+            <input id="textbox" type="text" placeholder="TITLE" formControlName="title">
+            <p>
+              If available, the title will be included in the subject of the notification email and can be used as a way
+              to
+              identify your analysis</p>
+          </div>
+        </div>
+        <button id="btnn" (click)="onSubmit(registrationForm.value)" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>

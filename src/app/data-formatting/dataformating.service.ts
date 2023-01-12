@@ -332,4 +332,42 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/psiblast/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
+
+
+
+
+  emboss_pepinfo_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_pepinfo/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_pepinfoStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepinfo/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_pepinfoResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepinfo/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
+
+  emboss_pepstats_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_pepstats/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_pepstatsStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepstats/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_pepstatsResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepstats/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
 }
