@@ -6,6 +6,8 @@ import { PepStatsComponent } from './pepStats/pepStats.component';
 import { PepWindowComponent } from './pepWindow/pepWindow.component';
 import { SequenceStatistsComponent } from './sequenceStatists/sequenceStatists.component';
 import { EmbossWaterComponent } from './embossWater/embossWater.component';
+import { PrattComponent } from './pratt/pratt.component';
+import { PSI_blastComponent } from '../data-formatting/PSI_blast/PSI_blast.component';
 
 const routes: Routes = [
   { path: 'pepInfo', component: PepinfoComponent },
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'pepwindow', component: PepWindowComponent },
   { path: 'ststists', component: SequenceStatistsComponent },
   { path: 'water', component: EmbossWaterComponent },
+  { path: 'pratt', component: PrattComponent },
+  { path: 'EMBL-EBI', component: PSI_blastComponent },
 ];
 
 @NgModule({

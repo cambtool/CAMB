@@ -93,6 +93,8 @@ export class PSI_blastComponent implements OnInit {
     this.registrationForm.controls.sequence.setValue('');
   }
   onSubmit(xml: any): void {
+    console.log(this.registrationForm.value);
+
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
@@ -134,6 +136,8 @@ export class PSI_blastComponent implements OnInit {
                               text: result
                             }
                           });
+                        }else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )

@@ -13,6 +13,7 @@ import { PepStatsComponent } from './pepStats/pepStats.component';
 import { PepWindowComponent } from './pepWindow/pepWindow.component';
 import { SequenceStatistsComponent } from './sequenceStatists/sequenceStatists.component';
 import { EmbossWaterComponent } from './embossWater/embossWater.component';
+import { PrattComponent } from './pratt/pratt.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { EmbossWaterComponent } from './embossWater/embossWater.component';
     PepStatsComponent,
     PepWindowComponent,
     SequenceStatistsComponent,
-    EmbossWaterComponent
+    EmbossWaterComponent,
+    PrattComponent
   ],
   imports: [
     CommonModule,

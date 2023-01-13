@@ -424,4 +424,40 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_water/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
+
+
+  emboss_pratt_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/phobius/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_prattStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_prattResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
+
+
+  emboss_ebi_Run(obj: FormData) {
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/phobius/run";
+    let headers = new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    });
+    let options = { headers: headers };
+    return this.http.post(url, obj, options)
+  }
+  getEmboss_ebitStatus(jobId: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/status/' + jobId
+    return this.http.get(url);
+  }
+  getEmboss_ebitResult(jobId: any, statusType: any) {
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/result/' + jobId + '/' + statusType
+    return this.http.get(url);
+  }
 }

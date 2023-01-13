@@ -50,7 +50,7 @@
         </select>
         <p>Expthr</p>
         <select formControlName="expthr">
-          <option *ngFor="let Feature of expthr.values.values" [ngValue]="expthr.value">
+          <option *ngFor="let Feature of expthr.values.values" [ngValue]="Feature.value">
             {{ Feature.label }}
           </option>
         </select>
@@ -66,7 +66,7 @@
           <div class="more-option">
             <p>Scores</p>
             <select formControlName="scores">
-              <option *ngFor="let Scores of scores.values.values" [ngValue]="scores.value">
+              <option *ngFor="let Scores of scores.values.values" [ngValue]="Scores.value">
                 {{ Scores.label }}
               </option>
             </select>
@@ -74,7 +74,7 @@
           <div class="more-option">
             <p>Alignments</p>
             <select formControlName="alignments">
-              <option *ngFor="let Alignments of alignments.values.values" [ngValue]="alignments.value">
+              <option *ngFor="let Alignments of alignments.values.values" [ngValue]="Alignments.value">
                 {{ Alignments.label }}
               </option>
             </select>
@@ -82,7 +82,7 @@
           <div class="more-option part">
             <p>Dropoff</p>
             <select formControlName="dropoff">
-              <option *ngFor="let Dropoff of dropoff.values.values" [ngValue]="dropoff.value">
+              <option *ngFor="let Dropoff of dropoff.values.values" [ngValue]="Dropoff.value">
                 {{ Dropoff.label }}
               </option>
             </select>
@@ -90,7 +90,7 @@
           <div class="more-option">
             <p>Finaldropoff</p>
             <select formControlName="alignView">
-              <option *ngFor="let Finaldropoff of finaldropoff.values.values" [ngValue]="finaldropoff.value">
+              <option *ngFor="let Finaldropoff of finaldropoff.values.values" [ngValue]="Finaldropoff.value">
                 {{ Finaldropoff.label }}
               </option>
             </select>
@@ -98,7 +98,7 @@
           <div class="more-option">
             <p>Filter</p>
             <select formControlName="filter">
-              <option *ngFor="let Filter of filter.values.values" [ngValue]="filter.value">
+              <option *ngFor="let Filter of filter.values.values" [ngValue]="Filter.value">
                 {{ Filter.label }}
               </option>
             </select>
@@ -106,7 +106,7 @@
           <div class="more-option">
             <p>Seqrange</p>
             <select formControlName="seqrange">
-              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="seqrange.value">
+              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
                 {{ Seqrange.label }}
               </option>
             </select>
@@ -114,7 +114,7 @@
           <div class="more-option part">
             <p>Database</p>
             <select formControlName="database">
-              <option *ngFor="let Database of database.values.values" [ngValue]="database.value">
+              <option *ngFor="let Database of database.values.values" [ngValue]="Database.value">
                 {{ Database.label }}
               </option>
             </select>

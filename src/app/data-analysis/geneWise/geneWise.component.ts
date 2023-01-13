@@ -125,6 +125,8 @@ export class GeneWiseComponent implements OnInit {
                               text: result
                             }
                           });
+                        }else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )

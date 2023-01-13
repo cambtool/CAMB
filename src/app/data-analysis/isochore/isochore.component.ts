@@ -95,6 +95,8 @@ export class IsochoreComponent implements OnInit {
                               text: result
                             }
                           });
+                        }else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )

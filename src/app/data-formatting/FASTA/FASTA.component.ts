@@ -156,6 +156,8 @@ export class FASTAComponent implements OnInit {
                               text: result
                             }
                           });
+                        }else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )

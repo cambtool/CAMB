@@ -109,6 +109,8 @@ export class SequenceStatistsComponent implements OnInit {
                               text: result
                             }
                           });
+                        }else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )

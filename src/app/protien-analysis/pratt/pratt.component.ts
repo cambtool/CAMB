@@ -7,11 +7,11 @@ import { DataformatingService } from 'src/app/data-formatting/dataformating.serv
 import { ResultComponent } from 'src/app/data-formatting/result/result.component';
 
 @Component({
-  selector: 'app-embossWater',
-  templateUrl: './embossWater.component.html',
-  styleUrls: ['./embossWater.component.css']
+  selector: 'app-pratt',
+  templateUrl: './pratt.component.html',
+  styleUrls: ['./pratt.component.css']
 })
-export class EmbossWaterComponent implements OnInit {
+export class PrattComponent implements OnInit {
 
   sequence: any = [];
 
@@ -20,9 +20,6 @@ export class EmbossWaterComponent implements OnInit {
   show2 = false;
   show3 = false;
   isSubmitted = false;
-  matrix: any = [];
-  gapopen:any =[];
-  gapext:any =[];
   format:any =[];
   stype:any =[];
   data: any = [];
@@ -31,34 +28,31 @@ export class EmbossWaterComponent implements OnInit {
   jobId: any;
   constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient,
     private toaster: ToastrService, public dialog: MatDialog) { }
-  registrationForm = this.fb.group({
-    asequence: new FormControl(''),
-    bsequence: new FormControl(''),
-    matrix: new FormControl(''),
-    gapopen:new FormControl(''),
-    gapext:new FormControl(''),
+     registrationForm = this.fb.group({
+    sequence: new FormControl(''),
     format:new FormControl(''),
     stype:new FormControl(''),
     email: new FormControl(''),
     title: new FormControl(''),
   });
   async ngOnInit() {
-    this.matrix = await this.service.getformat('/emboss_water/parameterdetails/matrix').toPromise();
-    this.gapopen = await this.service.getformat('/emboss_water/parameterdetails/gapopen').toPromise();
-    this.gapext = await this.service.getformat('/emboss_water/parameterdetails/gapext').toPromise();
-    this.format = await this.service.getformat('/emboss_water/parameterdetails/format').toPromise();
-    this.stype = await this.service.getformat('/emboss_water/parameterdetails/stype').toPromise();
+    this.format = await this.service.getformat('/phobius/parameterdetails/format').toPromise();
+    this.stype = await this.service.getformat('/phobius/parameterdetails/stype').toPromise();
   }
   toggle() {
     // this.show = !this.show;
-    this.registrationForm.controls.asequence.setValue(`>sp|P69905|HBA_HUMAN Hemoglobin subunit alpha OS=Homo sapiens GN=HBA1 PE=1 SV=2
+    this.registrationForm.controls.sequence.setValue(`>sp|P69905|HBA_HUMAN Hemoglobin subunit alpha OS=Homo sapiens GN=HBA1 PE=1 SV=2
     MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG
     KKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLLSHCLLVTLAAHLPAEFTP
-    AVHASLDKFLASVSTVLTSKYR  `);
-    this.registrationForm.controls.bsequence.setValue(`>sp|P01942|HBA_MOUSE Hemoglobin subunit alpha OS=Mus musculus GN=Hba PE=1 SV=2
+    AVHASLDKFLASVSTVLTSKYR
+    >sp|P01942|HBA_MOUSE Hemoglobin subunit alpha OS=Mus musculus GN=Hba PE=1 SV=2
     MVLSGEDKSNIKAAWGKIGGHGAEYGAEALERMFASFPTTKTYFPHFDVSHGSAQVKGHG
     KKVADALASAAGHLDDLPGALSALSDLHAHKLRVDPVNFKLLSHCLLVTLASHHPADFTP
-    AVHASLDKFLASVSTVLTSKYR  `);
+    AVHASLDKFLASVSTVLTSKYR
+    >sp|P13786|HBAZ_CAPHI Hemoglobin subunit zeta OS=Capra hircus GN=HBZ1 PE=3 SV=2
+    MSLTRTERTIILSLWSKISTQADVIGTETLERLFSCYPQAKTYFPHFDLHSGSAQLRAHG
+    SKVVAAVGDAVKSIDNVTSALSKLSELHAYVLRVDPVNFKFLSHCLLVTLASHFPADFTA
+    DAHAAWDKFLSIVSGVLTEKYR  `);
   }
   toggleinput() {
     this.show2 = !this.show2
@@ -81,17 +75,13 @@ export class EmbossWaterComponent implements OnInit {
   onSubmit(xml: any): void {
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
-    formdata.append("positiveresidues", this.registrationForm.get('positiveresidues')?.value);
-    formdata.append("species", this.registrationForm.get('species')?.value);
-    formdata.append("outputtype", this.registrationForm.get('outputtype')?.value);
-    formdata.append("asequence", this.registrationForm.get('asequence')?.value);
-    formdata.append("bsequence", this.registrationForm.get('bsequence')?.value);
+    formdata.append("sequence", this.registrationForm.get('sequence')?.value);
     formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     }
-    this.service.emboss_water_Run(formdata).subscribe(
+    this.service.emboss_pratt_Run(formdata).subscribe(
       success => {
         console.log(success);
       },
@@ -100,7 +90,7 @@ export class EmbossWaterComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
-            this.service.getEmboss_waterStatus(this.jobId).subscribe(
+            this.service.getEmboss_prattStatus(this.jobId).subscribe(
               data => {
                 this.toaster.success(data.toString())
               }, (error) => {
@@ -109,7 +99,7 @@ export class EmbossWaterComponent implements OnInit {
                   this.toaster.info(this.jobStatus)
                   setTimeout(() => {
                     // if (this.jobStatus != "FAILURE") {
-                    this.service.getEmboss_waterResult(this.jobId, 'out').subscribe(
+                    this.service.getEmboss_prattResult(this.jobId, 'out').subscribe(
                       success => {
                         console.log(success);
                       },

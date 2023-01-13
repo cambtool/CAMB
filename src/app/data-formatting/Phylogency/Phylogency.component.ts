@@ -49,31 +49,31 @@ export class PhylogencyComponent implements OnInit {
   }
   toggle() {
     this.registrationForm.controls.sequence.setValue(`CLUSTAL O(1.2.3) multiple sequence alignment
-    UniProt/Swiss-Prot|P26898|IL2RA_SHEEP      MEPSLLMWRFFVFIVVPGCVTEACHDDPPSLRNA----------MFKVLRYE----VGTM
-    UniProt/Swiss-Prot|P01590|IL2RA_MOUSE      MEPRLLMLGFLSLTIVPSCRAELCLYDPPEVPNA----------TFKALSYK----NGTI
-    UniProt/Swiss-Prot|P41690|IL2RA_FELCA      MEPSLLLWGILTFVVVHGHVTELCDENPPDIQHA----------TFKALTYK----TGTM
-    UniProt/Swiss-Prot|P01589|IL2RA_HUMAN      MDSYLLMWGLLTFIMVPGCQAELCDDDPPEIPHA----------TFKAMAYK----EGTM
-    UniProt/Swiss-Prot|Q5MNY4|IL2RA_MACMU      MDPYLLMWGLLTFITVPGCQAELCDDDPPKITHA----------TFKAVAYK----EGTM
-    UniProt/Swiss-Prot|Q95118|IL2RG_BOVIN      MLKPPLPLRSLLFLQLPLLGVGLNPKFLTPSGNEDIGGKPGTGGDFFLTSTPAGTLDVST
-    UniProt/Swiss-Prot|P40321|IL2RG_CANFA      MLKPPLPLRSLLFLQLSLLGVGLNSTVPMPNGNEDIT------PDFFLTATPSETLSVSS
-    UniProt/Swiss-Prot|P26896|IL2RB_RAT        MATVDLSWRLPLYILLLLLATT--------------------------------WVSAAV
-    UniProt/Swiss-Prot|Q8BZM1|GLMN_MOUSE       ------------------------------------------------------------
-    UniProt/Swiss-Prot|P36835|IL2_CAPHI        ------------------------------------------------------------
-    UniProt/Swiss-Prot|Q7JFM4|IL2_AOTVO        ------------------------------------------------------------
-    UniProt/Swiss-Prot|Q29416|IL2_CANFA        ------------------------------------------------------------
+UniProt/Swiss-Prot|P26898|IL2RA_SHEEP      MEPSLLMWRFFVFIVVPGCVTEACHDDPPSLRNA----------MFKVLRYE----VGTM
+UniProt/Swiss-Prot|P01590|IL2RA_MOUSE      MEPRLLMLGFLSLTIVPSCRAELCLYDPPEVPNA----------TFKALSYK----NGTI
+UniProt/Swiss-Prot|P41690|IL2RA_FELCA      MEPSLLLWGILTFVVVHGHVTELCDENPPDIQHA----------TFKALTYK----TGTM
+UniProt/Swiss-Prot|P01589|IL2RA_HUMAN      MDSYLLMWGLLTFIMVPGCQAELCDDDPPEIPHA----------TFKAMAYK----EGTM
+UniProt/Swiss-Prot|Q5MNY4|IL2RA_MACMU      MDPYLLMWGLLTFITVPGCQAELCDDDPPKITHA----------TFKAVAYK----EGTM
+UniProt/Swiss-Prot|Q95118|IL2RG_BOVIN      MLKPPLPLRSLLFLQLPLLGVGLNPKFLTPSGNEDIGGKPGTGGDFFLTSTPAGTLDVST
+UniProt/Swiss-Prot|P40321|IL2RG_CANFA      MLKPPLPLRSLLFLQLSLLGVGLNSTVPMPNGNEDIT------PDFFLTATPSETLSVSS
+UniProt/Swiss-Prot|P26896|IL2RB_RAT        MATVDLSWRLPLYILLLLLATT--------------------------------WVSAAV
+UniProt/Swiss-Prot|Q8BZM1|GLMN_MOUSE       ------------------------------------------------------------
+UniProt/Swiss-Prot|P36835|IL2_CAPHI        ------------------------------------------------------------
+UniProt/Swiss-Prot|Q7JFM4|IL2_AOTVO        ------------------------------------------------------------
+UniProt/Swiss-Prot|Q29416|IL2_CANFA        ------------------------------------------------------------
 
-    UniProt/Swiss-Prot|P26898|IL2RA_SHEEP      INCDCKAGFRRVS---AVMRCVGDSSHSAWNNRCFCNSTSPAKNPV--------------
-    UniProt/Swiss-Prot|P01590|IL2RA_MOUSE      LNCECKRGFRRLKE-LVYMRCLGN----SWSSNCQCTSNSHDKS-R--------------
-    UniProt/Swiss-Prot|P41690|IL2RA_FELCA      LNCECKKGFRRISNGSAFMLCAGNSSHSSWENQCRCISTSPRAT-D--------------
-    UniProt/Swiss-Prot|P01589|IL2RA_HUMAN      LNCECKRGFRRIKSGSLYMLCTGNSSHSSWDNQCQCTSSATRNT-T--------------
-    UniProt/Swiss-Prot|Q5MNY4|IL2RA_MACMU      LNCECKRGFRRIKSGSPYMLCTGNSSHSSWDNQCQCTSSAARNT-T--------------
-    UniProt/Swiss-Prot|Q95118|IL2RG_BOVIN      LPLPKVQC---FVFNVEYMNCTWNSSSEPQPNNLTLHYGYRNFNGDDKLQECGHYLFS--
-    UniProt/Swiss-Prot|P40321|IL2RG_CANFA      LPLPEVQC---FVFNVEYMNCTWNSSSEPRPTNLTLHYWYKNSN-DDKVQECGHYLFS--
-    UniProt/Swiss-Prot|P26896|IL2RB_RAT        NDCSHLKC---FYNSRANVSCMWSPEEALNVTSCHIHAK-SDMRHWNKTCELTPVRQASW
-    UniProt/Swiss-Prot|Q8BZM1|GLMN_MOUSE       ---------------------MAVEELQSIIKRCQILEE-HDFKEEDF----GLFQLAGQ
-    UniProt/Swiss-Prot|P36835|IL2_CAPHI        ------------------------------------------------------------
-    UniProt/Swiss-Prot|Q7JFM4|IL2_AOTVO        ------------------------------------------------------------
-    UniProt/Swiss-Prot|Q29416|IL2_CANFA        ------------------------------------------------------------`);
+UniProt/Swiss-Prot|P26898|IL2RA_SHEEP      INCDCKAGFRRVS---AVMRCVGDSSHSAWNNRCFCNSTSPAKNPV--------------
+UniProt/Swiss-Prot|P01590|IL2RA_MOUSE      LNCECKRGFRRLKE-LVYMRCLGN----SWSSNCQCTSNSHDKS-R--------------
+UniProt/Swiss-Prot|P41690|IL2RA_FELCA      LNCECKKGFRRISNGSAFMLCAGNSSHSSWENQCRCISTSPRAT-D--------------
+UniProt/Swiss-Prot|P01589|IL2RA_HUMAN      LNCECKRGFRRIKSGSLYMLCTGNSSHSSWDNQCQCTSSATRNT-T--------------
+UniProt/Swiss-Prot|Q5MNY4|IL2RA_MACMU      LNCECKRGFRRIKSGSPYMLCTGNSSHSSWDNQCQCTSSAARNT-T--------------
+UniProt/Swiss-Prot|Q95118|IL2RG_BOVIN      LPLPKVQC---FVFNVEYMNCTWNSSSEPQPNNLTLHYGYRNFNGDDKLQECGHYLFS--
+UniProt/Swiss-Prot|P40321|IL2RG_CANFA      LPLPEVQC---FVFNVEYMNCTWNSSSEPRPTNLTLHYWYKNSN-DDKVQECGHYLFS--
+UniProt/Swiss-Prot|P26896|IL2RB_RAT        NDCSHLKC---FYNSRANVSCMWSPEEALNVTSCHIHAK-SDMRHWNKTCELTPVRQASW
+UniProt/Swiss-Prot|Q8BZM1|GLMN_MOUSE       ---------------------MAVEELQSIIKRCQILEE-HDFKEEDF----GLFQLAGQ
+UniProt/Swiss-Prot|P36835|IL2_CAPHI        ------------------------------------------------------------
+UniProt/Swiss-Prot|Q7JFM4|IL2_AOTVO        ------------------------------------------------------------
+UniProt/Swiss-Prot|Q29416|IL2_CANFA        ------------------------------------------------------------`);
   }
   toggleinput() {
     this.show2 = !this.show2
@@ -136,6 +136,8 @@ export class PhylogencyComponent implements OnInit {
                               text: result
                             }
                           });
+                        }else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )

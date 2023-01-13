@@ -102,6 +102,8 @@ export class EmbosTranseqComponent implements OnInit {
                               text: result
                             }
                           });
+                        }else {
+                          this.toaster.error(error.error)
                         }
                       }
                     )
