@@ -105,7 +105,7 @@ export class CPGPLOTComponent implements OnInit {
                       }
                     )
                     // }
-                  }, 3000);
+                  }, 15000);
                 }
                 else {
                   this.toaster.error(error.error)

@@ -16,7 +16,7 @@
         <div class="step-one-drop-down">
           <p>Enter a type of Matrix</p>
           <select formControlName="matrix">
-            <option *ngFor="let Matrix of matrix.values.values" [ngValue]="matrix.value">
+            <option *ngFor="let Matrix of matrix.values.values" [ngValue]="Matrix.value">
               {{ Matrix.label }}
             </option>
           </select>
@@ -49,7 +49,7 @@
         </select>
         <p>Task</p>
         <select formControlName="task">
-          <option *ngFor="let Task of task.values.values" [ngValue]="task.value">
+          <option *ngFor="let Task of task.values.values" [ngValue]="Task.value">
             {{ Task.label }}
           </option>
         </select>
@@ -57,7 +57,7 @@
           <div class="more-option">
             <p>Program </p>
             <select formControlName="program">
-              <option *ngFor="let item of program.values.values" [ngValue]="program.value" placeholder=" psithr">
+              <option *ngFor="let item of program.values.values" [ngValue]="item.value" placeholder=" psithr">
                 {{ item.label }}
               </option>
             </select>
@@ -73,7 +73,7 @@
           <div class="more-option">
             <p>alignments</p>
             <select formControlName="alignments">
-              <option *ngFor="let Alignments of alignments.values.values" [ngValue]="alignments.value">
+              <option *ngFor="let Alignments of alignments.values.values" [ngValue]="Alignments.value">
                 {{ Alignments.label }}
               </option>
             </select>
@@ -81,7 +81,7 @@
           <div class="more-option">
             <p>dropoff</p>
             <select formControlName="dropoff">
-              <option *ngFor="let Dropoff of dropoff.values.values" [ngValue]="dropoff.value">
+              <option *ngFor="let Dropoff of dropoff.values.values" [ngValue]="Dropoff.value">
                 {{ Dropoff.label }}
               </option>
             </select>
@@ -89,7 +89,7 @@
           <div class="more-option">
             <p>Exp</p>
             <select formControlName="exp">
-              <option *ngFor="let Exp of exp.values.values" [ngValue]="exp.value">
+              <option *ngFor="let Exp of exp.values.values" [ngValue]="Exp.value">
                 {{ Exp.label }}
               </option>
             </select>
@@ -97,7 +97,7 @@
           <div class="more-option">
             <p>filter</p>
             <select formControlName="filter">
-              <option *ngFor="let Filter of filter.values.values" [ngValue]="filter.value">
+              <option *ngFor="let Filter of filter.values.values" [ngValue]="Filter.value">
                 {{ Filter.label }}
               </option>
             </select>
@@ -113,7 +113,7 @@
           <div class="more-option">
             <p>database</p>
             <select formControlName="database">
-              <option *ngFor="let Database of database.values.values" [ngValue]="database.value">
+              <option *ngFor="let Database of database.values.values" [ngValue]="Database.value">
                 {{ Database.label }}
               </option>
             </select>
@@ -121,7 +121,7 @@
           <div class="more-option">
             <p>Match_scores</p>
             <select formControlName="match_scores">
-              <option *ngFor="let Match_scores of match_scores.values.values" [ngValue]="match_scores.values">
+              <option *ngFor="let Match_scores of match_scores.values.values" [ngValue]="Match_scores.values">
                 {{ Match_scores.label}}
               </option>
             </select>
@@ -129,7 +129,7 @@
           <div class="more-option">
             <p>Hsps</p>
             <select formControlName="hsps">
-              <option *ngFor="let Hsps of hsps.values.values" [ngValue]="hsps.value">
+              <option *ngFor="let Hsps of hsps.values.values" [ngValue]="Hsps.value">
                 {{ Hsps.label }}
               </option>
             </select>
@@ -137,7 +137,7 @@
           <div class="more-option">
             <p>Gapalign</p>
             <select formControlName="gapalign">
-              <option *ngFor="let Gapalign of gapalign.values.values" [ngValue]="gapalign.value">
+              <option *ngFor="let Gapalign of gapalign.values.values" [ngValue]="Gapalign.value">
                 {{ Gapalign.label }}
               </option>
             </select>
@@ -146,7 +146,7 @@
           <div class="more-option">
             <p>Wordsize</p>
             <select formControlName="wordsize">
-              <option *ngFor="let Wordsize of wordsize.values.values" [ngValue]="wordsize.value">
+              <option *ngFor="let Wordsize of wordsize.values.values" [ngValue]="Wordsize.value">
                 {{ Wordsize.label }}
               </option>
             </select>
@@ -171,7 +171,7 @@
           <div class="more-option">
             <p>Align</p>
             <select formControlName="align">
-              <option *ngFor="let Align of align.values.values" [ngValue]="align.value">
+              <option *ngFor="let Align of align.values.values" [ngValue]="Align.value">
                 {{ Align.label }}
               </option>
             </select>
@@ -179,7 +179,7 @@
           <div class="more-option">
             <p>Transltable</p>
             <select formControlName="transltable">
-              <option *ngFor="let Transltable of transltable.values.values" [ngValue]="transltable.value">
+              <option *ngFor="let Transltable of transltable.values.values" [ngValue]="Transltable.value">
                 {{ Transltable.label }}
               </option>
             </select>
@@ -187,7 +187,7 @@
           <div class="more-option">
             <p>Stype</p>
             <select formControlName="stype">
-              <option *ngFor="let Stype of stype.values.values" [ngValue]="stype.value">
+              <option *ngFor="let Stype of stype.values.values" [ngValue]="Stype.value">
                 {{ Stype.label }}
               </option>
             </select>
