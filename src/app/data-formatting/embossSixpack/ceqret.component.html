@@ -37,11 +37,6 @@
           </div>
           <div class="more-option">
             <p>ORF MIN SIZE</p>
-            <!-- <select formControlName="orfminsize">
-          <option *ngFor="let item of orfminsize.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select> -->
             <input formControlName="orfminsize" />
           </div>
           <div class="more-option">
@@ -56,7 +51,7 @@
         <div>
           <div class="more-option">
             <p>LAST ORF </p>
-            <select formControlName="firstonly">
+            <select formControlName="lastorf">
               <option *ngFor="let item of lastorf.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
                 {{ item.label }}
               </option>
@@ -70,22 +65,6 @@
               </option>
             </select>
           </div>
-          <!-- <div class="more-option">
-            <p>outputcase</p>
-            <select formControlName="outputcase">
-              <option *ngFor="let Outputcase of outputcase.values.values" [ngValue]="Outputcase.value">
-                {{ Outputcase.label }}
-              </option>
-            </select>
-          </div> -->
-          <!-- <div class="more-option">
-            <p>seqrange</p>
-            <select formControlName="seqrange">
-              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
-                {{ Seqrange.label }}
-              </option>
-            </select>
-          </div> -->
         </div>
       </div>
       <div class="step-three-form">
