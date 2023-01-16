@@ -95,7 +95,7 @@
             </select>
           </div>
           <div class="more-option">
-            <p>filter</p>
+            <p>Filter</p>
             <select formControlName="filter">
               <option *ngFor="let Filter of filter.values.values" [ngValue]="Filter.value">
                 {{ Filter.label }}
@@ -103,9 +103,9 @@
             </select>
           </div>
           <div class="more-option">
-            <p>seqrange</p>
+            <p>Seqrange</p>
             <select formControlName="seqrange">
-              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="seqrange.value">
+              <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
                 {{ Seqrange.label }}
               </option>
             </select>
@@ -121,7 +121,7 @@
           <div class="more-option">
             <p>Match_scores</p>
             <select formControlName="match_scores">
-              <option *ngFor="let Match_scores of match_scores.values.values" [ngValue]="Match_scores.values">
+              <option *ngFor="let Match_scores of match_scores.values.values" [ngValue]="Match_scores.value">
                 {{ Match_scores.label}}
               </option>
             </select>
