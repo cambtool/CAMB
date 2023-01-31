@@ -14,6 +14,7 @@ import { PepWindowComponent } from './pepWindow/pepWindow.component';
 import { SequenceStatistsComponent } from './sequenceStatists/sequenceStatists.component';
 import { EmbossWaterComponent } from './embossWater/embossWater.component';
 import { PrattComponent } from './pratt/pratt.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -34,7 +35,12 @@ import { PrattComponent } from './pratt/pratt.component';
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatTabsModule,
+  ],
+  exports: [
+    CommonModule,
+    MatSelectModule,
+  ],
 })
 export class ProtienAnalysisModule { }

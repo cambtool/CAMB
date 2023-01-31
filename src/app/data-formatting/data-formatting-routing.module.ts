@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'EBI', component: EmblEbiComponent },
   { path: 'fastA', component: FASTAComponent },
   { path: 'fastM', component: FASTMComponent },
-  { path: '', component: DataFormattingComponent },
+  { path: 'Detail', component: DataFormattingComponent },
 
 
 ];

@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'water', component: EmbossWaterComponent },
   { path: 'pratt', component: PrattComponent },
   { path: 'EMBL-EBI', component: PSI_blastComponent },
+  { path: 'Detail', component: ProtienAnalysisComponent },
 ];
 
 @NgModule({

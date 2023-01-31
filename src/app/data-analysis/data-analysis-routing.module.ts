@@ -16,7 +16,9 @@ const routes: Routes = [
   { path: 'Isochore', component: IsochoreComponent },
   { path: 'CPGPLOT', component: CPGPLOTComponent },
   {path: 'Transeq',component: EmbosTranseqComponent} ,
-  {path: 'BackTranSeq',component: BackTranseqComponent}
+  {path: 'BackTranSeq',component: BackTranseqComponent},
+  {path: 'Detail',component: DataAnalysisComponent},
+
 ]
 
 @NgModule({

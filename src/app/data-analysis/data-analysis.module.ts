@@ -16,6 +16,7 @@ import { CPGPLOTComponent } from './CPGPLOT/CPGPLOT.component';
 import { EmbosTranseqComponent } from './embosTranseq/embosTranseq.component';
 import { BackTranseqComponent } from './backTranseq/backTranseq.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -32,13 +33,17 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [
     CommonModule,
     DataAnalysisRoutingModule,
-    DataFormattingRoutingModule,
     MatSelectModule,
     FormsModule,
+    MatTabsModule,
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatDialogModule
-  ]
+  ],
+  exports: [
+    CommonModule,
+    MatSelectModule,
+  ],
 })
 export class DataAnalysisModule { }

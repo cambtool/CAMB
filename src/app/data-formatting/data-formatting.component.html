@@ -34,40 +34,49 @@
             routerLinkActive="router-link-active">
             Button</button>
         </mat-tab>
-        <mat-tab label="Tool Name">
-          <h2>Data Formatting an Conversions</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-          <button class="btnFormating">Button</button>
+        <mat-tab label="EMBL-EBI">
+          <h2>EMBL-EBI Web Services</h2>
+          <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
+            visualmanner</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/EBI']"
+          routerLinkActive="router-link-active">Button</button>
         </mat-tab>
-        <mat-tab label="Tool Name">
-          <h2>Data Formatting an Conversions</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-          <button class="btnFormating">Button</button>
+        <mat-tab label="EMBOSS Sixpack">
+          <h2>EMBOSS Sixpack</h2>
+          <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
+            visual manner.</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/Sixpack']"
+          routerLinkActive="router-link-active">Button</button>
         </mat-tab>
-        <mat-tab label="Tool Name">
-          <h2>Data Formatting an Conversions</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-          <button class="btnFormating">Button</button>
+        <mat-tab label="FastA">
+          <h2>FASTA</h2>
+          <p>This tool provides sequence similarity searching against protein databases using the FASTA suite of programs.
+            FASTA provides a heuristic search with a protein query. FASTX and FASTY translate a DNA query.
+            Optimal searches are available with SSEARCH (local), GGSEARCH (global) and GLSEARCH (global query, local database).</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/fastA']"
+          routerLinkActive="router-link-active">Button</button>
         </mat-tab>
-        <mat-tab label="Tool Name">
+        <mat-tab label="FastM">
           <h2>Data Formatting an Conversions</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-          <button class="btnFormating">Button</button>
+          <p>This tool provides sequence similarity searching against protein databases using the FASTM suite of programs.
+            FASTM provides a heuristic search with a protein query. FASTX and FASTY translate a DNA query.
+            Optimal searches are available with SSEARCH (local), GGSEARCH (global) and GLSEARCH (global query, local database).</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/fastM']"
+          routerLinkActive="router-link-active">Button</button>
         </mat-tab>
-        <mat-tab label="Tool Name">
-          <h2>Data Formatting an Conversions</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-          <button class="btnFormating">Button</button>
+        <mat-tab label="PSI-BLAST">
+          <h2>Job Dispatcher RESTful Web Services</h2>
+          <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
+            visual manner.</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/PSi']"
+          routerLinkActive="router-link-active">Button</button>
+        </mat-tab>
+        <mat-tab label="Simple Phylogeny">
+          <h2>Simple Phylogeny</h2>
+          <p>This tool provides access to phylogenetic tree generation methods from the ClustalW2 package. Please note this
+            is NOT a multiple sequence alignment tool.</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/Phylogeny']"
+          routerLinkActive="router-link-active">Button</button>
         </mat-tab>
       </mat-tab-group>
     </div>
