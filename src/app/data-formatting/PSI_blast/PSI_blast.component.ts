@@ -80,7 +80,6 @@ export class PSI_blastComponent implements OnInit {
     this.cpfile = await this.service.getformat('psiblast/parameterdetails/cpfile').toPromise();
     this.patfile = await this.service.getformat('psiblast/parameterdetails/patfile').toPromise();
     this.seqrange = await this.service.getformat('psiblast/parameterdetails/seqrange').toPromise();
-    console.log(this.selectedHits = await this.service.getformat('psiblast/parameterdetails/selectedHits').toPromise());
 
   }
   toggle() {
@@ -93,18 +92,30 @@ export class PSI_blastComponent implements OnInit {
     this.registrationForm.controls.sequence.setValue('');
   }
   onSubmit(xml: any): void {
-    console.log(this.registrationForm.value);
-
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
     formdata.append("database", this.registrationForm.get('database')?.value);
+    formdata.append("matrix", this.registrationForm.get('matrix')?.value);
+    formdata.append("gapopen", this.registrationForm.get('gapopen')?.value);
+    formdata.append("gapext", this.registrationForm.get('gapext')?.value);
+    formdata.append("expthr", this.registrationForm.get('expthr')?.value);
+    formdata.append("psithr", this.registrationForm.get('psithr')?.value);
+    formdata.append("scores", this.registrationForm.get('scores')?.value);
+    formdata.append("alignments", this.registrationForm.get('alignments')?.value);
+    formdata.append("alignView", this.registrationForm.get('alignView')?.value);
+    formdata.append("dropoff", this.registrationForm.get('dropoff')?.value);
+    formdata.append("finaldropoff", this.registrationForm.get('finaldropoff')?.value);
+    formdata.append("filter", this.registrationForm.get('filter')?.value);
+    formdata.append("previousjobid", this.registrationForm.get('previousjobid')?.value);
+    formdata.append("selectedHits", this.registrationForm.get('selectedHits')?.value);
+    formdata.append("cpfile", this.registrationForm.get('cpfile')?.value);
+    formdata.append("patfile", this.registrationForm.get('patfile')?.value);
+    formdata.append("seqrange", this.registrationForm.get('seqrange')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     }
-    // let url = "https://www.ebi.ac.uk/Tools/services/rest/psiblast/run";
-    // this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
     this.service.PSI_Run(formdata).subscribe(
       success => {
         console.log(success);
@@ -122,7 +133,6 @@ export class PSI_blastComponent implements OnInit {
                   this.jobStatus = error.error.text
                   this.toaster.info(this.jobStatus)
                   setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
                     this.service.PSIResult(this.jobId, 'out').subscribe(
                       success => {
                         console.log(success);
@@ -141,7 +151,6 @@ export class PSI_blastComponent implements OnInit {
                         }
                       }
                     )
-                    // }
                   }, 15000);
                 }
                 else {

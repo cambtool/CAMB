@@ -56,7 +56,11 @@ export class EmbossNewcpgreportComponent implements OnInit {
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
-    formdata.append("stype", this.registrationForm.get('stype')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
+    formdata.append("minlen", this.registrationForm.get('minlen')?.value);
+    formdata.append("window", this.registrationForm.get('window')?.value);
+    formdata.append("minpc", this.registrationForm.get('minpc')?.value);
+    formdata.append("minoe", this.registrationForm.get('minoe')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;

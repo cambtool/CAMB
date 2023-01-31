@@ -118,13 +118,29 @@ export class FASTAComponent implements OnInit {
     formdata.append("program", this.registrationForm.get('program')?.value);
     formdata.append("stype", this.registrationForm.get('stype')?.value);
     formdata.append("database", this.registrationForm.get('database')?.value);
+    formdata.append("matrix", this.registrationForm.get('matrix')?.value);
+    formdata.append("match_scores", this.registrationForm.get('match_scores')?.value);
+    formdata.append("gapopen", this.registrationForm.get('gapopen')?.value);
+    formdata.append("gapext", this.registrationForm.get('gapext')?.value);
+    formdata.append("hsps", this.registrationForm.get('hsps')?.value);
+    formdata.append("expupperlim", this.registrationForm.get('expupperlim')?.value);
+    formdata.append("explowlim", this.registrationForm.get('explowlim')?.value);
+    formdata.append("strand", this.registrationForm.get('strand')?.value);
+    formdata.append("hist", this.registrationForm.get('hist')?.value);
+    formdata.append("scores", this.registrationForm.get('scores')?.value);
+    formdata.append("alignments", this.registrationForm.get('alignments')?.value);
+    formdata.append("scoreformat", this.registrationForm.get('scoreformat')?.value);
+    formdata.append("stats", this.registrationForm.get('stats')?.value);
+    formdata.append("annotfeats", this.registrationForm.get('annotfeats')?.value);
+    formdata.append("annotsym", this.registrationForm.get('annotsym')?.value);
+    formdata.append("seqrange", this.registrationForm.get('seqrange')?.value);
+    formdata.append("filter", this.registrationForm.get('filter')?.value);
+    formdata.append("transltable", this.registrationForm.get('transltable')?.value);
+    formdata.append("ktup", this.registrationForm.get('ktup')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
     }
-    // let url = "https://www.ebi.ac.uk/Tools/services/rest/fasta/run";
-    // this.http.post(url, formdata, { headers: new HttpHeaders({ 'Accept': 'text/plain' }) }).subscribe(res => console.log("Data Post Done"));
-
     this.service.FASTA_Run(formdata).subscribe(
       success => {
         console.log(success);
@@ -142,7 +158,6 @@ export class FASTAComponent implements OnInit {
                   this.jobStatus = error.error.text
                   this.toaster.info(this.jobStatus)
                   setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
                     this.service.FASTAResult(this.jobId, 'out').subscribe(
                       success => {
                         console.log(success);
@@ -161,7 +176,6 @@ export class FASTAComponent implements OnInit {
                         }
                       }
                     )
-                    // }
                   }, 15000);
                 }
                 else {

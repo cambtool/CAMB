@@ -95,12 +95,12 @@ UniProt/Swiss-Prot|Q29416|IL2_CANFA        -------------------------------------
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
-    // formdata.append("tossgaps", this.registrationForm.get('tossgaps')?.value);
-    // formdata.append("tree", this.registrationForm.get('tree')?.value);
-    // formdata.append("clustering", this.registrationForm.get('clustering')?.value);
-    // formdata.append("pim", this.registrationForm.get('pim')?.value);
-    // formdata.append("kimura", this.registrationForm.get('kimura')?.value);
-    // formdata.append("title", this.registrationForm.get('title')?.value);
+    formdata.append("tossgaps", this.registrationForm.get('tossgaps')?.value);
+    formdata.append("tree", this.registrationForm.get('tree')?.value);
+    formdata.append("clustering", this.registrationForm.get('clustering')?.value);
+    formdata.append("pim", this.registrationForm.get('pim')?.value);
+    formdata.append("kimura", this.registrationForm.get('kimura')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
@@ -122,7 +122,6 @@ UniProt/Swiss-Prot|Q29416|IL2_CANFA        -------------------------------------
                   this.jobStatus = error.error.text
                   this.toaster.info(this.jobStatus)
                   setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
                     this.service.getPhylogencyResult(this.jobId, 'out').subscribe(
                       success => {
                         console.log(success);
@@ -141,7 +140,6 @@ UniProt/Swiss-Prot|Q29416|IL2_CANFA        -------------------------------------
                         }
                       }
                     )
-                    // }
                   }, 15000);
                 }
                 else {

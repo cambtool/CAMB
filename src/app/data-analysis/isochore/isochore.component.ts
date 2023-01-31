@@ -53,7 +53,9 @@ export class IsochoreComponent implements OnInit {
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
-    formdata.append("stype", this.registrationForm.get('stype')?.value);
+    formdata.append("window", this.registrationForm.get('window')?.value);
+    formdata.append("shift", this.registrationForm.get('shift')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;

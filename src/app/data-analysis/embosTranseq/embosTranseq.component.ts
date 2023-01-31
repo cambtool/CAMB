@@ -62,6 +62,11 @@ export class EmbosTranseqComponent implements OnInit {
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
     formdata.append("frame", this.registrationForm.get('frame')?.value);
+    formdata.append("codontable", this.registrationForm.get('codontable')?.value);
+    formdata.append("regions", this.registrationForm.get('regions')?.value);
+    formdata.append("trim", this.registrationForm.get('trim')?.value);
+    formdata.append("reverse", this.registrationForm.get('reverse')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;

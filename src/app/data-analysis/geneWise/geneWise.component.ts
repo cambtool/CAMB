@@ -87,6 +87,20 @@ export class GeneWiseComponent implements OnInit {
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("asequence", this.registrationForm.get('asequence')?.value);
     formdata.append("bsequence", this.registrationForm.get('bsequence')?.value);
+    formdata.append("para", this.registrationForm.get('para')?.value);
+    formdata.append("pretty", this.registrationForm.get('pretty')?.value);
+    formdata.append("genes", this.registrationForm.get('genes')?.value);
+    formdata.append("trans", this.registrationForm.get('trans')?.value);
+    formdata.append("cdna", this.registrationForm.get('cdna')?.value);
+    formdata.append("embl", this.registrationForm.get('embl')?.value);
+    formdata.append("ace", this.registrationForm.get('ace')?.value);
+    formdata.append("gff", this.registrationForm.get('gff')?.value);
+    formdata.append("alg", this.registrationForm.get('alg')?.value);
+    formdata.append("diana", this.registrationForm.get('diana')?.value);
+    formdata.append("init", this.registrationForm.get('init')?.value);
+    formdata.append("splice", this.registrationForm.get('splice')?.value);
+    formdata.append("random", this.registrationForm.get('random')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;

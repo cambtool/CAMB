@@ -53,6 +53,9 @@ export class SeqckSumComponent implements OnInit {
     formdata.append("email", this.registrationForm.get('email')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
     formdata.append("stype", this.registrationForm.get('stype')?.value);
+    formdata.append("cksmethod", this.registrationForm.get('cksmethod')?.value);
+    formdata.append("length", this.registrationForm.get('length')?.value);
+    formdata.append("title", this.registrationForm.get('title')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;

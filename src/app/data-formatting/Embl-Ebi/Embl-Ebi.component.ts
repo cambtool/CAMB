@@ -126,8 +126,8 @@ export class EmblEbiComponent implements OnInit {
     formdata.append("filter", this.registrationForm.get('filter')?.value);
     formdata.append("gapalign", this.registrationForm.get('gapalign')?.value);
     formdata.append("wordsize", this.registrationForm.get('wordsize')?.value);
-    // formdata.append("taxids", this.registrationForm.get('taxids')?.value);
-    // formdata.append("negative_taxids", this.registrationForm.get('negative_taxids')?.value);
+    formdata.append("taxids", this.registrationForm.get('taxids')?.value);
+    formdata.append("negative_taxids", this.registrationForm.get('negative_taxids')?.value);
     formdata.append("compstats", this.registrationForm.get('compstats')?.value);
     formdata.append("align", this.registrationForm.get('align')?.value);
     formdata.append("transltable", this.registrationForm.get('transltable')?.value);

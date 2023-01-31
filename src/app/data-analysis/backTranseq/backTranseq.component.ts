@@ -46,8 +46,9 @@ export class BackTranseqComponent implements OnInit {
   onSubmit(xml: any): void {
     let formdata = new FormData();
     formdata.append("email", this.registrationForm.get('email')?.value);
+    formdata.append("codontable", this.registrationForm.get('codontable')?.value);
     formdata.append("sequence", this.registrationForm.get('sequence')?.value);
-    formdata.append("frame", this.registrationForm.get('frame')?.value);
+    formdata.append("title", this.registrationForm.get('fratitleme')?.value);
     this.isSubmitted = true;
     if (!this.registrationForm.valid) {
       false;
