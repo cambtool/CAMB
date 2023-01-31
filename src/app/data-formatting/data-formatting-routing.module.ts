@@ -8,6 +8,7 @@ import { PSI_blastComponent } from './PSI_blast/PSI_blast.component';
 import { EmblEbiComponent } from './Embl-Ebi/Embl-Ebi.component';
 import { FASTAComponent } from './FASTA/FASTA.component';
 import { FASTMComponent } from './FASTM/FASTM.component';
+import { DataFormattingComponent } from './data-formatting.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'EBI', component: EmblEbiComponent },
   { path: 'fastA', component: FASTAComponent },
   { path: 'fastM', component: FASTMComponent },
+  { path: '', component: DataFormattingComponent },
 
 
 ];

@@ -20,12 +20,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { HomeComponent } from './home/home.component';
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HeaderComponent,
-    FooterComponent
-  ],
+    FooterComponent,
+      HomeComponent
+   ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -39,7 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     FormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   exports: [
     CommonModule,

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { ResultComponent } from '../result/result.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-embossSeqret',
   templateUrl: './embossSeqret.component.html',

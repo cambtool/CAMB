@@ -2,14 +2,14 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { throwError } from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataformatingService {
   baseURL: any;
-  constructor(private http: HttpClient , private toaster: ToastrService,) { }
+  constructor(private http: HttpClient, private toaster: ToastrService,) { }
   getformat(format: string) {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/' + format;
     const headers = { 'content-type': 'application/json' }
@@ -34,7 +34,7 @@ export class DataformatingService {
     } else {
       console.log(`Backend returned code ${error.status}, body was: `, error.error);
     }
-    return throwError (error.error);
+    return throwError(error.error);
   }
 
 
@@ -132,7 +132,7 @@ export class DataformatingService {
     return this.http.get(url);
   }
 
- FASTMResult(jobId: any, statusType: any) {
+  FASTMResult(jobId: any, statusType: any) {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/fastm/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
@@ -153,7 +153,7 @@ export class DataformatingService {
     return this.http.get(url);
   }
 
- FASTAResult(jobId: any, statusType: any) {
+  FASTAResult(jobId: any, statusType: any) {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/fasta/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
@@ -218,7 +218,7 @@ export class DataformatingService {
 
 
 
- SEQ_Run(obj: FormData) {
+  SEQ_Run(obj: FormData) {
     let headers = new HttpHeaders({
       "Content-Type": "multipart/form-data"
     });
@@ -298,7 +298,7 @@ export class DataformatingService {
 
   EMB_Run(obj: FormData) {
     let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
+      "Content-Type": "multipart/form-data",
     });
     let options = { headers: headers };
     let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";

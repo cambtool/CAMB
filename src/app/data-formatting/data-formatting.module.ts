@@ -15,6 +15,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ResultComponent } from './result/result.component';
 import { FASTAComponent } from './FASTA/FASTA.component';
 import { FASTMComponent } from './FASTM/FASTM.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DataFormattingComponent } from './data-formatting.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,12 @@ import { FASTMComponent } from './FASTM/FASTM.component';
     EmblEbiComponent,
     ResultComponent,
     FASTAComponent,
-    FASTMComponent
-
+    FASTMComponent,
+    DataFormattingComponent
   ],
   imports: [
     CommonModule,
+    MatTabsModule,
     DataFormattingRoutingModule,
     MatSelectModule,
     FormsModule,
