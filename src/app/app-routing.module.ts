@@ -4,10 +4,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  // { path: '', component: HomeComponent },
+  { path: "home", component: HomeComponent },
   { path: 'dataFormatting', loadChildren: () => import('./data-formatting/data-formatting.module').then(m => m.DataFormattingModule) },
   { path: 'dataAnalysis', loadChildren: () => import('./data-analysis/data-analysis.module').then(m => m.DataAnalysisModule) },
   { path: 'protienAnalysis', loadChildren: () => import('./protien-analysis/protien-analysis.module').then(m => m.ProtienAnalysisModule) },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

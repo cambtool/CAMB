@@ -19,7 +19,7 @@ export class LoaderInterceptorService {
       this.requests.splice(i, 1);
 
     }
-    console.log(i, this.requests.length);
+    // console.log(i, this.requests.length);
     this.loaderService.isLoading.next(this.requests.length > 0);
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

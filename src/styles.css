@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
+html,
+body {
   height: 100%;
 }
 body {
@@ -23,7 +24,7 @@ body {
   color: #fff;
   font-weight: 400;
 }
-.form{
+.form {
   padding: 5% 0;
 }
 .form h2 {
@@ -44,7 +45,7 @@ body {
   border-radius: 30px;
   margin-bottom: 6%;
 }
-.step-one-drop-down{
+.step-one-drop-down {
   margin-top: 3%;
 }
 .btn {
@@ -71,7 +72,6 @@ body {
   color: #014371;
   font-weight: 500;
   padding: 0;
-
 }
 .step-two-form input,
 .job-frm input {
@@ -112,31 +112,38 @@ body {
 .more-option:last-child {
   margin-right: 0;
 }
-.step-one-drop-down select, .step-two-form select {
+.step-one-drop-down select,
+.step-two-form select {
   width: 100%;
   padding: 7px 6px;
   margin-bottom: 23px;
   outline-color: #014371;
   border: 1px solid #ccc;
-
 }
-.form form textarea, .step-two-form textarea{
+.form form textarea,
+.step-two-form textarea {
   width: 98% !important;
   border: 1px solid #ccc;
   padding: 10px;
   font-size: 16px;
   color: #000;
 }
-.step-one-drop-down select:focus, .form form textarea:focus,
-.step-two-form textarea:focus, .more-option input:focus,
-.job-frm input:focus{
+.step-one-drop-down select:focus,
+.form form textarea:focus,
+.step-two-form textarea:focus,
+.more-option input:focus,
+.job-frm input:focus {
   outline: none;
 }
-.job-frm input::placeholder{
+.job-frm input::placeholder {
   font-size: 14px;
 }
-.more-option:last-child{
+.more-option:last-child {
   margin-right: 0;
 }
-
-
+.carousel-indicators {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  text-align: center !important;
+}

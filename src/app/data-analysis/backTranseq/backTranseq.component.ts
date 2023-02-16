@@ -20,10 +20,10 @@ export class BackTranseqComponent implements OnInit {
   isSubmitted = false;
   jobId: any;
   jobStatus: any;
-  codontable:any=[];
+  codontable: any = [];
   sequence: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient ,private toaster: ToastrService,public dialog: MatDialog) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient, private toaster: ToastrService, public dialog: MatDialog) { }
   registrationForm = this.fb.group({
     codontable: new FormControl(''),
     email: new FormControl(''),
@@ -60,10 +60,10 @@ export class BackTranseqComponent implements OnInit {
 
     this.service.TRANSEQ_Run(formdata).subscribe(
       success => {
-        console.log(success);
+        // console.log(success);
       },
       error => {
-        console.log(error);
+        // console.log(error);
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
@@ -78,10 +78,10 @@ export class BackTranseqComponent implements OnInit {
                     // if (this.jobStatus != "FAILURE") {
                     this.service.TRANSEQResult(this.jobId, 'out').subscribe(
                       success => {
-                        console.log(success);
+                        // console.log(success);
                       },
                       error => {
-                        console.log(error);
+                        // console.log(error);
                         if (error.status == 200) {
                           let result = error.error.text;
                           const dialogRef = this.dialog.open(ResultComponent, {
@@ -89,7 +89,7 @@ export class BackTranseqComponent implements OnInit {
                               text: result
                             }
                           });
-                        }else {
+                        } else {
                           this.toaster.error(error.error)
                         }
                       }

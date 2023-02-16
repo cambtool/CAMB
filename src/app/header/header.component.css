@@ -5,7 +5,7 @@ body {
   margin: 0 auto;
 }
 .page-size {
-  width: 1200px;
+  width: 1310px;
   margin: 0 auto;
 }
 .header {
@@ -60,6 +60,7 @@ body {
   text-decoration: none;
   color: #014371;
   font-weight: 500;
+  font-size: 16px;
 }
 .info-navigation ul li img {
   width: 23px;
@@ -136,4 +137,47 @@ body {
 }
 ::ng-deep.mat-form-field-hide-placeholder .mat-select-placeholder {
   padding-bottom: 10px;
+}
+.dropdown {
+  display: none;
+}
+
+@media only screen and (min-width: 10px) and (max-width: 1200px) {
+  .page-size {
+    width: auto;
+    margin: 0 10px;
+  }
+}
+@media only screen and (min-width: 10px) and (max-width: 768px) {
+  .info-navigation,
+  .header-navigation ul {
+    display: none;
+  }
+  .header-logo {
+    width: 34%;
+  }
+  .header-navigation {
+    width: 65%;
+  }
+  .dropdown {
+    display: block;
+    text-align: right;
+  }
+  #dropdownMenuButton {
+    background-color: transparent;
+    color: #014371;
+    border: none;
+    font-size: 18px;
+  }
+  .dropdown-menu a {
+    font-size: 16px;
+    padding: 15px;
+  }
+  .open > .dropdown-menu {
+    display: block;
+    right: 0;
+    width: 203px;
+    left: auto;
+    border: navajowhite;
+  }
 }

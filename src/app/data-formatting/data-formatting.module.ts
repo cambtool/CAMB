@@ -17,6 +17,7 @@ import { FASTAComponent } from './FASTA/FASTA.component';
 import { FASTMComponent } from './FASTM/FASTM.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DataFormattingComponent } from './data-formatting.component';
+import { OtherToolsComponent } from './other-tools/other-tools.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DataFormattingComponent } from './data-formatting.component';
     ResultComponent,
     FASTAComponent,
     FASTMComponent,
-    DataFormattingComponent
+    DataFormattingComponent,
+    OtherToolsComponent
   ],
   imports: [
     CommonModule,

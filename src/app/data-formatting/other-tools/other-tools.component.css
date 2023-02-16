@@ -1,0 +1,25 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #d5d5d5;
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #ebebeb;
+}
+.btnFormating {
+  background-color: #004473;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+}

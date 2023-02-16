@@ -1,13 +1,15 @@
 <div class="header">
   <div class="page-size">
     <div class="header-logo">
-      <img src="../assets/images/CAMB-logo.png" alt="CAMB-logo" />
+      <a routerLink="/home">
+        <img src="../assets/images/CAMB-logo.png" alt="CAMB-logo" />
+      </a>
     </div>
     <div class="header-navigation">
       <ul>
-        <li><a routerLink="/dataFormatting/Detail" href="">Data Formatting </a></li>
-        <li><a routerLink="/dataAnalysis/Detail" href=""> DNA Analysis </a></li>
-        <li><a routerLink="/protienAnalysis/Detail" href=""> Protien Analysis </a></li>
+        <li><a routerLink="/dataFormatting/Detail">Data Formatting </a></li>
+        <li><a routerLink="/dataAnalysis/Detail"> DNA Analysis </a></li>
+        <li><a routerLink="/protienAnalysis/Detail"> Protien Analysis </a></li>
         <!-- <mat-form-field appearance="fill">
           <mat-label class="Menu-head">Data Formatting</mat-label>
           <mat-select>
@@ -47,6 +49,17 @@
           </mat-select>
         </mat-form-field> -->
       </ul>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Tools
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/dataFormatting/Detail" href="">Data Formatting </a>
+          <a class="dropdown-item" routerLink="/dataAnalysis/Detail" href=""> DNA Analysis </a>
+          <a class="dropdown-item" routerLink="/protienAnalysis/Detail" href=""> Protien Analysis </a>
+        </div>
+      </div>
     </div>
     <div class="info-navigation">
       <ul>
@@ -58,3 +71,7 @@
 
   </div>
 </div>
+<script>
+  const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
+  const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
+</script>
