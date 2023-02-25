@@ -14,7 +14,7 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/' + format;
     const headers = { 'content-type': 'application/json' }
     const body = JSON.stringify(format);
-    console.log(body)
+    // console.log(body)
     let option: any = {
       body: format,
       oberve: "response",

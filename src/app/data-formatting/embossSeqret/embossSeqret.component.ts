@@ -52,6 +52,13 @@ export class EmbossSeqretComponent implements OnInit {
   });
   async ngOnInit() {
     this.stypeList = await this.service.getformat('emboss_seqret/parameterdetails/stype').toPromise();
+    console.log(this.stypeList);
+    
+    // this.stypeList.values?.values.forEach((element:any) => {
+    //   if(element.defaultValue == true) {
+    //     this.registrationForm.get("stype")?.setValue(element.value);
+    //   }
+    // });
     this.inputformat = await this.service.getformat('emboss_seqret/parameterdetails/inputformat').toPromise();
     this.outputformat = await this.service.getformat('emboss_seqret/parameterdetails/outputformat').toPromise();
     this.feature = await this.service.getformat('emboss_seqret/parameterdetails/feature').toPromise();

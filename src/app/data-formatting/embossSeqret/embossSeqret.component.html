@@ -17,7 +17,7 @@
         <div class="step-one-drop-down">
           <p>Enter a type of</p>
           <select formControlName="stype">
-            <option *ngFor="let Stype of stypeList.values.values" [ngValue]="Stype.value">
+            <option *ngFor="let Stype of stypeList.values.values" [ngValue]="Stype.value" [selected]="Stype.defaultValue === true">
               {{ Stype.label }}
             </option>
           </select>
@@ -37,13 +37,13 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Inputformat</p>
+        <p>Input Format</p>
         <select formControlName="inputformat">
-          <option *ngFor="let item of inputformat.values.values" [ngValue]="item.value">
+          <option *ngFor="let item of inputformat.values.values" [ngValue]="item.value" [selected]="item.defaultValue">
             {{ item.label }}
           </option>
         </select>
-        <p>Outputformat</p>
+        <p>Output Format</p>
         <select formControlName="outputformat">
           <option *ngFor="let item of outputformat.values.values" [ngValue]="item.value">
             {{ item.label }}
@@ -57,7 +57,7 @@
         </select>
         <div>
           <div class="more-option">
-            <p>Firstonly </p>
+            <p>First Only </p>
             <select formControlName="firstonly">
               <option *ngFor="let item of firstonly.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
                 {{ item.label }}
@@ -73,7 +73,7 @@
             </select>
           </div>
           <div class="more-option">
-            <p>Outputcase</p>
+            <p>Output Case</p>
             <select formControlName="outputcase">
               <option *ngFor="let Outputcase of outputcase.values.values" [ngValue]="Outputcase.value">
                 {{ Outputcase.label }}
@@ -81,7 +81,7 @@
             </select>
           </div>
           <div class="more-option">
-            <p>Seqrange</p>
+            <p>Sequence Range</p>
             <select formControlName="seqrange">
               <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
                 {{ Seqrange.label }}
