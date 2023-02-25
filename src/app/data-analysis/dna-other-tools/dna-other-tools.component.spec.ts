@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DataFormattingComponent } from './data-formatting.component';
+import { DnaOtherToolsComponent } from './dna-other-tools.component';
 
-describe('DataFormattingComponent', () => {
-  let component: DataFormattingComponent;
-  let fixture: ComponentFixture<DataFormattingComponent>;
+describe('DnaOtherToolsComponent', () => {
+  let component: DnaOtherToolsComponent;
+  let fixture: ComponentFixture<DnaOtherToolsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataFormattingComponent ]
+      declarations: [ DnaOtherToolsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataFormattingComponent);
+    fixture = TestBed.createComponent(DnaOtherToolsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

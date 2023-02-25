@@ -17,6 +17,7 @@ import { EmbosTranseqComponent } from './embosTranseq/embosTranseq.component';
 import { BackTranseqComponent } from './backTranseq/backTranseq.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DnaOtherToolsComponent } from './dna-other-tools/dna-other-tools.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     IsochoreComponent,
     CPGPLOTComponent,
     EmbosTranseqComponent,
-    BackTranseqComponent
+    BackTranseqComponent,
+    DnaOtherToolsComponent
   ],
   imports: [
     CommonModule,

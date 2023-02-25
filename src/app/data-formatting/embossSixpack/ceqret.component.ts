@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription, timer } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { DataformatingService } from '../dataformating.service';
 import { ResultComponent } from '../result/result.component';
 
@@ -16,6 +18,7 @@ export class CeqretComponent implements OnInit {
   lastorf: any = [];
   name = '';
   show: boolean = false;
+  currentSub: Subscription | undefined;
   show2 = false;
   show3 = false;
   isSubmitted = false;
@@ -94,45 +97,91 @@ export class CeqretComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
-            this.service.getEmboss_SixpackStatus(this.jobId).subscribe(
-              data => {
-                this.toaster.success(data.toString())
-              }, (error) => {
-                if (error.status == 200) {
-                  this.jobStatus = error.error.text
-                  this.toaster.info(this.jobStatus)
-                  setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
-                    this.service.getEmboss_sixpackResult(this.jobId, 'out').subscribe(
-                      success => {
-                        console.log(success);
-                      },
-                      error => {
-                        console.log(error);
-                        if (error.status == 200) {
-                          let result = error.error.text;
-                          const dialogRef = this.dialog.open(ResultComponent, {
-                            data: {
-                              text: result
-                            }
-                          });
-                        }else {
-                          this.toaster.error(error.error)
-                        }
-                      }
-                    )
-                    // }
-                  }, 15000);
-                }
-                else {
-                  this.toaster.error(error.error)
-                }
-              }
-            )
+            this.getResult();
+            // this.service.getEmboss_SixpackStatus(this.jobId).subscribe(
+            //   data => {
+            //     this.toaster.success(data.toString())
+            //   }, (error) => {
+            //     if (error.status == 200) {
+            //       this.jobStatus = error.error.text
+            //       this.toaster.info(this.jobStatus)
+            //       setTimeout(() => {
+            //         // if (this.jobStatus != "FAILURE") {
+            //         this.service.getEmboss_sixpackResult(this.jobId, 'out').subscribe(
+            //           success => {
+            //             console.log(success);
+            //           },
+            //           error => {
+            //             console.log(error);
+            //             if (error.status == 200) {
+            //               let result = error.error.text;
+            //               const dialogRef = this.dialog.open(ResultComponent, {
+            //                 data: {
+            //                   text: result
+            //                 }
+            //               });
+            //             }else {
+            //               this.toaster.error(error.error)
+            //             }
+            //           }
+            //         )
+            //         // }
+            //       }, 15000);
+            //     }
+            //     else {
+            //       this.toaster.error(error.error)
+            //     }
+            //   }
+            // )
           }
         } else {
           this.toaster.error(error.error)
         }
       })
-          }
+  }
+  getResult() {
+    // this.spinner.show()
+    this.currentSub = timer(15000).pipe(
+      mergeMap(() => 
+      this.service.getEmboss_SixpackStatus(this.jobId))
+    ).subscribe((response:any)=>{
+      console.log(response);
+      // this.message_arr = response.resp;
+    },(error)=>{
+      console.log(error);
+      if (error.status == 200) {
+        this.jobStatus = error.error.text
+        this.toaster.info(this.jobStatus)
+        if (this.jobStatus!= "RUNNING") {
+          this.service.getEmboss_sixpackResult(this.jobId, 'out').subscribe(
+            (response:any)=>{
+              console.log(response);
+              // this.message_arr = response.resp;
+            },(error)=>{
+              console.log(error);
+              if (error.status == 200) {
+                let result = error.error.text;
+                const dialogRef = this.dialog.open(ResultComponent, {
+                  data: {
+                    text: result
+                  }
+                });
+              }else {
+                this.toaster.error(error.error)
+                this.getResult()
+              }
+            }
+          )
+        } else{
+          this.getResult()
         }
+      }else {
+        this.toaster.error(error.error)
+        this.getResult()
+      }
+    });
+  }
+  ngOnDestroy () {
+    this.currentSub?.unsubscribe()
+  }
+}

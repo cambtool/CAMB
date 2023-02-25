@@ -1,8 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription, timer } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { DataformatingService } from '../dataformating.service';
 import { ResultComponent } from '../result/result.component';
 
@@ -16,8 +18,8 @@ export class EmblEbiComponent implements OnInit {
   jobId: any = '';
   jobStatus: string = '';
   show: boolean = false;
-  show2 = false;
-  show3 = false;
+  show3:boolean = false;
+  currentSub: Subscription | undefined;
   isSubmitted = false;
   taxids: any = []
   negative_taxids: any = []
@@ -45,7 +47,8 @@ export class EmblEbiComponent implements OnInit {
   data: any = [];
   sequence:any=[]
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient  , private toaster: ToastrService, public dialog: MatDialog) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService,
+     private toaster: ToastrService, public dialog: MatDialog, private spinner: NgxSpinnerService) { }
   registrationForm = this.fb.group({
     matrix: new FormControl(''),
     sequence: new FormControl(''),
@@ -141,6 +144,7 @@ export class EmblEbiComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
+    
     this.service.ncbiblast_Run(formdata).subscribe(
       success => {
         console.log(success);
@@ -148,50 +152,84 @@ export class EmblEbiComponent implements OnInit {
       error => {
         console.log(error);
         if (error.status == 200) {
+          debugger
+          ;
           this.jobId = error.error.text
           if (this.jobId != null) {
-            this.service.getncbiblastStatus(this.jobId).subscribe(
-              data => {
-                this.toaster.success(data.toString())
-              }, (error) => {
-                if (error.status == 200) {
-                  this.jobStatus = error.error.text
-                  this.toaster.info(this.jobStatus)
-                  setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
-                    this.service.getncbiblastResult(this.jobId, 'out').subscribe(
-                      success => {
-                        console.log(success);
-                      },
-                      error => {
-                        console.log(error);
-                        if (error.status == 200) {
-                          let result = error.error.text;
-                          const dialogRef = this.dialog.open(ResultComponent, {
-                            data: {
-                              text: result
-                            }
-                          });
-                        }else {
-                          this.toaster.error(error.error)
-                        }
-                      }
-                    )
-                    // }
-                  }, 15000);
-                }
-                else {
-                  this.toaster.error(error.error)
-                }
-              }
-            )
+            this.getResult()
+          //   this.service.getncbiblastStatus(this.jobId).subscribe(
+          //     data => {
+          //       this.toaster.success(data.toString())
+          //     }, (error) => {
+          //       if (error.status == 200) {
+          //         this.jobStatus = error.error.text
+          //         this.toaster.info(this.jobStatus)
+          //         // setTimeout(() => {
+          //           // if (this.jobStatus != "FAILURE") {
+          //           this.getResult()
+                    
+          //           // }
+          //         // }, 30000);
+          //       }
+          //       else {
+          //         this.toaster.error(error.error)
+          //       }
+          //     }
+          //   )
           }
-        } else {
+        }
+         else {
           this.toaster.error(error.error)
         }
       })
 
 
   }
+  getResult(){
+    this.spinner.show()
 
+    this.currentSub = timer(20000).pipe(
+      mergeMap(() => 
+      this.service.getncbiblastStatus(this.jobId))
+    ).subscribe((response:any)=>{
+      console.log(response);
+      // this.message_arr = response.resp;
+    },(error)=>{
+      console.log(error);
+      if (error.status == 200) {
+        this.jobStatus = error.error.text
+        this.toaster.info(this.jobStatus)
+        if (this.jobStatus!= "RUNNING") {
+          this.service.getncbiblastResult(this.jobId, 'out').subscribe(
+            (response:any)=>{
+              console.log(response);
+              // this.message_arr = response.resp;
+            },(error)=>{
+              console.log(error);
+              if (error.status == 200) {
+                let result = error.error.text;
+                const dialogRef = this.dialog.open(ResultComponent, {
+                  data: {
+                    text: result
+                  }
+                });
+              }else {
+                this.toaster.error(error.error)
+                this.getResult()
+              }
+            }
+          )
+        } else{
+          this.getResult()
+        }
+      }else {
+        this.toaster.error(error.error)
+        this.getResult()
+      }
+    });
+
+  }
+  ngOnDestroy () {
+    this.currentSub?.unsubscribe()
+  }
 }

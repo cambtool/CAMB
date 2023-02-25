@@ -18,13 +18,6 @@
           </div>
           <p>Data conversions entail changing the format of the data, such as changing FASTQ files to FASTA files. Data conversions and formatting are crucial processes in getting the data ready for analysis, and they can improve the data's compatibility with other programmes and tools. This may make the analysis easier to share and replicate.</p>
         </mat-tab>
-        <mat-tab label="Emboss Seqret">
-          <h2>EMBOSS Seqret</h2>
-          <p>EMBOSS Seqret reads sequences and writes them (returns). It can be used for a range of activities, such as obtaining sequences from databases, displaying sequences, reformatting sequences, generating a sequence's reverse complement, obtaining sequence fragments, converting sequence case, or any combination of the aforementioned operations.</p>
-          <button class="btnFormating" [routerLink]="['/dataFormatting/EmbossSeqret']"
-            routerLinkActive="router-link-active">
-            Button</button>
-        </mat-tab>
         <mat-tab label="NCBI BLAST">
           <h2>NCBI BLAST</h2>
           <p>BLAST stands for Basic Local Alignment Search Tool. Its main purpose is to identify areas of similarity in sequence, providing insights into the function and evolution of the sequence. This tool can be used to gain a better understanding of the structure and function of a given sequence by analyzing its similarities to other sequences.</p>
@@ -63,6 +56,13 @@
           </p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/Phylogeny']"
             routerLinkActive="router-link-active">Button</button>
+        </mat-tab>
+        <mat-tab label="Emboss Seqret">
+          <h2>EMBOSS Seqret</h2>
+          <p>EMBOSS Seqret reads sequences and writes them (returns). It can be used for a range of activities, such as obtaining sequences from databases, displaying sequences, reformatting sequences, generating a sequence's reverse complement, obtaining sequence fragments, converting sequence case, or any combination of the aforementioned operations.</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/EmbossSeqret']"
+            routerLinkActive="router-link-active">
+            Button</button>
         </mat-tab>
         <mat-tab label="Other Tools">
           <app-other-tools></app-other-tools>

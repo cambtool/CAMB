@@ -39,7 +39,7 @@
         </select>
         <p>Exclude Gaps</p>
         <select formControlName="tossgaps">
-          <option *ngFor="let Tossgaps of tossgaps.values.values" [ngValue]="tossgaps.value">
+          <option *ngFor="let Tossgaps of tossgaps.values.values" [ngValue]="Tossgaps.value">
             {{ Tossgaps.label }}
           </option>
         </select>
@@ -47,8 +47,8 @@
           <div class="more-option">
             <p>Clustering Method</p>
             <select formControlName="clustering">
-              <option *ngFor="let Clustering of clustering.values.values" [ngValue]="clustering.value">
-                {{ Clustering.label }}
+              <option *ngFor="let Cluster of clustering.values.values" [ngValue]="Cluster.value">
+                {{ Cluster.label }}
               </option>
             </select>
           </div>
@@ -58,8 +58,8 @@
           <div class="more-option">
             <p>PIM</p>
             <select formControlName="pim">
-              <option *ngFor="let Pim of pim.values.values" [ngValue]="pim.value">
-                {{ Pim.label }}
+              <option *ngFor="let pim of pim.values.values" [ngValue]="pim.value">
+                {{ pim.label }}
               </option>
             </select>
           </div>

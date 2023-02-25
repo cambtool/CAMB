@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription, timer } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { DataformatingService } from '../dataformating.service';
 import { ResultComponent } from '../result/result.component';
 
@@ -15,6 +17,7 @@ export class PSI_blastComponent implements OnInit {
   name = '';
   show: boolean = false;
   show2 = false;
+  currentSub: Subscription | undefined;
   show3 = false;
   isSubmitted = false;
   jobId: any;
@@ -165,5 +168,49 @@ export class PSI_blastComponent implements OnInit {
       })
 
   }
-
+  getResult() {
+    // this.spinner.show()
+    this.currentSub = timer(10000).pipe(
+      mergeMap(() => 
+      this.service.PSIStatus(this.jobId))
+    ).subscribe((response:any)=>{
+      console.log(response);
+      // this.message_arr = response.resp;
+    },(error)=>{
+      console.log(error);
+      if (error.status == 200) {
+        this.jobStatus = error.error.text
+        this.toaster.info(this.jobStatus)
+        if (this.jobStatus!= "RUNNING") {
+          this.service.PSIResult(this.jobId, 'out').subscribe(
+            (response:any)=>{
+              console.log(response);
+              // this.message_arr = response.resp;
+            },(error)=>{
+              console.log(error);
+              if (error.status == 200) {
+                let result = error.error.text;
+                const dialogRef = this.dialog.open(ResultComponent, {
+                  data: {
+                    text: result
+                  }
+                });
+              }else {
+                this.toaster.error(error.error)
+                this.getResult()
+              }
+            }
+          )
+        } else{
+          this.getResult()
+        }
+      }else {
+        this.toaster.error(error.error)
+        this.getResult()
+      }
+    });
+  }
+  ngOnDestroy () {
+    this.currentSub?.unsubscribe()
+  }
 }

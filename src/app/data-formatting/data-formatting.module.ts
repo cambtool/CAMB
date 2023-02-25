@@ -18,6 +18,7 @@ import { FASTMComponent } from './FASTM/FASTM.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DataFormattingComponent } from './data-formatting.component';
 import { OtherToolsComponent } from './other-tools/other-tools.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { OtherToolsComponent } from './other-tools/other-tools.component';
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxSpinnerModule
 
   ],
   exports: [
