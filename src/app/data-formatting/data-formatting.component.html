@@ -18,10 +18,18 @@
           </div>
           <p>Data conversions entail changing the format of the data, such as changing FASTQ files to FASTA files. Data conversions and formatting are crucial processes in getting the data ready for analysis, and they can improve the data's compatibility with other programmes and tools. This may make the analysis easier to share and replicate.</p>
         </mat-tab>
-        <mat-tab label="NCBI BLAST">
-          <h2>NCBI BLAST</h2>
-          <p>BLAST stands for Basic Local Alignment Search Tool. Its main purpose is to identify areas of similarity in sequence, providing insights into the function and evolution of the sequence. This tool can be used to gain a better understanding of the structure and function of a given sequence by analyzing its similarities to other sequences.</p>
-          <button class="btnFormating" [routerLink]="['/dataFormatting/EBI']"
+        <mat-tab label="PSI-BLAST">
+          <h2>PSI-BLAST</h2>
+          <p>Users of PSI-BLAST can create and execute an NCBI BLAST search with a unique, position-specific score matrix that can be used to identify far-off evolutionary links. The PHI-BLAST functionality under "additional options" allows users to specify pattern files to limit search results.
+          </p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/PSi']"
+            routerLinkActive="router-link-active">Button</button>
+        </mat-tab>
+        <mat-tab label="Simple Phylogeny">
+          <h2>Simple Phylogeny</h2>
+          <p>Phylogenetic tree generating techniques from the ClustalW2 package are accessible through this tool.
+          </p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/Phylogeny']"
             routerLinkActive="router-link-active">Button</button>
         </mat-tab>
         <mat-tab label="EMBOSS Sixpack">
@@ -43,18 +51,11 @@
           <button class="btnFormating" [routerLink]="['/dataFormatting/fastM']"
             routerLinkActive="router-link-active">Button</button>
         </mat-tab>
-        <mat-tab label="PSI-BLAST">
-          <h2>PSI-BLAST</h2>
-          <p>Users of PSI-BLAST can create and execute an NCBI BLAST search with a unique, position-specific score matrix that can be used to identify far-off evolutionary links. The PHI-BLAST functionality under "additional options" allows users to specify pattern files to limit search results.
-          </p>
-          <button class="btnFormating" [routerLink]="['/dataFormatting/PSi']"
-            routerLinkActive="router-link-active">Button</button>
-        </mat-tab>
-        <mat-tab label="Simple Phylogeny">
-          <h2>Simple Phylogeny</h2>
-          <p>Phylogenetic tree generating techniques from the ClustalW2 package are accessible through this tool.
-          </p>
-          <button class="btnFormating" [routerLink]="['/dataFormatting/Phylogeny']"
+        
+        <mat-tab label="NCBI BLAST">
+          <h2>NCBI BLAST</h2>
+          <p>BLAST stands for Basic Local Alignment Search Tool. Its main purpose is to identify areas of similarity in sequence, providing insights into the function and evolution of the sequence. This tool can be used to gain a better understanding of the structure and function of a given sequence by analyzing its similarities to other sequences.</p>
+          <button class="btnFormating" [routerLink]="['/dataFormatting/EBI']"
             routerLinkActive="router-link-active">Button</button>
         </mat-tab>
         <mat-tab label="Emboss Seqret">
