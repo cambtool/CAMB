@@ -1,77 +1,196 @@
 <div class="container">
-    <div class="row mainPadding">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <mat-tab-group animationDuration="0ms">
-          <mat-tab label="DataAnalysis">
-            <h2>DNA Analysis</h2>
-            <p>DNA analysis plays a critical role in bioinformatics, which is the application of computer science and information technology to the field of biology. Bioinformatics is a rapidly growing field that has revolutionized many areas of biological research, including genomics, proteomics, and evolutionary biology.
-            </p>
-            <div class="row paddingTop">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <img src="../assets/images/sideImg.jpg" alt="" style="width:100%;">
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <img src="../assets/images/sideImg.jpg" alt="" style="width:100%;">
-              </div>
+  <div class="row mainPadding">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab label="DataAnalysis">
+          <h2>DNA Analysis</h2>
+          <p>
+            DNA analysis plays a critical role in bioinformatics, which is the
+            application of computer science and information technology to the
+            field of biology. Bioinformatics is a rapidly growing field that has
+            revolutionized many areas of biological research, including
+            genomics, proteomics, and evolutionary biology.
+          </p>
+          <div class="row paddingTop">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <img
+                src="../../assets/images//dna-1-inner.PNG"
+                alt=""
+                style="width: 100%"
+              />
             </div>
-            <p>In the field of bioinformatics, DNA analysis tools are essential for studying the genetic information stored within DNA. These tools are computer programs or software that allow researchers to analyze, interpret and visualize DNA data, such as DNA sequences and genetic variations.Some commonly used DNA analysis tools in bioinformatics include: Sequence alignment tools, Genome annotation software, Phylogenetic analysis tools and Structural analysis tools.</p>
-          </mat-tab>
-          <mat-tab label="Emboss Newcpgreport">
-            <h2>Emboss Newcpgreport</h2>
-            <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-                visual manner.</p>
-            <button class="btnFormating" [routerLink]="['/dataAnalysis/Newcpgreport']"
-              routerLinkActive="router-link-active">
-              Button</button>
-          </mat-tab>
-          <mat-tab label="GENE WISE">
-            <h2>GENE WISE</h2>
-            <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-              visualmanner</p>
-            <button class="btnFormating" [routerLink]="['/dataAnalysis/GeneWise']"
-            routerLinkActive="router-link-active">Button</button>
-          </mat-tab>
-          <mat-tab label="SEQCK SUM">
-            <h2>SEQCK SUM</h2>
-            <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-              visual manner.</p>
-            <button class="btnFormating" [routerLink]="['/dataAnalysis/seqcksum']"
-            routerLinkActive="router-link-active">Button</button>
-          </mat-tab>
-          <mat-tab label="ISOCHORE">
-            <h2>ISOCHORE</h2>
-            <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-                visual manner.</p>
-            <button class="btnFormating" [routerLink]="['/dataAnalysis/Isochore']"
-            routerLinkActive="router-link-active">Button</button>
-          </mat-tab>
-          <mat-tab label="CPGPLOT">
-            <h2>CPGPLOT</h2>
-            <p>This tool provides sequence similarity searching against protein databases using the FASTM suite of programs.
-              FASTM provides a heuristic search with a protein query. FASTX and FASTY translate a DNA query.
-              Optimal searches are available with SSEARCH (local), GGSEARCH (global) and GLSEARCH (global query, local database).</p>
-            <button class="btnFormating" [routerLink]="['/dataAnalysis/CPGPLOT']"
-            routerLinkActive="router-link-active">Button</button>
-          </mat-tab>
-          <mat-tab label="TRANSEQ">
-            <h2>Job Dispatcher RESTful Web Services</h2>
-            <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-              visual manner.</p>
-            <button class="btnFormating" [routerLink]="['/dataAnalysis/Transeq']"
-            routerLinkActive="router-link-active">Button</button>
-          </mat-tab>
-          <mat-tab label="BACKTRANSEQ">
-            <h2>BACKTRANSEQ</h2>
-            <p>This tool provides access to phylogenetic tree generation methods from the ClustalW2 package. Please note this
-              is NOT a multiple sequence alignment tool.</p>
-            <button class="btnFormating" [routerLink]="['/dataAnalysis/BackTranSeq']"
-            routerLinkActive="router-link-active">Button</button>
-          </mat-tab>
-          <mat-tab label="Other tools">
-            <app-dna-other-tools></app-dna-other-tools>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <img
+                src="../../assets/images//dna-2-inner.PNG"
+                alt=""
+                style="width: 100%"
+              />
+            </div>
+          </div>
+          <p>
+            In the field of bioinformatics, DNA analysis tools are essential for
+            studying the genetic information stored within DNA. These tools are
+            computer programs or software that allow researchers to analyze,
+            interpret and visualize DNA data, such as DNA sequences and genetic
+            variations.Some commonly used DNA analysis tools in bioinformatics
+            include: Sequence alignment tools, Genome annotation software,
+            Phylogenetic analysis tools and Structural analysis tools.
+          </p>
+        </mat-tab>
+        <mat-tab label="Emboss Newcpgreport">
+          <h2>Emboss Newcpgreport</h2>
+          <p>
+            The Newcpgreport tool in EMBOSS uses a statistical method to predict
+            CpG islands based on the frequency of CpG dinucleotides in a DNA
+            sequence. It identifies CpG islands based on three criteria: GC
+            content, observed-to-expected CpG ratio, and length of the CpG
+            island. The output of Newcpgreport includes a graphical
+            representation of the predicted CpG islands, as well as a tabulated
+            summary of their properties.
+          </p>
+           <!-- <div class="row paddingTop">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <img
+                src="../../assets/images/cgp.PNG"
+                alt=""
+                style="width: 100%"
+              />
+            </div>
+            </div> -->
+          <!-- <p>
+            Report and Identify CpG islands in any nucleotide sequences. </p>
+            <ul>
+              <li>WINDOW SIZE</li>
+              <li>MINIMUM LENGTH</li>
+              <li>MINIMUM OBSERVED</li>
+              <li>MINIMUM PERCENTAGE</li>
+            </ul> -->
+          
+          <button
+            class="btnFormating"
+            [routerLink]="['/dataAnalysis/Newcpgreport']"
+            routerLinkActive="router-link-active"
+          >
+            Button
+          </button>
+        </mat-tab>
+        <mat-tab label="GENE WISE">
+          <h2>GENE WISE</h2>
+          <p>
+            GENE WISE is a computer program that is used to analyze DNA sequences and identify genes. It works by comparing the DNA sequence to a database of known protein sequences, and uses this comparison to predict where the genes are located, how they are structured, and how they are regulated. This tool is widely used in genomics research for gene annotation and identification.
+          </p>
+          <!-- <div class="row paddingTop">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <img
+                src="../../assets/images/gene.PNG"
+                alt=""
+                style="width: 100%"
+              />
+            </div>
+            </div> -->
+          <!-- <p>
+            Enter or paste your DNA sequence in any supported format: </p>
+            <ul>
+              <li>PRETTY ASCII</li>
+              <li>GENE STRUCTURE</li>
+              <li>TRANSLATION</li>
+              <li>cDNA</li>
+              <li>EMBL FEATURE</li>
+            </ul> -->
+          
+          <button
+            class="btnFormating"
+            [routerLink]="['/dataAnalysis/GeneWise']"
+            routerLinkActive="router-link-active">
+            Button
+          </button>
+        </mat-tab>
+        <mat-tab label="SEQCK SUM">
+          <h2>SEQCK SUM</h2>
+          <p>
+            CheckSum Tool is a bioinformatics tool that is used to calculate and validate checksums for nucleotide and protein sequence data. Checksums are unique digital fingerprints that are generated using a mathematical algorithm to represent a large amount of data in a compact and unique way.The tool then calculates the checksum values using the selected algorithm(s) and returns the result to the user. The user can then compare the calculated checksums to the original sequence data to verify that the data has not been altered or corrupted during transmission or storage.
+          </p>
+          <!-- <div class="col-md-6 col-sm-6 col-xs-6">
+            <img
+              src="../../assets/images/checsum.PNG"
+              alt=""
+              style="width: 84%"
+            />
+          </div> -->
+          <button
+            class="btnFormating"
+            [routerLink]="['/dataAnalysis/seqcksum']"
+            routerLinkActive="router-link-active"
+          >
+            Button
+          </button>
+        </mat-tab>
+        <mat-tab label="ISOCHORE">
+          <h2>ISOCHORE</h2>
+          <p>
+            The ISOCHORE tool uses a statistical approach to identify isochores in genomic sequences. It calculates the GC content of a sliding window along the genome and identifies regions with a significantly different GC content compared to the background GC content. The output of the ISOCHORE tool includes a graphical representation of the identified isochores, as well as a tabulated summary of their properties, such as length, GC content, and statistical significance.
+          </p>
+
+          <!-- <div class="col-md-6 col-sm-6 col-xs-6">
+            <img
+              src="../../assets/images/ISOchore.PNG"
+              alt=""
+              style="width: 84%"
+            />
+          </div> -->
+
+          <button
+            class="btnFormating"
+            [routerLink]="['/dataAnalysis/Isochore']"
+            routerLinkActive="router-link-active"
+          >
+            Button
+          </button>
+        </mat-tab>
+        <mat-tab label="CPGPLOT">
+          <h2>CPGPLOT</h2>
+          <p>
+            The CPGPLOT tool can generate several types of plots, including GC skew plots, dinucleotide frequency plots, codon usage plots, and amino acid composition plots. These plots are useful for identifying sequence features, such as gene boundaries, replication origins, and coding regions. They can also reveal patterns of genome evolution and adaptation, such as biased codon usage and nucleotide composition variation.
+          </p>
+          <button
+            class="btnFormating"
+            [routerLink]="['/dataAnalysis/CPGPLOT']"
+            routerLinkActive="router-link-active"
+          >
+            Button
+          </button>
+        </mat-tab>
+        <mat-tab label="TRANSEQ">
+          <h2>Transeq</h2>
+          <p>
+            Transeq uses a standard genetic code to translate the nucleotide sequence into all possible reading frames. It can handle both single sequences and batches of sequences in a variety of input formats, such as FASTA and GenBank. The output is a FASTA-formatted file containing the translated protein sequences.
+            Transeq is particularly useful in genome annotation, where it is often necessary to identify the protein-coding regions of a genome. It is also used in protein structure prediction and functional analysis, where knowledge of the protein sequence is essential.            
+          </p>
+          <button
+            class="btnFormating"
+            [routerLink]="['/dataAnalysis/Transeq']"
+            routerLinkActive="router-link-active"
+          >
+            Button
+          </button>
+        </mat-tab>
+        <mat-tab label="BACKTRANSEQ">
+          <h2>BACKTRANSEQ</h2>
+          <p>
+            The BACKTRANSEQ tool uses a process called back-translation to generate the most likely nucleotide sequence for a given protein sequence. The tool identifies all possible codons for each amino acid in the protein sequence, using the genetic code as a reference. The most likely codon is then selected based on factors such as codon usage bias, GC content, and other sequence characteristics.
+          </p>
+          <button
+            class="btnFormating"
+            [routerLink]="['/dataAnalysis/BackTranSeq']"
+            routerLinkActive="router-link-active"
+          >
+            Button
+          </button>
+        </mat-tab>
+        <mat-tab label="Other tools">
+          <app-dna-other-tools></app-dna-other-tools>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
-
+</div>

@@ -147,3 +147,6 @@ body {
   width: 100% !important;
   text-align: center !important;
 }
+p {
+  font-size: initial;
+}
