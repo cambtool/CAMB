@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription, timer } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { DataformatingService } from 'src/app/data-formatting/dataformating.service';
 import { ResultComponent } from 'src/app/data-formatting/result/result.component';
 
@@ -23,6 +25,7 @@ export class IsochoreComponent implements OnInit {
   jobStatus: any;
   postId: any;
   window: any = [];
+  currentSub: Subscription | undefined;
   shift: any = [];
   data: any = [];
   public buttonName: any = 'More option...';
@@ -75,49 +78,93 @@ export class IsochoreComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
-            this.service.ISOCHOREStatus(this.jobId).subscribe(
-              data => {
-                this.toaster.success(data.toString())
-              }, (error) => {
-                if (error.status == 200) {
-                  this.jobStatus = error.error.text
-                  this.toaster.info(this.jobStatus)
-                  setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
-                    this.service.ISOCHOREResult(this.jobId, 'out').subscribe(
-                      success => {
-                        console.log(success);
-                      },
-                      error => {
-                        console.log(error);
-                        if (error.status == 200) {
-                          let result = error.error.text;
-                          const dialogRef = this.dialog.open(ResultComponent, {
-                            data: {
-                              text: result
-                            }
-                          });
-                        }else {
-                          this.toaster.error(error.error)
-                        }
-                      }
-                    )
-                    // }
-                  }, 3000);
-                }
-                else {
-                  this.toaster.error(error.error)
-                }
-              }
-            )
+            this.getResult()
+            // this.service.ISOCHOREStatus(this.jobId).subscribe(
+            //   data => {
+            //     this.toaster.success(data.toString())
+            //   }, (error) => {
+            //     if (error.status == 200) {
+            //       this.jobStatus = error.error.text
+            //       this.toaster.info(this.jobStatus)
+            //       setTimeout(() => {
+            //         // if (this.jobStatus != "FAILURE") {
+            //         this.service.ISOCHOREResult(this.jobId, 'out').subscribe(
+            //           success => {
+            //             console.log(success);
+            //           },
+            //           error => {
+            //             console.log(error);
+            //             if (error.status == 200) {
+            //               let result = error.error.text;
+            //               const dialogRef = this.dialog.open(ResultComponent, {
+            //                 data: {
+            //                   text: result
+            //                 }
+            //               });
+            //             }else {
+            //               this.toaster.error(error.error)
+            //             }
+            //           }
+            //         )
+            //         // }
+            //       }, 3000);
+            //     }
+            //     else {
+            //       this.toaster.error(error.error)
+            //     }
+            //   }
+            // )
           }
         } else {
           this.toaster.error(error.error)
         }
       })
+  }
+  getResult(){
+    // this.spinner.show()
 
-
+    this.currentSub = timer(20000).pipe(
+      mergeMap(() => 
+      this.service.ISOCHOREStatus(this.jobId))
+    ).subscribe((response:any)=>{
+      console.log(response);
+      // this.message_arr = response.resp;
+    },(error)=>{
+      console.log(error);
+      if (error.status == 200) {
+        this.jobStatus = error.error.text
+        this.toaster.info(this.jobStatus)
+        if (this.jobStatus!= "RUNNING") {
+          this.service.ISOCHOREResult(this.jobId, 'out').subscribe(
+            (response:any)=>{
+              console.log(response);
+              // this.message_arr = response.resp;
+            },(error)=>{
+              console.log(error);
+              if (error.status == 200) {
+                let result = error.error.text;
+                const dialogRef = this.dialog.open(ResultComponent, {
+                  data: {
+                    text: result
+                  }
+                });
+              }else {
+                this.toaster.error(error.error)
+                this.getResult()
+              }
+            }
+          )
+        } else{
+          this.getResult()
+        }
+      }else {
+        this.toaster.error(error.error)
+        this.getResult()
+      }
+    });
 
   }
-
+  ngOnDestroy () {
+    this.currentSub?.unsubscribe()
+  }
 }

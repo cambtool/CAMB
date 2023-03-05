@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription, timer } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { DataformatingService } from 'src/app/data-formatting/dataformating.service';
 import { ResultComponent } from 'src/app/data-formatting/result/result.component';
 
@@ -19,6 +21,7 @@ export class BackTranseqComponent implements OnInit {
   show3 = false;
   isSubmitted = false;
   jobId: any;
+  currentSub: Subscription | undefined;
   jobStatus: any;
   codontable: any = [];
   sequence: any = [];
@@ -67,46 +70,93 @@ export class BackTranseqComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
-            this.service.TRANSEQStatus(this.jobId).subscribe(
-              data => {
-                this.toaster.success(data.toString())
-              }, (error) => {
-                if (error.status == 200) {
-                  this.jobStatus = error.error.text
-                  this.toaster.info(this.jobStatus)
-                  setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
-                    this.service.TRANSEQResult(this.jobId, 'out').subscribe(
-                      success => {
-                        // console.log(success);
-                      },
-                      error => {
-                        // console.log(error);
-                        if (error.status == 200) {
-                          let result = error.error.text;
-                          const dialogRef = this.dialog.open(ResultComponent, {
-                            data: {
-                              text: result
-                            }
-                          });
-                        } else {
-                          this.toaster.error(error.error)
-                        }
-                      }
-                    )
-                    // }
-                  }, 3000);
-                }
-                else {
-                  this.toaster.error(error.error)
-                }
-              }
-            )
+            this.getResult();
+            // this.service.TRANSEQStatus(this.jobId).subscribe(
+            //   data => {
+            //     this.toaster.success(data.toString())
+            //   }, (error) => {
+            //     if (error.status == 200) {
+            //       this.jobStatus = error.error.text
+            //       this.toaster.info(this.jobStatus)
+            //       setTimeout(() => {
+            //         // if (this.jobStatus != "FAILURE") {
+            //         this.service.TRANSEQResult(this.jobId, 'out').subscribe(
+            //           success => {
+            //             // console.log(success);
+            //           },
+            //           error => {
+            //             // console.log(error);
+            //             if (error.status == 200) {
+            //               let result = error.error.text;
+            //               const dialogRef = this.dialog.open(ResultComponent, {
+            //                 data: {
+            //                   text: result
+            //                 }
+            //               });
+            //             } else {
+            //               this.toaster.error(error.error)
+            //             }
+            //           }
+            //         )
+            //         // }
+            //       }, 3000);
+            //     }
+            //     else {
+            //       this.toaster.error(error.error)
+            //     }
+            //   }
+            // )
           }
         } else {
           this.toaster.error(error.error)
         }
       })
   }
+  getResult(){
+    // this.spinner.show()
 
+    this.currentSub = timer(20000).pipe(
+      mergeMap(() => 
+      this.service.TRANSEQStatus(this.jobId))
+    ).subscribe((response:any)=>{
+      console.log(response);
+      // this.message_arr = response.resp;
+    },(error)=>{
+      console.log(error);
+      if (error.status == 200) {
+        this.jobStatus = error.error.text
+        this.toaster.info(this.jobStatus)
+        if (this.jobStatus!= "RUNNING") {
+          this.service.TRANSEQResult(this.jobId, 'out').subscribe(
+            (response:any)=>{
+              console.log(response);
+              // this.message_arr = response.resp;
+            },(error)=>{
+              console.log(error);
+              if (error.status == 200) {
+                let result = error.error.text;
+                const dialogRef = this.dialog.open(ResultComponent, {
+                  data: {
+                    text: result
+                  }
+                });
+              }else {
+                this.toaster.error(error.error)
+                this.getResult()
+              }
+            }
+          )
+        } else{
+          this.getResult()
+        }
+      }else {
+        this.toaster.error(error.error)
+        this.getResult()
+      }
+    });
+
+  }
+  ngOnDestroy () {
+    this.currentSub?.unsubscribe()
+  }
 }

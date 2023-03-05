@@ -150,6 +150,7 @@ export class FASTMComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
+            this.getResult()
             // this.service.FASTMStatus(this.jobId).subscribe(
             //   data => {
             //     this.toaster.success(data.toString())
