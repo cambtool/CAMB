@@ -133,6 +133,8 @@ export class FASTMComponent implements OnInit {
     formdata.append("alignments", this.registrationForm.get('alignments')?.value);
     formdata.append("scoreformat", this.registrationForm.get('scoreformat')?.value);
     formdata.append("stats", this.registrationForm.get('stats')?.value);
+    console.log(this.registrationForm.get('stats')?.value);
+    
     formdata.append("seqrange", this.registrationForm.get('seqrange')?.value);
     formdata.append("dbrange", this.registrationForm.get('dbrange')?.value);
     formdata.append("filter", this.registrationForm.get('filter')?.value);

@@ -16,7 +16,7 @@
         <div class="step-one-drop-down">
           <p>Enter a type of Matrix</p>
           <select formControlName="matrix">
-            <option *ngFor="let Matrix of matrix.values.values" [ngValue]="matrix.value">
+            <option *ngFor="let Matrix of matrix.values.values" [ngValue]="Matrix.value">
               {{ Matrix.label }}
             </option>
           </select>
@@ -122,7 +122,7 @@
           <div class="more-option">
             <p>Previous Job Id</p>
             <select formControlName="previousjobid">
-              <option [ngValue]="previousjobid.value">
+              <option [ngValue]="previousjobid.type">
                 {{ previousjobid.type}}
               </option>
             </select>
@@ -130,7 +130,7 @@
           <div class="more-option">
             <p>{{ selectedHits.name }}</p>
             <select formControlName="selectedHits">
-              <option [ngValue]="selectedHits.value">
+              <option [ngValue]="selectedHits.type">
                 {{ selectedHits.type }}
               </option>
             </select>
@@ -139,7 +139,7 @@
           <div class="more-option">
             <p>Cp File</p>
             <select formControlName="cpfile">
-              <option [ngValue]="cpfile.value">
+              <option [ngValue]="cpfile.type">
                 {{ cpfile.type }}
               </option>
             </select>
@@ -148,7 +148,7 @@
           <div class="more-option part">
             <p>Pat File</p>
             <select formControlName="patfile">
-              <option [ngValue]="patfile.value">
+              <option [ngValue]="patfile.type">
                 {{ patfile.type }}
               </option>
             </select>

@@ -113,11 +113,12 @@
           </option>
         </select>
         <p>Stats </p>
-        <select formControlName="gapopen">
+        <select formControlName="stats">
           <option *ngFor="let item of stats.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
+        <pre>{{registrationForm.value | json}}</pre>
         <!-- <p>annotfeats </p>
         <select formControlName="annotfeats">
           <option *ngFor="let item of annotfeats.values.values" [ngValue]="item.value">
