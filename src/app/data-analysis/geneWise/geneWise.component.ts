@@ -120,6 +120,7 @@ export class GeneWiseComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
+            this.getResult();
             // this.service.genewiseStatus(this.jobId).subscribe(
             //   data => {
             //     this.toaster.success(data.toString())

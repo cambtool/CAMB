@@ -7,9 +7,7 @@
   <div class="form">
     <form [formGroup]="registrationForm">
 
-      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-        visual
-        manner.</p>
+      <p>Generate a graphical representation of isochores within DNA sequences.</p>
       <div class="step-one-form">
         <h2>Step:1 - Enter your input </h2>
 
@@ -27,14 +25,14 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>window</p>
+        <p>Window Size</p>
         <select formControlName="window">
           <option *ngFor="let item of window.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
         <p>shift</p>
-        <select formControlName="cksmethod">
+        <select formControlName="shift">
           <option *ngFor="let item of shift.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>

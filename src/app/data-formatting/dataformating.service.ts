@@ -24,7 +24,6 @@ export class DataformatingService {
         "Accept": "application/xml"
       })
     }
-    // return this.http.post(this.baseURL + 'https://www.ebi.ac.uk/Tools/services/rest/' + format, body, { 'headers': headers })
     return this.http.get<any>(url)
   }
 
@@ -36,30 +35,6 @@ export class DataformatingService {
     }
     return throwError(error.error);
   }
-
-
-  // getStatus(jobId: any) {
-  //   const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/status/' + jobId
-  //   return this.http.get(url).pipe(
-  //     catchError(this.handleError)
-  //   )
-  // }
-  // Run(obj: FormData) {
-  //   let headers = new HttpHeaders({
-  //     "Content-Type": "multipart/form-data"
-  //   });
-  //   let options = { headers: headers };
-  //   let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-  //   return this.http.post(url, obj, options).pipe(catchError(this.handleError))
-
-  // }
-  // getResult(jobId: any, statusType: any) {
-  //   const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/result/' + jobId + '/' + statusType
-  //   return this.http.get(url);
-  // }
-
-
-
 
   emboss_sixpack_Run(obj: FormData) {
     let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/run";
@@ -116,9 +91,6 @@ export class DataformatingService {
     return this.http.get(url);
   }
 
-
-
-
   FASTM_Run(obj: FormData) {
     let headers = new HttpHeaders({
       "Content-Type": "multipart/form-data"
@@ -137,9 +109,6 @@ export class DataformatingService {
     return this.http.get(url);
   }
 
-
-
-
   FASTA_Run(obj: FormData) {
     let headers = new HttpHeaders({
       "Content-Type": "multipart/form-data"
@@ -157,7 +126,6 @@ export class DataformatingService {
     const url = 'https://www.ebi.ac.uk/Tools/services/rest/fasta/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
-
 
   NewCPG_Run(obj: FormData) {
     let headers = new HttpHeaders({

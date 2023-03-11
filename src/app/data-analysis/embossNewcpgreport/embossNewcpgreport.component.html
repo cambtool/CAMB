@@ -1,15 +1,13 @@
 <div class="pack-head">
   <div class="page-size">
-    <h1>Emboss Newcpgreport</h1>
+    <h1>Newcpgreport</h1>
   </div>
 </div>
 <div class="page-size">
   <div class="form">
     <form [formGroup]="registrationForm">
 
-      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-        visual
-        manner.</p>
+      <p>Detect and report the presence of CpG islands within one or multiple nucleotide sequences.</p>
       <div class="step-one-form">
         <h2>Step:1 - Enter your input </h2>
 
@@ -27,25 +25,25 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Window</p>
+        <p>Window SIze</p>
         <select formControlName="window">
           <option *ngFor="let item of window.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Minlen</p>
+        <p>Minimum Length</p>
         <select formControlName="minlen">
           <option *ngFor="let item of minlen.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Minoe</p>
+        <p>Minimum Observed</p>
         <select formControlName="minoe">
           <option *ngFor="let Feature of minoe.values.values" [ngValue]="Feature.value">
             {{ Feature.label }}
           </option>
         </select>
-        <p>Minpc </p>
+        <p>Minimum Percentage</p>
         <select formControlName="minpc">
           <option *ngFor="let item of minpc.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
             {{ item.label }}

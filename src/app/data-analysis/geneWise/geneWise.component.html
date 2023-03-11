@@ -7,9 +7,7 @@
   <div class="form">
     <form [formGroup]="registrationForm">
 
-      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-        visual
-        manner.</p>
+      <p>Enables the comparison of a protein sequence with a genomic DNA sequence, taking into account the presence of introns and the possibility of errors in the reading frame.</p>
       <div class="step-one-form">
         <h2>Step:1 - Enter your input </h2>
 
@@ -32,55 +30,55 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Para</p>
+        <p>Parameters</p>
         <select formControlName="para">
           <option *ngFor="let item of para.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Pretty</p>
+        <p>Pretty ASCII</p>
         <select formControlName="pretty">
           <option *ngFor="let item of pretty.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Genes</p>
+        <p>Genes Structure</p>
         <select formControlName="genes">
           <option *ngFor="let Feature of genes.values.values" [ngValue]="Feature.value">
             {{ Feature.label }}
           </option>
         </select>
-        <p>Trans </p>
+        <p>Translation </p>
         <select formControlName="trans">
           <option *ngFor="let item of trans.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Cdna </p>
+        <p>cDNA </p>
         <select formControlName="cdna">
           <option *ngFor="let item of cdna.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Embl </p>
+        <p>EMBL Feature </p>
         <select formControlName="embl">
           <option *ngFor="let item of embl.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Ace </p>
+        <p>ACE File Gene Structure </p>
         <select formControlName="ace">
           <option *ngFor="let item of ace.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Gff </p>
+        <p>GFF Output </p>
         <select formControlName="gff">
           <option *ngFor="let item of gff.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Diana </p>
+        <p>EMBL Feature For diana </p>
         <select formControlName="diana">
           <option *ngFor="let item of diana.values.values" [ngValue]="item.value">
             {{ item.label }}
@@ -92,19 +90,19 @@
             {{ item.label }}
           </option>
         </select>
-        <p>Splice </p>
+        <p>Splice Site</p>
         <select formControlName="splice">
           <option *ngFor="let item of splice.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Random </p>
+        <p>Random Model</p>
         <select formControlName="random">
           <option *ngFor="let item of random.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>Alg </p>
+        <p>Algorithm </p>
         <select formControlName="alg">
           <option *ngFor="let item of alg.values.values" [ngValue]="item.value">
             {{ item.label }}

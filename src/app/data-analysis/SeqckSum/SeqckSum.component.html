@@ -1,15 +1,14 @@
 <div class="pack-head">
   <div class="page-size">
-    <h1>SEQCK SUM</h1>
+    <h1>Check SUM</h1>
   </div>
 </div>
 <div class="page-size">
   <div class="form">
     <form [formGroup]="registrationForm">
 
-      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-        visual
-        manner.</p>
+      <p>Produce checksums for sequences using a range of algorithms, including CRC32, CRC64-ISO, CRC64-ECMA-182, CRC32-CRC64, MD5, SHA1, and SHA2 with bit-lengths of 224, 256, 384, and 512.
+      </p>
       <div class="step-one-form">
         <h2>Step:1 - Enter your input </h2>
 
@@ -27,13 +26,13 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>stype</p>
+        <p>Sequence Type</p>
         <select formControlName="stype">
           <option *ngFor="let item of stype.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select>
-        <p>cksmethod</p>
+        <p>Check Sum Method</p>
         <select formControlName="cksmethod">
           <option *ngFor="let item of cksmethod.values.values" [ngValue]="item.value">
             {{ item.label }}
