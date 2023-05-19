@@ -50,6 +50,7 @@ body {
 }
 .btn {
   margin-top: 2%;
+  padding: 0 !important;
 }
 #equence-btn {
   margin-right: 23px;
@@ -115,18 +116,22 @@ body {
 .step-one-drop-down select,
 .step-two-form select {
   width: 100%;
-  padding: 7px 6px;
-  margin-bottom: 23px;
-  outline-color: #014371;
-  border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 23px;
+    outline-color: #014371;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
 .form form textarea,
 .step-two-form textarea {
-  width: 98% !important;
+  width: 100% !important;
   border: 1px solid #ccc;
   padding: 10px;
   font-size: 16px;
   color: #000;
+  border-radius: 5px;
 }
 .step-one-drop-down select:focus,
 .form form textarea:focus,

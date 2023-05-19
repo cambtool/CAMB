@@ -7,11 +7,9 @@
   <div class="form">
     <form [formGroup]="registrationForm">
       <h2>EMBOSS Sixpack</h2>
-      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-        visual
-        manner.</p>
+      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a visual manner.</p>
       <div class="step-one-form">
-        <label>Step:1 - Enter your input sequence </label>
+        <h2>Step:1 - Enter your input sequence </h2>
         <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
           placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
@@ -26,8 +24,8 @@
       </div>
       <div class="step-two-form">
         <p><label>STEP 2 - Select Parameters</label></p>
-        <div>
-          <div class="more-option">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>CONDON Table</p>
             <select formControlName="codontable">
               <option *ngFor="let item of codontable.values.values" [ngValue]="item.value">
@@ -35,11 +33,16 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>ORF MIN SIZE</p>
-            <input formControlName="orfminsize" />
+            <!-- <input formControlName="orfminsize" /> -->
+            <select formControlName="orfminsize">
+              <option *ngFor="let item of orfminsize.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>FIRST ORF</p>
             <select formControlName="firstorf">
               <option *ngFor="let Feature of firstorf.values.values" [ngValue]="Feature.value">
@@ -47,9 +50,7 @@
               </option>
             </select>
           </div>
-        </div>
-        <div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>LAST ORF </p>
             <select formControlName="lastorf">
               <option *ngFor="let item of lastorf.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
@@ -57,7 +58,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>REVERSE</p>
             <select formControlName="reverse">
               <option *ngFor="let Reverse of reverse.values.values" [ngValue]="Reverse.value">

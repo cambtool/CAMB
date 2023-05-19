@@ -1,3 +1,7 @@
+<ng-container *ngIf="showLoader">
+  <div class="overlay"></div>
+  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+</ng-container>
 <div class="pack-head">
   <div class="page-size">
     <h1>PSI BLAST Web Services</h1>
@@ -7,11 +11,10 @@
   <div class="form">
     <form [formGroup]="registrationForm">
       <h2>Job Dispatcher RESTful Web Services</h2>
-      <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-        visual
-        manner.</p>
+      <p>PSI-BLAST allows users to construct and perform a NCBI BLAST search with a custom, position-specific, scoring matrix which can help find distant evolutionary relationships. 
+        Users can specify pattern files to restrict search results using the PHI-BLAST functionality under 'more options'.</p>
       <div class="step-one-form">
-        <label>Step:1 - Enter your input sequence </label>
+        <h2>Step:1 - Enter your input sequence </h2>
 
         <div class="step-one-drop-down">
           <p>Enter a type of Matrix</p>
@@ -79,6 +82,14 @@
               </option>
             </select>
           </div>
+          <div class="more-option">
+            <p>Alignment View</p>
+            <select formControlName="alignView">
+              <option *ngFor="let AlignView of alignView.values.values" [ngValue]="AlignView.value">
+                {{ AlignView.label }}
+              </option>
+            </select>
+          </div>
           <div class="more-option part">
             <p>Drop Off</p>
             <select formControlName="dropoff">
@@ -89,7 +100,7 @@
           </div>
           <div class="more-option">
             <p>Final Drop Off</p>
-            <select formControlName="alignView">
+            <select formControlName="finaldropoff">
               <option *ngFor="let Finaldropoff of finaldropoff.values.values" [ngValue]="Finaldropoff.value">
                 {{ Finaldropoff.label }}
               </option>

@@ -37,26 +37,32 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Input Format</p>
-        <select formControlName="inputformat">
-          <option *ngFor="let item of inputformat.values.values" [ngValue]="item.value" [selected]="item.defaultValue">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Output Format</p>
-        <select formControlName="outputformat">
-          <option *ngFor="let item of outputformat.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Feature</p>
-        <select formControlName="feature">
-          <option *ngFor="let Feature of feature.values.values" [ngValue]="Feature.value">
-            {{ Feature.label }}
-          </option>
-        </select>
-        <div>
-          <div class="more-option">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Input Format</p>
+            <select formControlName="inputformat">
+              <option *ngFor="let item of inputformat.values.values" [ngValue]="item.value" [selected]="item.defaultValue">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Output Format</p>
+            <select formControlName="outputformat">
+              <option *ngFor="let item of outputformat.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Feature</p>
+            <select formControlName="feature">
+              <option *ngFor="let Feature of feature.values.values" [ngValue]="Feature.value">
+                {{ Feature.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>First Only </p>
             <select formControlName="firstonly">
               <option *ngFor="let item of firstonly.values.values" [ngValue]="item.value" placeholder=" FIRST ORF">
@@ -64,7 +70,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Reverse</p>
             <select formControlName="reverse">
               <option *ngFor="let Reverse of reverse.values.values" [ngValue]="Reverse.value">
@@ -72,7 +78,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Output Case</p>
             <select formControlName="outputcase">
               <option *ngFor="let Outputcase of outputcase.values.values" [ngValue]="Outputcase.value">
@@ -80,7 +86,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Sequence Range</p>
             <select formControlName="seqrange">
               <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">

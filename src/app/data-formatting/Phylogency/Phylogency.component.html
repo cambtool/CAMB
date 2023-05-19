@@ -1,89 +1,102 @@
-<div class="pack-head">
+<div class="positionRelative">
+  <ng-container *ngIf="showLoader">
+    <div class="overlay"></div>
+    <div class="progressBar">
+      <mat-progress-spinner class="custom-spinner" [mode]="'indeterminate'" [value]="'Your Job Is Still Processing'"></mat-progress-spinner>
+      <h2>Your Job Is Still Processing</h2>
+    </div>
+  </ng-container>
+  <div class="pack-head">
+    <div class="page-size">
+      <h1>Simple Phylogeny</h1>
+    </div>
+  </div>
   <div class="page-size">
-    <h1>Simple Phylogeny</h1>
+    <div class="form">
+      <form [formGroup]="registrationForm">
+        <h2>Simple Phylogeny</h2>
+        <p>This tool provides access to phylogenetic tree generation methods from the ClustalW2 package. 
+          Please note this is NOT a multiple sequence alignment tool. To perform a multiple sequence alignment please use one of our MSA tools.</p>
+        <div class="step-one-form">
+          <h2>Step:1 - Enter your input sequence </h2>
+          <p>Enter or paste a multiple sequence alignment in any supported format:</p>
+          <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
+            placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+  
+        </textarea>
+          <div class="btn">
+            <button (click)="toggle()" id="equence-btn">
+              Use a examples equence
+            </button>
+            <button (click)="handleClear()">Clear</button>
+          </div>
+        </div>
+        <div class="step-two-form">
+          <h2>STEP 2 - Select Parameters</h2>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <p>Tree Format</p>
+              <select formControlName="tree">
+                <option *ngFor="let item of tree.values.values" [ngValue]="item.value">
+                  {{ item.label }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <p>Distance Correction</p>
+              <select formControlName="kimura">
+                <option *ngFor="let item of kimura.values.values" [ngValue]="item.value">
+                  {{ item.label }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <p>Exclude Gaps</p>
+          <select formControlName="tossgaps">
+            <option *ngFor="let Tossgaps of tossgaps.values.values" [ngValue]="Tossgaps.value">
+              {{ Tossgaps.label }}
+            </option>
+          </select>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <p>Clustering Method</p>
+                <select formControlName="clustering">
+                  <option *ngFor="let Cluster of clustering.values.values" [ngValue]="Cluster.value">
+                    {{ Cluster.label }}
+                  </option>
+                </select>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <p>PIM</p>
+                <select formControlName="pim">
+                  <option *ngFor="let pim of pim.values.values" [ngValue]="pim.value">
+                    {{ pim.label }}
+                  </option>
+                </select>
+    
+            </div>
+          </div>
+        </div>
+        <div class="step-three-form">
+          <h2>STEP 3 - Submit your job</h2>
+          <p>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
+            Be notified by email (Tick this box if you want to be notified by email when the results are available)
+          </p>
+          <div *ngIf="show3">
+            <div class="job-frm">
+              <input id="textbox" type="text" placeholder="Email" formControlName="email">
+              <input id="textbox" type="text" placeholder="Title" formControlName="title">
+              <p>
+                If available, the title will be included in the subject of the notification email and can be used as a way
+                to
+                identify your analysis</p>
+            </div>
+          </div>
+          <button id="btnn" (click)="onSubmit(registrationForm.value)" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-<div class="page-size">
-  <div class="form">
-    <form [formGroup]="registrationForm">
-      <h2>Simple Phylogeny</h2>
-      <p>This tool provides access to phylogenetic tree generation methods from the ClustalW2 package. Please note this
-        is NOT a multiple sequence alignment tool.</p>
-      <div class="step-one-form">
-        <label>Step:1 - Enter your input sequence </label>
-        <p>Enter or paste a multiple sequence alignment in any supported format:</p>
-        <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
-          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
-
-      </textarea>
-        <div class="btn">
-          <button (click)="toggle()" id="equence-btn">
-            Use a examples equence
-          </button>
-          <button (click)="handleClear()">Clear</button>
-        </div>
-      </div>
-      <div class="step-two-form">
-        <h2>STEP 2 - Select Parameters</h2>
-        <p>Tree Format</p>
-        <select formControlName="tree">
-          <option *ngFor="let item of tree.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Distance Correction</p>
-        <select formControlName="kimura">
-          <option *ngFor="let item of kimura.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Exclude Gaps</p>
-        <select formControlName="tossgaps">
-          <option *ngFor="let Tossgaps of tossgaps.values.values" [ngValue]="Tossgaps.value">
-            {{ Tossgaps.label }}
-          </option>
-        </select>
-        <div>
-          <div class="more-option">
-            <p>Clustering Method</p>
-            <select formControlName="clustering">
-              <option *ngFor="let Cluster of clustering.values.values" [ngValue]="Cluster.value">
-                {{ Cluster.label }}
-              </option>
-            </select>
-          </div>
-
-        </div>
-        <div>
-          <div class="more-option">
-            <p>PIM</p>
-            <select formControlName="pim">
-              <option *ngFor="let pim of pim.values.values" [ngValue]="pim.value">
-                {{ pim.label }}
-              </option>
-            </select>
-          </div>
-
-        </div>
-      </div>
-      <div class="step-three-form">
-        <h2>STEP 3 - Submit your job</h2>
-        <p>
-          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (click)="checkbox()">
-          Be notified by email (Tick this box if you want to be notified by email when the results are available)
-        </p>
-        <div *ngIf="show3">
-          <div class="job-frm">
-            <input id="textbox" type="text" placeholder="Email" formControlName="email">
-            <input id="textbox" type="text" placeholder="Title" formControlName="title">
-            <p>
-              If available, the title will be included in the subject of the notification email and can be used as a way
-              to
-              identify your analysis</p>
-          </div>
-        </div>
-        <button id="btnn" (click)="onSubmit(registrationForm.value)" type="submit">Submit</button>
-      </div>
-    </form>
-  </div>
+  
 </div>

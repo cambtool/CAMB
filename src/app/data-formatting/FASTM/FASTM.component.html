@@ -7,9 +7,7 @@
   <div class="form">
     <form [formGroup]="registrationForm">
 
-      <p>This tool provides sequence similarity searching against protein databases using the FASTM suite of programs.
-         FASTM provides a heuristic search with a protein query. FASTX and FASTY translate a DNA query.
-         Optimal searches are available with SSEARCH (local), GGSEARCH (global) and GLSEARCH (global query, local database).</p>
+      <p>This tool provides peptide similarity searching against protein databases using the FASTM/FASTS/FASTF programs.</p>
       <div class="step-one-form">
         <h2>Step:1 - Enter your input </h2>
 
@@ -28,97 +26,172 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Program</p>
-        <select formControlName="program">
-          <option *ngFor="let item of program.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Stype</p>
-        <select formControlName="stype">
-          <option *ngFor="let item of stype.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Matrix</p>
-        <select formControlName="matrix">
-          <option *ngFor="let Feature of matrix.values.values" [ngValue]="Feature.value">
-            {{ Feature.label }}
-          </option>
-        </select>
-        <p>Match_scores </p>
-        <select formControlName="match_scores">
-          <option *ngFor="let item of match_scores.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Gapopen </p>
-        <select formControlName="gapopen">
-          <option *ngFor="let item of gapopen.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Gapext </p>
-        <select formControlName="gapext">
-          <option *ngFor="let item of gapext.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Hsps </p>
-        <select formControlName="hsps">
-          <option *ngFor="let item of hsps.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Expupperlim </p>
-        <select formControlName="expupperlim">
-          <option *ngFor="let item of expupperlim.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Explowlim </p>
-        <select formControlName="explowlim">
-          <option *ngFor="let item of explowlim.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Strand </p>
-        <select formControlName="strand">
-          <option *ngFor="let item of strand.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Hist </p>
-        <select formControlName="hist">
-          <option *ngFor="let item of hist.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Scores </p>
-        <select formControlName="scores">
-          <option *ngFor="let item of scores.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Alignments </p>
-        <select formControlName="alignments">
-          <option *ngFor="let item of alignments.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Score Format </p>
-        <select formControlName="scoreformat">
-          <option *ngFor="let item of scoreformat.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Stats </p>
-        <select formControlName="stats">
-          <option *ngFor="let item of stats.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <pre>{{registrationForm.value | json}}</pre>
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Program</p>
+            <select formControlName="program">
+              <option *ngFor="let item of program.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Stype</p>
+            <select formControlName="stype">
+              <option *ngFor="let item of stype.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Matrix</p>
+            <select formControlName="matrix">
+              <option *ngFor="let Feature of matrix.values.values" [ngValue]="Feature.value">
+                {{ Feature.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Match_scores </p>
+            <select formControlName="match_scores">
+              <option *ngFor="let item of match_scores.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Gapopen </p>
+            <select formControlName="gapopen">
+              <option *ngFor="let item of gapopen.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Gapext </p>
+            <select formControlName="gapext">
+              <option *ngFor="let item of gapext.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Hsps </p>
+            <select formControlName="hsps">
+              <option *ngFor="let item of hsps.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Expupperlim </p>
+            <select formControlName="expupperlim">
+              <option *ngFor="let item of expupperlim.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Explowlim </p>
+            <select formControlName="explowlim">
+              <option *ngFor="let item of explowlim.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Strand </p>
+            <select formControlName="strand">
+              <option *ngFor="let item of strand.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Hist </p>
+            <select formControlName="hist">
+              <option *ngFor="let item of hist.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Scores </p>
+            <select formControlName="scores">
+              <option *ngFor="let item of scores.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Alignments </p>
+            <select formControlName="alignments">
+              <option *ngFor="let item of alignments.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Score Format </p>
+            <select formControlName="scoreformat">
+              <option *ngFor="let item of scoreformat.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Stats </p>
+            <select formControlName="stats">
+              <option *ngFor="let item of stats.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <pre>{{registrationForm.value | json}}</pre>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Db Range </p>
+            <select formControlName="dbrange">
+              <option *ngFor="let item of dbrange.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Seq Range </p>
+            <select formControlName="seqrange">
+              <option *ngFor="let item of seqrange.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Filter </p>
+            <select formControlName="filter">
+              <option *ngFor="let item of filter.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Database </p>
+            <select formControlName="database">
+              <option *ngFor="let item of database.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Ktup </p>
+            <select formControlName="ktup">
+              <option *ngFor="let item of ktup.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+         
+        </div>
         <!-- <p>annotfeats </p>
         <select formControlName="annotfeats">
           <option *ngFor="let item of annotfeats.values.values" [ngValue]="item.value">
@@ -131,42 +204,15 @@
             {{ item.label }}
           </option>
         </select> -->
-        <p>Db Range </p>
-        <select formControlName="dbrange">
-          <option *ngFor="let item of dbrange.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Seq Range </p>
-        <select formControlName="seqrange">
-          <option *ngFor="let item of seqrange.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Filter </p>
-        <select formControlName="filter">
-          <option *ngFor="let item of filter.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
+       
+        
+       
         <!-- <p>transltable </p>
         <select formControlName="transltable">
           <option *ngFor="let item of transltable.values.values" [ngValue]="item.value">
             {{ item.label }}
           </option>
         </select> -->
-        <p>Database </p>
-        <select formControlName="database">
-          <option *ngFor="let item of database.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Ktup </p>
-        <select formControlName="ktup">
-          <option *ngFor="let item of ktup.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
       </div>
 
       <div class="step-three-form">

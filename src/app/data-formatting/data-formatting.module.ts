@@ -19,6 +19,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { DataFormattingComponent } from './data-formatting.component';
 import { OtherToolsComponent } from './other-tools/other-tools.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatDialogModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatProgressSpinnerModule,
 
   ],
   exports: [

@@ -1,3 +1,8 @@
+
+<ng-container *ngIf="showLoader">
+  <div class="overlay"></div>
+  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+</ng-container>
 <div class="pack-head">
   <div class="page-size">
     <h1>EMBL-EBI Web Services</h1>
@@ -7,7 +12,8 @@
   <div class="form">
     <form [formGroup]="registrationForm">
       <h2>NCBI BLAST+</h2>
-      <p>BLAST stands for Basic Local Alignment Search Tool.The emphasis of this tool is to find regions of sequence similarity, which will yield functional and evolutionary clues about the structure and function of your sequence.</p>
+      <p>BLAST stands for Basic Local Alignment Search Tool.The emphasis of this tool is to find regions of sequence similarity, 
+        which will yield functional and evolutionary clues about the structure and function of your sequence.</p>
       <div class="step-one-form">
         <h2>Step:1 - Enter your input sequence </h2>
 
@@ -33,26 +39,32 @@
       </div>
       <div class="step-two-form">
         <h2>STEP 2 - Select Parameters</h2>
-        <p>Gapopen</p>
-        <select formControlName="gapopen">
-          <option *ngFor="let item of gapopen.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Gapext</p>
-        <select formControlName="gapext">
-          <option *ngFor="let item of gapext.values.values" [ngValue]="item.value">
-            {{ item.label }}
-          </option>
-        </select>
-        <p>Task</p>
-        <select formControlName="task">
-          <option *ngFor="let Task of task.values.values" [ngValue]="Task.value">
-            {{ Task.label }}
-          </option>
-        </select>
-        <div>
-          <div class="more-option">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Gapopen</p>
+            <select formControlName="gapopen">
+              <option *ngFor="let item of gapopen.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Gapext</p>
+            <select formControlName="gapext">
+              <option *ngFor="let item of gapext.values.values" [ngValue]="item.value">
+                {{ item.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Task</p>
+            <select formControlName="task">
+              <option *ngFor="let Task of task.values.values" [ngValue]="Task.value">
+                {{ Task.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Program </p>
             <select formControlName="program">
               <option *ngFor="let item of program.values.values" [ngValue]="item.value" placeholder=" psithr">
@@ -60,7 +72,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Scores</p>
             <select formControlName="scores">
               <option *ngFor="let scores of scores.values.values" [ngValue]="scores.value">
@@ -68,7 +80,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Alignments</p>
             <select formControlName="alignments">
               <option *ngFor="let Alignments of alignments.values.values" [ngValue]="Alignments.value">
@@ -76,7 +88,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>dropoff</p>
             <select formControlName="dropoff">
               <option *ngFor="let Dropoff of dropoff.values.values" [ngValue]="Dropoff.value">
@@ -84,7 +96,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Exp</p>
             <select formControlName="exp">
               <option *ngFor="let Exp of exp.values.values" [ngValue]="Exp.value">
@@ -92,7 +104,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Filter</p>
             <select formControlName="filter">
               <option *ngFor="let Filter of filter.values.values" [ngValue]="Filter.value">
@@ -100,7 +112,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Seqrange</p>
             <select formControlName="seqrange">
               <option *ngFor="let Seqrange of seqrange.values.values" [ngValue]="Seqrange.value">
@@ -108,7 +120,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Database</p>
             <select formControlName="database">
               <option *ngFor="let Database of database.values.values" [ngValue]="Database.value">
@@ -116,7 +128,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Match_scores</p>
             <select formControlName="match_scores">
               <option *ngFor="let Match_scores of match_scores.values.values" [ngValue]="Match_scores.value">
@@ -124,7 +136,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Hsps</p>
             <select formControlName="hsps">
               <option *ngFor="let Hsps of hsps.values.values" [ngValue]="Hsps.value">
@@ -132,7 +144,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Gapalign</p>
             <select formControlName="gapalign">
               <option *ngFor="let Gapalign of gapalign.values.values" [ngValue]="Gapalign.value">
@@ -140,8 +152,7 @@
               </option>
             </select>
           </div>
-
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Wordsize</p>
             <select formControlName="wordsize">
               <option *ngFor="let Wordsize of wordsize.values.values" [ngValue]="Wordsize.value">
@@ -149,7 +160,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Taxids</p>
             <!-- <select formControlName="taxids">
               <option *ngFor="let Taxids of taxids.values" [ngValue]="taxids.value">
@@ -158,7 +169,7 @@
             </select> -->
             <input type="text" formControlName="taxids">
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Compstats</p>
             <select formControlName="compstats">
               <option *ngFor="let Compstats of compstats.values.values" [ngValue]="Compstats.value">
@@ -166,7 +177,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Align</p>
             <select formControlName="align">
               <option *ngFor="let Align of align.values.values" [ngValue]="Align.value">
@@ -174,7 +185,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Transltable</p>
             <select formControlName="transltable">
               <option *ngFor="let Transltable of transltable.values.values" [ngValue]="Transltable.value">
@@ -182,7 +193,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Stype</p>
             <select formControlName="stype">
               <option *ngFor="let Stype of stype.values.values" [ngValue]="Stype.value">
@@ -190,7 +201,7 @@
               </option>
             </select>
           </div>
-          <div class="more-option">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <p>Negative_taxids</p>
             <!-- <select formControlName="negative_taxids">
               <option *ngFor="let Negative_taxids of negative_taxids.values.values" [ngValue]="negative_taxids.value">
@@ -199,9 +210,9 @@
             </select> -->
             <input type="test" formControlName="negative_taxids">
           </div>
+          
         </div>
       </div>
-
       <div class="step-three-form">
         <h2>STEP 3 - Submit your job</h2>
         <p>

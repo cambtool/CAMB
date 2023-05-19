@@ -7,12 +7,11 @@
   <div class="form">
     <form [formGroup]="registrationForm">
 
-      <p>Takes as input a protein sequence and produces the nucleic acid sequence that is most probable to have generated it.
-        Remove keyword emboss</p>
+      <p>Takes as input a protein sequence and produces the nucleic acid sequence that is most probable to have generated it. </p>
       <div class="step-one-form">
         <h2>Step:1 - Enter your input </h2>
 
-        <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
+        <p>Enter or paste a PROTIEN/RNA sequence in any supported format:</p>
         <p>sequence :</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
           placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">

@@ -19,6 +19,7 @@ export class EmblEbiComponent implements OnInit {
   jobStatus: string = '';
   show: boolean = false;
   show3:boolean = false;
+  showLoader: boolean = false;
   currentSub: Subscription | undefined;
   isSubmitted = false;
   taxids: any = []
@@ -186,7 +187,7 @@ export class EmblEbiComponent implements OnInit {
 
   }
   getResult(){
-    this.spinner.show()
+    this.showLoader = true;
 
     this.currentSub = timer(20000).pipe(
       mergeMap(() => 
@@ -207,6 +208,7 @@ export class EmblEbiComponent implements OnInit {
             },(error)=>{
               console.log(error);
               if (error.status == 200) {
+                this.showLoader = false;
                 let result = error.error.text;
                 const dialogRef = this.dialog.open(ResultComponent, {
                   data: {
