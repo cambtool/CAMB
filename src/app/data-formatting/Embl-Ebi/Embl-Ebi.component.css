@@ -1,3 +1,55 @@
 .step-two-form input {
     width: 100%;
 }
+.positionRelative{
+    position: relative !important;
+  }
+  /* Customize the size of the progress spinner */
+    .overlay{
+      background-color: rgb(0,0,0,0.4);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .progressBar{
+      width: 50%;
+      margin: 0 auto;
+      position: absolute;
+      top: 10%;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      z-index: 2;
+    }
+    .progressBar .custom-spinner {
+      margin: 0 auto;
+  
+    }
+    .progressBar h2{
+      text-align: center;
+      margin: 0;
+      font-size: 25px;
+      padding-top: 20px;
+      color: #fff;
+    }
+    
+    /* Change the color of the progress spinner */
+    .custom-spinner .mat-progress-spinner-circle {
+      stroke: red;
+    }
+    
+    /* Change the color of the background circle */
+    .custom-spinner .mat-progress-spinner-circle, 
+    .custom-spinner .mat-progress-spinner-circle.mat-progress-spinner-primary {
+      stroke: blue;
+    }
+    
+    /* Change the color of the progress value */
+    .custom-spinner .mat-progress-spinner-circle.mat-progress-spinner-primary .mat-progress-spinner-path {
+      stroke: green;
+    }
+    ::ng-deep .mat-progress-spinner circle {
+        stroke: #fff !important;
+    }

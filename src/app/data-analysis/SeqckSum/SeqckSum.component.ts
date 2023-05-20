@@ -18,6 +18,7 @@ export class SeqckSumComponent implements OnInit {
   show: boolean = false;
   show2 = false;
   show3 = false;
+  showLoader: boolean = false
   currentSub: Subscription | undefined;
   isSubmitted = false;
   jobId: any;
@@ -76,41 +77,42 @@ export class SeqckSumComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
-            this.service.SEQStatus(this.jobId).subscribe(
-              data => {
-                this.toaster.success(data.toString())
-              }, (error) => {
-                if (error.status == 200) {
-                  this.jobStatus = error.error.text
-                  this.toaster.info(this.jobStatus)
-                  setTimeout(() => {
-                    // if (this.jobStatus != "FAILURE") {
-                    this.service.SEQResult(this.jobId, 'out').subscribe(
-                      success => {
-                        console.log(success);
-                      },
-                      error => {
-                        console.log(error);
-                        if (error.status == 200) {
-                          let result = error.error.text;
-                          const dialogRef = this.dialog.open(ResultComponent, {
-                            data: {
-                              text: result
-                            }
-                          });
-                        }else {
-                          this.toaster.error(error.error)
-                        }
-                      }
-                    )
-                    // }
-                  }, 3000);
-                }
-                else {
-                  this.toaster.error(error.error)
-                }
-              }
-            )
+            this.getResult()
+            // this.service.SEQStatus(this.jobId).subscribe(
+            //   data => {
+            //     this.toaster.success(data.toString())
+            //   }, (error) => {
+            //     if (error.status == 200) {
+            //       this.jobStatus = error.error.text
+            //       this.toaster.info(this.jobStatus)
+            //       setTimeout(() => {
+            //         // if (this.jobStatus != "FAILURE") {
+            //         this.service.SEQResult(this.jobId, 'out').subscribe(
+            //           success => {
+            //             console.log(success);
+            //           },
+            //           error => {
+            //             console.log(error);
+            //             if (error.status == 200) {
+            //               let result = error.error.text;
+            //               const dialogRef = this.dialog.open(ResultComponent, {
+            //                 data: {
+            //                   text: result
+            //                 }
+            //               });
+            //             }else {
+            //               this.toaster.error(error.error)
+            //             }
+            //           }
+            //         )
+            //         // }
+            //       }, 3000);
+            //     }
+            //     else {
+            //       this.toaster.error(error.error)
+            //     }
+            //   }
+            // )
           }
         } else {
           this.toaster.error(error.error)
@@ -118,7 +120,7 @@ export class SeqckSumComponent implements OnInit {
       })
   }
   getResult(){
-    // this.spinner.show()
+    this.showLoader = true
 
     this.currentSub = timer(20000).pipe(
       mergeMap(() => 
@@ -139,6 +141,7 @@ export class SeqckSumComponent implements OnInit {
             },(error)=>{
               console.log(error);
               if (error.status == 200) {
+                this.showLoader = false
                 let result = error.error.text;
                 const dialogRef = this.dialog.open(ResultComponent, {
                   data: {
@@ -152,7 +155,13 @@ export class SeqckSumComponent implements OnInit {
             }
           )
         } else{
-          this.getResult()
+          if (this.jobStatus == "RUNNING") {
+            this.getResult()
+          }
+          else {
+            this.showLoader = false;
+            this.currentSub?.unsubscribe()
+          }
         }
       }else {
         this.toaster.error(error.error)

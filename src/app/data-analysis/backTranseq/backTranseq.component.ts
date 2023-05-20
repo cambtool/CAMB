@@ -19,6 +19,7 @@ export class BackTranseqComponent implements OnInit {
   show: boolean = false;
   show2 = false;
   show3 = false;
+  showLoader: boolean = false
   isSubmitted = false;
   jobId: any;
   currentSub: Subscription | undefined;
@@ -113,7 +114,7 @@ export class BackTranseqComponent implements OnInit {
       })
   }
   getResult(){
-    // this.spinner.show()
+    this.showLoader = true
 
     this.currentSub = timer(20000).pipe(
       mergeMap(() => 
@@ -134,6 +135,7 @@ export class BackTranseqComponent implements OnInit {
             },(error)=>{
               console.log(error);
               if (error.status == 200) {
+                this.showLoader = false
                 let result = error.error.text;
                 const dialogRef = this.dialog.open(ResultComponent, {
                   data: {
@@ -147,7 +149,13 @@ export class BackTranseqComponent implements OnInit {
             }
           )
         } else{
-          this.getResult()
+          if (this.jobStatus == "RUNNING") {
+            this.getResult()
+          }
+          else {
+            this.showLoader = false;
+            this.currentSub?.unsubscribe()
+          }
         }
       }else {
         this.toaster.error(error.error)

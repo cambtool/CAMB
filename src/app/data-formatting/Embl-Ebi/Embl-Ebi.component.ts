@@ -222,7 +222,13 @@ export class EmblEbiComponent implements OnInit {
             }
           )
         } else{
-          this.getResult()
+          if (this.jobStatus == "RUNNING") {
+            this.getResult()
+          }
+          else {
+            this.showLoader = false;
+            this.currentSub?.unsubscribe()
+          }
         }
       }else {
         this.toaster.error(error.error)

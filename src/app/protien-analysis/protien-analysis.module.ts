@@ -15,6 +15,7 @@ import { SequenceStatistsComponent } from './sequenceStatists/sequenceStatists.c
 import { EmbossWaterComponent } from './embossWater/embossWater.component';
 import { PrattComponent } from './pratt/pratt.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ReactiveFormsModule,
     MatDialogModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     CommonModule,

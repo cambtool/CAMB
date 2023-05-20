@@ -4,72 +4,108 @@
         <mat-tab-group animationDuration="0ms">
           <mat-tab label="Tool Name">
             <h2>Protien Analysis an Conversions</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only five centuries,</p>
+            <p>Protein analysis is crucial in a wide range of scientific disciplines and industries due to
+              its numerous benefits and applications. By studying proteins, researchers can gain
+              insights into their structure, function, and interactions, which are essential for
+              understanding biological processes and disease mechanisms. Protein analysis plays a
+              vital role in disease research and diagnostics, as it helps identify biomarkers, monitor
+              disease progression, and develop personalized treatments. Moreover, it is instrumental
+              in drug discovery and development, enabling the identification of potential drug targets
+              and the evaluation of drug safety and efficacy. In the agricultural and food science
+              sectors, protein analysis ensures food safety, quality, and nutritional value, while also
+              contributing to the improvement of crop yields and livestock breeding programs.
+              Additionally, protein analysis is fundamental in biotechnology and industrial applications,
+              facilitating the characterization and optimization of recombinant proteins and ensuring
+              product consistency and quality. Overall, protein analysis is an indispensable tool that
+              drives advancements in scientific knowledge, healthcare, food production, and industrial
+              innovation.</p>
             <div class="row paddingTop">
               <div class="col-md-6 col-sm-6 col-xs-6">
-                <img src="../assets/images/sideImg.jpg" alt="" style="width:100%;">
+                <img src="../assets/images/protien_analysis_menu.jpg" alt="" style="width:530px; height: 360px;">
               </div>
-              <div class="col-md-6 col-sm-6 col-xs-6">
+              <!-- <div class="col-md-6 col-sm-6 col-xs-6">
                 <img src="../assets/images/sideImg.jpg" alt="" style="width:100%;">
-              </div>
+              </div> -->
             </div>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only five centuries,</p>
+            
           </mat-tab>
           <mat-tab label="PEPINFO">
             <h2>PEPINFO</h2>
-            <p>Pepinfo creates a variety of plots that display different amino acid properties, such as hydropathy or charged residues, and their position in the sequence.</p>
+            <p>PEPINFO is a widely used bioinformatics tool that predicts and analyzes protein-protein
+              interaction (PPI) sites. It provides valuable information on the residues involved in
+              protein interactions, aiding in the understanding of protein function, cellular processes,
+              and disease mechanisms. PEPINFO&#39;s predictive capabilities make it a valuable
+              resource for researchers in the fields of molecular biology and drug discovery.</p>
+              
             <button class="btnFormating" [routerLink]="['/protienAnalysis/pepInfo']"
               routerLinkActive="router-link-active">
               Button</button>
           </mat-tab>
           <mat-tab label="PEPSTAT">
             <h2>PEPSTAT</h2>
-            <p>Pepstats calculates statistics for your protein such as molecular weight, isoelectric point etc.</p>
+            <p>PEPSTAT is a potent inhibitor of the enzyme pepsin, which plays a critical role in the
+              digestion of proteins in the stomach. It is commonly used in research and
+              pharmaceutical industries to study and regulate pepsin activity. PEPSTAT&#39;s inhibitory
+              properties make it a valuable tool in understanding gastric physiology and developing
+              treatments for acid-related disorders.</p>
+              
             <button class="btnFormating" [routerLink]="['/protienAnalysis/pepstat']"
             routerLinkActive="router-link-active">Button</button>
           </mat-tab>
           <mat-tab label="PEPWINDOW">
             <h2>PEPWINDOW</h2>
-            <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-              visual manner.</p>
+            <p>PEPWINDOW is a bioinformatics tool commonly used for protein analysis. It calculates
+              and displays the hydrophobicity profiles and secondary structure predictions of protein
+              sequences, helping researchers gain insights into protein structure and function.
+              PEPWINDOW aids in understanding the physicochemical properties of proteins,
+              contributing to various areas such as drug discovery, disease research, and protein
+              engineering.</p>
             <button class="btnFormating" [routerLink]="['/protienAnalysis/pepwindow']"
             routerLinkActive="router-link-active">Button</button>
           </mat-tab>
           <mat-tab label="SATSISTS">
             <h2>SATSISTS</h2>
-            <p>This tool provides sequence similarity searching against protein databases using the FASTA suite of programs.
-              FASTA provides a heuristic search with a protein query. FASTX and FASTY translate a DNA query.
-              Optimal searches are available with SSEARCH (local), GGSEARCH (global) and GLSEARCH (global query, local database).</p>
+            <p>Statistical analysis of protein sequences involves the application of computational and
+              statistical methods to study patterns, relationships, and characteristics of proteins. It
+              aids in identifying conserved regions, predicting protein structure and function,
+              understanding evolutionary relationships, and uncovering sequence motifs or patterns
+              associated with specific biological functions or diseases. This analysis plays a crucial
+              role in bioinformatics and has significant implications for protein research, drug
+              discovery, and personalized medicine.</p>
             <button class="btnFormating" [routerLink]="['/protienAnalysis/ststists']"
             routerLinkActive="router-link-active">Button</button>
           </mat-tab>
           <mat-tab label="WATER">
             <h2>Pairwise Sequence Alignment</h2>
-            <p>EMBOSS Water uses the Smith-Waterman algorithm (modified for speed enhancements) to calculate the local alignment of two sequences.</p>
+            <p>EMBOSS Water is a powerful tool for performing local sequence alignment between two
+              biological sequences. It is based on a modified version of the Smith-Waterman
+              algorithm, which is known for its sensitivity in detecting subtle sequence similarities.
+              EMBOSS Water provides a versatile and efficient solution for comparing DNA or protein
+              sequences, allowing researchers to identify regions of similarity, detect conserved
+              motifs, and uncover functional relationships. With its speed enhancements, EMBOSS
+              Water enables accurate and rapid analysis of sequence data, contributing to
+              advancements in genomics, proteomics, and other areas of biological research.</p>
             <button class="btnFormating" [routerLink]="['/protienAnalysis/water']"
             routerLinkActive="router-link-active">Button</button>
           </mat-tab>
           <mat-tab label="PRATT">
-            <h2>Job Dispatcher RESTful Web Services</h2>
-            <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
-              visual manner.</p>
+            <h2>PRATT</h2>
+            <p>PRATT stands for &quot;Protein Annotation Through Transcripts&quot; and is a computational tool
+              used for protein function prediction. It integrates transcriptomic data with protein
+              sequence information to provide functional annotations for proteins. PRATT aids in
+              understanding the biological roles and functions of proteins, contributing to the field of
+              functional genomics.</p>
             <button class="btnFormating" [routerLink]="['/protienAnalysis/pratt']"
             routerLinkActive="router-link-active">Button</button>
           </mat-tab>
           <mat-tab label="EMBL-EBI">
             <h2>EMBL-EBI</h2>
-            <p>This tool provides access to phylogenetic tree generation methods from the ClustalW2 package. Please note this
-              is NOT a multiple sequence alignment tool.</p>
+            <p>EMBL-EBI (European Molecular Biology Laboratory-European Bioinformatics Institute)
+              is a leading global research institution and hub for bioinformatics and computational
+              biology. It provides vital resources and expertise in managing and analyzing biological
+              data, fostering collaboration, and advancing research in areas such as genomics,
+              proteomics, and structural biology. EMBL-EBI plays a pivotal role in driving innovation
+              and discoveries in the life sciences.</p>
             <button class="btnFormating" [routerLink]="['/protienAnalysis/EMBL-EBI']"
             routerLinkActive="router-link-active">Button</button>
           </mat-tab>

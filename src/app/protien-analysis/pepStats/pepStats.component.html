@@ -1,3 +1,11 @@
+<div class="positionRelative">
+  <ng-container *ngIf="showLoader">
+    <div class="overlay"></div>
+    <div class="progressBar">
+      <mat-progress-spinner class="custom-spinner" [mode]="'indeterminate'" [value]="'Your Job Is Still Processing'"></mat-progress-spinner>
+      <h2>Your Job Is Still Processing</h2>
+    </div>
+  </ng-container>
 <div class="pack-head">
   <div class="page-size">
     <h1>EMBOSS Pepstats</h1>
@@ -64,3 +72,4 @@
       </div>
     </form>
   </div>
+</div>

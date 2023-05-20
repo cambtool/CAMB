@@ -129,39 +129,40 @@ export class PSI_blastComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
-            this.service.PSIStatus(this.jobId).subscribe(
-              data => {
-                this.toaster.success(data.toString())
-              }, (error) => {
-                if (error.status == 200) {
-                  this.jobStatus = error.error.text
-                  this.toaster.info(this.jobStatus)
-                  setTimeout(() => {
-                    this.service.PSIResult(this.jobId, 'out').subscribe(
-                      success => {
-                        console.log(success);
-                      },
-                      error => {
-                        console.log(error);
-                        if (error.status == 200) {
-                          let result = error.error.text;
-                          const dialogRef = this.dialog.open(ResultComponent, {
-                            data: {
-                              text: result
-                            }
-                          });
-                        }else {
-                          this.toaster.error(error.error)
-                        }
-                      }
-                    )
-                  }, 15000);
-                }
-                else {
-                  this.toaster.error(error.error)
-                }
-              }
-            )
+            // this.service.PSIStatus(this.jobId).subscribe(
+            //   data => {
+            //     this.toaster.success(data.toString())
+            //   }, (error) => {
+            //     if (error.status == 200) {
+            //       this.jobStatus = error.error.text
+            //       this.toaster.info(this.jobStatus)
+            //       setTimeout(() => {
+            //         this.service.PSIResult(this.jobId, 'out').subscribe(
+            //           success => {
+            //             console.log(success);
+            //           },
+            //           error => {
+            //             console.log(error);
+            //             if (error.status == 200) {
+            //               let result = error.error.text;
+            //               const dialogRef = this.dialog.open(ResultComponent, {
+            //                 data: {
+            //                   text: result
+            //                 }
+            //               });
+            //             }else {
+            //               this.toaster.error(error.error)
+            //             }
+            //           }
+            //         )
+            //       }, 15000);
+            //     }
+            //     else {
+            //       this.toaster.error(error.error)
+            //     }
+            //   }
+            // )
+            this.getResult()
           }
         } else {
           this.toaster.error(error.error)
@@ -204,7 +205,13 @@ export class PSI_blastComponent implements OnInit {
             }
           )
         } else{
-          this.getResult()
+          if (this.jobStatus == "RUNNING") {
+            this.getResult()
+          }
+          else {
+            this.showLoader = false;
+            this.currentSub?.unsubscribe()
+          }
         }
       }else {
         this.toaster.error(error.error)

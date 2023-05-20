@@ -21,6 +21,7 @@ export class CeqretComponent implements OnInit {
   currentSub: Subscription | undefined;
   show2 = false;
   show3 = false;
+  showLoader: boolean = false
   isSubmitted = false;
   codontable: any = [];
   reverse: any = [];
@@ -140,7 +141,7 @@ export class CeqretComponent implements OnInit {
       })
   }
   getResult() {
-    // this.spinner.show()
+    this.showLoader = true
     this.currentSub = timer(15000).pipe(
       mergeMap(() => 
       this.service.getEmboss_SixpackStatus(this.jobId))
@@ -160,6 +161,7 @@ export class CeqretComponent implements OnInit {
             },(error)=>{
               console.log(error);
               if (error.status == 200) {
+                this.showLoader = false
                 let result = error.error.text;
                 const dialogRef = this.dialog.open(ResultComponent, {
                   data: {
@@ -173,7 +175,13 @@ export class CeqretComponent implements OnInit {
             }
           )
         } else{
-          this.getResult()
+          if (this.jobStatus == "RUNNING") {
+            this.getResult()
+          }
+          else {
+            this.showLoader = false;
+            this.currentSub?.unsubscribe()
+          }
         }
       }else {
         this.toaster.error(error.error)

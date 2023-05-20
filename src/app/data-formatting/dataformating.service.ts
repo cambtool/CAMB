@@ -230,16 +230,16 @@ export class DataformatingService {
       "Content-Type": "multipart/form-data"
     });
     let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_isochore/run";
+    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_cpgplot/run";
     return this.http.post(url, obj, options)
   }
   CPGPLOtStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_isochore/status/' + jobId
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_cpgplot/status/' + jobId
     return this.http.get(url);
   }
 
   CPGPLOtResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_isochore/result/' + jobId + '/' + statusType
+    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_cpgplot/result/' + jobId + '/' + statusType
     return this.http.get(url);
   }
 

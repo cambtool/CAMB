@@ -18,6 +18,7 @@ import { BackTranseqComponent } from './backTranseq/backTranseq.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DnaOtherToolsComponent } from './dna-other-tools/dna-other-tools.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { DnaOtherToolsComponent } from './dna-other-tools/dna-other-tools.compon
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     CommonModule,

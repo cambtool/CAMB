@@ -20,6 +20,7 @@ export class FASTAComponent implements OnInit {
   show2 = false;
   currentSub: Subscription | undefined;
   show3 = false;
+  showLoader: boolean = false
   isSubmitted = false;
   jobId: any;
   jobStatus: any;
@@ -153,6 +154,7 @@ export class FASTAComponent implements OnInit {
         if (error.status == 200) {
           this.jobId = error.error.text
           if (this.jobId != null) {
+            this.getResult()
             // this.service.FASTAStatus(this.jobId).subscribe(
             //   data => {
             //     this.toaster.success(data.toString())
@@ -193,7 +195,7 @@ export class FASTAComponent implements OnInit {
       })
   }
   getResult() {
-    // this.spinner.show()
+    this.showLoader = true;
     this.currentSub = timer(15000).pipe(
       mergeMap(() => 
       this.service.FASTAStatus(this.jobId))
@@ -213,6 +215,7 @@ export class FASTAComponent implements OnInit {
             },(error)=>{
               console.log(error);
               if (error.status == 200) {
+                this.showLoader = false;
                 let result = error.error.text;
                 const dialogRef = this.dialog.open(ResultComponent, {
                   data: {
@@ -226,7 +229,13 @@ export class FASTAComponent implements OnInit {
             }
           )
         } else{
-          this.getResult()
+          if (this.jobStatus == "RUNNING") {
+            this.getResult()
+          }
+          else {
+            this.showLoader = false;
+            this.currentSub?.unsubscribe()
+          }
         }
       }else {
         this.toaster.error(error.error)
