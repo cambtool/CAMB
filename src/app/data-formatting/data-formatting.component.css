@@ -1,20 +1,20 @@
-:host /deep/ .mat-tab-group {
+::ng-deep .mat-tab-group {
   flex-direction: row;
 }
-:host /deep/ .mat-tab-header {
+::ng-deep .mat-tab-header {
   border-bottom: none;
 }
-:host /deep/ .mat-tab-header-pagination {
+::ng-deep .mat-tab-header-pagination {
   display: none !important;
 }
-:host /deep/ .mat-tab-labels {
+::ng-deep .mat-tab-labels {
   flex-direction: column;
 }
-:host /deep/ .mat-ink-bar {
+::ng-deep .mat-ink-bar {
   height: 100%;
   left: 98% !important;
 }
-:host /deep/ .mat-tab-body-wrapper {
+::ng-deep .mat-tab-body-wrapper {
   flex: 1 1 auto;
 }
 ::ng-deep .mat-tab-label {
