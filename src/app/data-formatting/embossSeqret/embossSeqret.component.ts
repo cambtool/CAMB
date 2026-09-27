@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { FormBuilder, FormControl } from '@angular/forms';
 import { DataformatingService } from '../dataformating.service';
-import { Subject, Subscription, timer } from 'rxjs';
+import { EbiJobRunnerService } from 'src/app/core/ebi-job-runner.service';
+import { toggleFlag, clearControl } from 'src/app/core/tool-form.helpers';
+import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { ResultComponent } from '../result/result.component';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-embossSeqret',
   templateUrl: './embossSeqret.component.html',
@@ -34,9 +32,7 @@ export class EmbossSeqretComponent implements OnInit {
   jobStatus: string = '';
   public buttonName: any = 'More option...';
 
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient,
-    private toaster: ToastrService, public dialog: MatDialog
-  ) {
+  constructor(public fb: FormBuilder, private service: DataformatingService , private toaster: ToastrService, public dialog: MatDialog, private jobRunner: EbiJobRunnerService) {
 
   }
   registrationForm = this.fb.group({
@@ -74,10 +70,10 @@ export class EmbossSeqretComponent implements OnInit {
     this.registrationForm.controls.sequence.setValue("ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
   }
   checkbox() {
-    this.show3 = !this.show3
+    this.show3 = toggleFlag(this.show3);
   }
   handleClear() {
-    this.registrationForm.controls.sequence.setValue('');
+    clearControl(this.registrationForm, 'sequence');
   }
   onSubmit(xml: any): void {
     let formdata = new FormData();
@@ -100,108 +96,21 @@ export class EmbossSeqretComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    this.service.EMB_Run(formdata).subscribe(
-      success => {
-        console.log(success);
-      },
-      error => {
-        console.log(error);
-        if (error.status == 200) {
-          this.jobId = error.error.text
-          if (this.jobId != null) {
-            this.getResult();
-            // this.service.EMBStatus(this.jobId).subscribe(
-            //   data => {
-            //     this.toaster.success(data.toString())
-            //   }, (error) => {
-            //     if (error.status == 200) {
-            //       this.jobStatus = error.error.text
-            //       this.toaster.info(this.jobStatus)
-            //       setTimeout(() => {
-            //         // if (this.jobStatus != "FAILURE") {
-            //         this.service.EMBResult(this.jobId, 'out').subscribe(
-            //           success => {
-            //             console.log(success);
-            //           },
-            //           error => {
-            //             console.log(error);
-            //             if (error.status == 200) {
-            //               let result = error.error.text;
-            //               const dialogRef = this.dialog.open(ResultComponent, {
-            //                 data: {
-            //                   text: result
-            //                 }
-            //               });
-            //             } else {
-            //               this.toaster.error(error.error)
-            //             }
-            //           }
-            //         )
-            //         // }
-            //       }, 15000);
-            //     }
-            //     else {
-            //       this.toaster.error(error.error)
-            //     }
-            //   }
-            // )
-          }
-        } else {
-          this.toaster.error(error.error)
-        }
-      })
-  }
-  getResult() {
-    this.showLoader = true;
-    this.currentSub = timer(10000).pipe(
-      mergeMap(() => 
-      this.service.EMBStatus(this.jobId))
-    ).subscribe((response:any)=>{
-      console.log(response);
-      // this.message_arr = response.resp;
-    },(error)=>{
-      console.log(error);
-      if (error.status == 200) {
-        this.jobStatus = error.error.text
-        this.toaster.info(this.jobStatus)
-        if (this.jobStatus!= "RUNNING") {
-          this.service.EMBResult(this.jobId, 'out').subscribe(
-            (response:any)=>{
-              console.log(response);
-              // this.message_arr = response.resp;
-            },(error)=>{
-              console.log(error);
-              if (error.status == 200) {
-                this.showLoader = false;
-                let result = error.error.text;
-                const dialogRef = this.dialog.open(ResultComponent, {
-                  data: {
-                    text: result
-                  }
-                });
-              }else {
-                this.toaster.error(error.error)
-                this.getResult()
-              }
-            }
-          )
-        } else{
-          if (this.jobStatus == "RUNNING") {
-            this.getResult()
-          }
-          else {
-            this.showLoader = false;
-            this.currentSub?.unsubscribe()
-          }
-        }
-      }else {
-        this.toaster.error(error.error)
-        this.getResult()
-      }
+    this.currentSub = this.jobRunner.submit({
+      run: this.service.EMB_Run(formdata),
+      status: (jobId) => this.service.EMBStatus(jobId),
+      result: (jobId) => this.service.EMBResult(jobId, 'out'),
+      pollDelayMs: 10000,
+      toaster: this.toaster,
+      dialog: this.dialog,
+      setLoading: (loading) => this.showLoader = loading,
+      onJobId: (jobId) => this.jobId = jobId,
+      onStatus: (status) => this.jobStatus = status,
     });
   }
-  ngOnDestroy () {
-    this.currentSub?.unsubscribe()
+
+  ngOnDestroy() {
+    this.currentSub?.unsubscribe();
   }
 }
 

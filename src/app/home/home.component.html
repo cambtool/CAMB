@@ -1,136 +1,69 @@
-<div class="container-fluid">
-
-  <div class="row">
-    <div class="mainHeader">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-          <li data-target="#myCarousel" data-slide-to="4"></li>
-          <li data-target="#myCarousel" data-slide-to="5"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-          <div class="item active">
-            <img src="assets/images/11.jpg" alt="Los Angeles" style="width:100%;">
-          </div>
-
-          <div class="item">
-            <img src="assets/images/6.jpg" alt="Chicago" style="width:100%;">
-          </div>
-
-          <div class="item">
-            <img src="assets/images/5.jpg" alt="New york" style="width:100%;">
-          </div>
-
-          <div class="item">
-            <img src="assets/images/4.jpg" alt="New york" style="width:100%;">
-          </div>
-
-          <div class="item">
-            <img src="assets/images/3.jpg" alt="New york" style="width:100%;">
-          </div>
-
-          <div class="item">
-            <img src="assets/images/2.jpg" alt="New york" style="width:100%;">
-          </div>
-        </div>
-
-        <!-- Left and right controls -->
-        <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-        </a> -->
+<section class="hero">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="assets/images/11.jpg" alt="Laboratory research">
+      </div>
+      <div class="item">
+        <img src="assets/images/6.jpg" alt="Sequence analysis">
+      </div>
+      <div class="item">
+        <img src="assets/images/5.jpg" alt="Molecular biology">
+      </div>
+      <div class="item">
+        <img src="assets/images/4.jpg" alt="Genomics">
+      </div>
+      <div class="item">
+        <img src="assets/images/3.jpg" alt="Bioinformatics">
+      </div>
+      <div class="item">
+        <img src="assets/images/2.jpg" alt="Microbiology">
       </div>
     </div>
   </div>
-</div>
-<div class="container-xxl">
-  <div class="row mainHeader">
-    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-      <h2>Microbiomes</h2>
-      <p>In bioinformatics, the term microbiome refers to the collection of microorganisms that live within a specific
-        environment, such as the human body, soil, or water. The study of microbiomes, also known as microbiome
-        research, involves the use of computational and bioinformatics methods to analyze and understand the diversity,
-        structure, and function of these microbial communities.</p>
-    </div>
+  <div class="hero-copy page-size">
+    <p class="eyebrow">CAMB bioinformatics</p>
+    <h1>Sequence tools for formatting, DNA, and protein analysis</h1>
+    <p>Submit a sequence, follow the job status, and review the result when the analysis finishes.</p>
   </div>
-</div>
-<div class="container-xxl">
-  <div class="row mainHeader">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <h2>Data formatting and Conversions</h2>
-      <p>Data formatting and conversions refers to the process of organizing and structuring the data generated from
-        microbiome studies in a format that can be easily read and understood by bioinformatics software and algorithms.
-        It involves converting the data from one format to another, such as converting FASTQ files to FASTA files.</p>
-      <button routerLink="/dataFormatting/Detail" class="btnFormating">Button</button>
+</section>
+
+<section class="intro page-size">
+  <h2>Microbiomes</h2>
+  <p>In bioinformatics, the microbiome is the collection of microorganisms that live in a specific environment, such as the body, soil, or water. These tools help organize that sequence data and run the analyses used to study its structure and function.</p>
+</section>
+
+<section class="module-grid page-size">
+  <article class="module-card">
+    <img src="assets/images/Data Formatting.jpg" alt="Data formatting">
+    <div>
+      <h2>Data formatting and conversions</h2>
+      <p>Organize microbiome sequence data into formats that analysis software can read, including conversions such as FASTQ to FASTA.</p>
+      <button routerLink="/dataFormatting/Detail" class="btnFormating">Open tools</button>
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <img src="assets/images/Data Formatting.jpg" alt="" style="width:100%;height:285px;object-fit:cover;">
+  </article>
+  <article class="module-card">
+    <img src="assets/images/Data Formtting 2.jpg" alt="DNA analysis">
+    <div>
+      <h2>DNA analysis</h2>
+      <p>Inspect sequence composition, CpG islands, translations, and related DNA features with the EMBL-EBI analysis tools.</p>
+      <button routerLink="/dataAnalysis/Detail" class="btnFormating">Open tools</button>
     </div>
-  </div>
-  <div class="row mainHeader">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <img src="assets/images/Data Formtting 2.jpg" alt="" style="width:100%;height:280px;object-fit:cover;">
+  </article>
+  <article class="module-card">
+    <img src="assets/images/Protein.jpg" alt="Protein analysis">
+    <div>
+      <h2>Protein analysis</h2>
+      <p>Review protein properties, windows, pairwise alignment, and related sequence statistics from the same job workflow.</p>
+      <button routerLink="/protienAnalysis/Detail" class="btnFormating">Open tools</button>
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <h2>DNA Analysis</h2>
-      <p>Study of genetic information encoded in DNA, which is essential for understanding the structure and function of genes and genomes. In the field of bioinformatics, DNA sequence data is analyzed using various software and tools to extract valuable information, including the identification of genes, genetic variations, and regulatory elements. This information is crucial for investigating gene functions, identifying mutations that cause diseases, and developing innovative therapies.
-      
-      </p>
-      <button routerLink="/dataAnalysis/Detail" class="btnFormating">Button</button>
-    </div>
-  </div>
-  <div class="row mainHeader">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <h2>Protein Analysis</h2>
-      <p>Protein analysis refers to the use of computational methods to analyze and interpret the protein sequencing
-        data generated from microbiome studies. This can include various bioinformatics techniques such as functional
-        annotation, protein function prediction, and protein-protein interaction prediction.</p>
-      <button routerLink="/protienAnalysis/Detail" class="btnFormating">Button</button>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <img src="assets/images/Protein.jpg" alt="" style="width:100%;height:265px;object-fit:cover;">
-    </div>
-  </div>
-</div>
-<!-- <div class="container">
-  <div class="row mainHeader">
-    <h2 class="blogsHead text-center">Blogs</h2>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="blogsMain">
-        <img src="../assets/images/pitfalls-3.jpg" alt="Card image">
-        <div class="card-body">
-          <h3>The standard Lorem Ipsum passage.</h3>
-          <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="blogsMain">
-        <img src="../assets/images/1.jpg" alt="Card image">
-        <div class="card-body">
-          <h3>The standard Lorem Ipsum passage.</h3>
-          <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="blogsMain">
-        <img src="../assets/images/deploying-automations.jpg" alt="Card image">
-        <div class="card-body">
-          <h3>The standard Lorem Ipsum passage.</h3>
-          <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
+  </article>
+</section>

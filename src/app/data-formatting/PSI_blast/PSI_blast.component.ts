@@ -1,12 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription, timer } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { DataformatingService } from '../dataformating.service';
-import { ResultComponent } from '../result/result.component';
+import { EbiJobRunnerService } from 'src/app/core/ebi-job-runner.service';
+import { toggleFlag, clearControl } from 'src/app/core/tool-form.helpers';
 
 @Component({
   selector: 'app-PSI_blast',
@@ -42,7 +41,7 @@ export class PSI_blastComponent implements OnInit {
   seqrange: any = []
   data: any = [];
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient ,private toaster: ToastrService,public dialog: MatDialog) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService ,private toaster: ToastrService,public dialog: MatDialog, private jobRunner: EbiJobRunnerService) { }
   registrationForm = this.fb.group({
     matrix: new FormControl(''),
     gapopen: new FormControl(''),
@@ -90,10 +89,10 @@ export class PSI_blastComponent implements OnInit {
     this.registrationForm.controls.sequence.setValue(`MALRKGGLALALLLLSWVALGPRSLEGADPGTPGEAEGPACPAACVCSYDDDADELSVFCSSRNLTRLPDGVPGGTQALWLDGNNLSSVPPAAFQNLSSLGFLNLQGGQLGSLEPQALLGLENLCHLHLERNQLRSLALGTFAHTPALASLGLSNNRLSRLEDGLFEGLGSLWDLNLGWNSLAVLPDAAFRGLGSLRELVLAGNRLAYLQPALFSGLAELRELDLSRNALRAIKANVFVQLPRLQKLYLDRNLIAAVAPGAFLGLKALRWLDLSHNRVAGLLEDTFPGLLGLRVLRLSHNAIASLRPRTFKDLHFLEELQLGHNRIRQLAERSFEGLGQLEVLTLDHNQLQEVKAGAFLGLTNVAVMNLSGNCLRNLPEQVFRGLGKLHSLHLEGSCLGRIRPHTFTGLSGLRRLFLKDNGLVGIEEQSLWGLAELLELDLTSNQLTHLPHRLFQGLGKLEYLLLSRNRLAELPADALGPLQRAFWLDVSHNRLEALPNSLLAPLGRLRYLSLRNNSLRTFTPQPPGLERLWLEGNPWDCGCPLKALRDFALQNPSAVPRFVQAICEGDDCQPPAYTYNNITCASPPEVVGLDLRDLSEAHFAPC`);
   }
   checkbox() {
-    this.show3 = !this.show3
+    this.show3 = toggleFlag(this.show3);
   }
   handleClear() {
-    this.registrationForm.controls.sequence.setValue('');
+    clearControl(this.registrationForm, 'sequence');
   }
   onSubmit(xml: any): void {
     let formdata = new FormData();
@@ -120,106 +119,20 @@ export class PSI_blastComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    this.service.PSI_Run(formdata).subscribe(
-      success => {
-        console.log(success);
-      },
-      error => {
-        console.log(error);
-        if (error.status == 200) {
-          this.jobId = error.error.text
-          if (this.jobId != null) {
-            // this.service.PSIStatus(this.jobId).subscribe(
-            //   data => {
-            //     this.toaster.success(data.toString())
-            //   }, (error) => {
-            //     if (error.status == 200) {
-            //       this.jobStatus = error.error.text
-            //       this.toaster.info(this.jobStatus)
-            //       setTimeout(() => {
-            //         this.service.PSIResult(this.jobId, 'out').subscribe(
-            //           success => {
-            //             console.log(success);
-            //           },
-            //           error => {
-            //             console.log(error);
-            //             if (error.status == 200) {
-            //               let result = error.error.text;
-            //               const dialogRef = this.dialog.open(ResultComponent, {
-            //                 data: {
-            //                   text: result
-            //                 }
-            //               });
-            //             }else {
-            //               this.toaster.error(error.error)
-            //             }
-            //           }
-            //         )
-            //       }, 15000);
-            //     }
-            //     else {
-            //       this.toaster.error(error.error)
-            //     }
-            //   }
-            // )
-            this.getResult()
-          }
-        } else {
-          this.toaster.error(error.error)
-        }
-      })
-
-  }
-  getResult() {
-    this.showLoader = true;
-    this.currentSub = timer(10000).pipe(
-      mergeMap(() => 
-      this.service.PSIStatus(this.jobId))
-    ).subscribe((response:any)=>{
-      console.log(response);
-      // this.message_arr = response.resp;
-    },(error)=>{
-      console.log(error);
-      if (error.status == 200) {
-        this.jobStatus = error.error.text
-        this.toaster.info(this.jobStatus)
-        if (this.jobStatus!= "RUNNING") {
-          this.service.PSIResult(this.jobId, 'out').subscribe(
-            (response:any)=>{
-              console.log(response);
-              // this.message_arr = response.resp;
-            },(error)=>{
-              console.log(error);
-              if (error.status == 200) {
-                this.showLoader = false;
-                let result = error.error.text;
-                const dialogRef = this.dialog.open(ResultComponent, {
-                  data: {
-                    text: result
-                  }
-                });
-              }else {
-                this.toaster.error(error.error)
-                this.getResult()
-              }
-            }
-          )
-        } else{
-          if (this.jobStatus == "RUNNING") {
-            this.getResult()
-          }
-          else {
-            this.showLoader = false;
-            this.currentSub?.unsubscribe()
-          }
-        }
-      }else {
-        this.toaster.error(error.error)
-        this.getResult()
-      }
+    this.currentSub = this.jobRunner.submit({
+      run: this.service.PSI_Run(formdata),
+      status: (jobId) => this.service.PSIStatus(jobId),
+      result: (jobId) => this.service.PSIResult(jobId, 'out'),
+      pollDelayMs: 10000,
+      toaster: this.toaster,
+      dialog: this.dialog,
+      setLoading: (loading) => this.showLoader = loading,
+      onJobId: (jobId) => this.jobId = jobId,
+      onStatus: (status) => this.jobStatus = status,
     });
   }
-  ngOnDestroy () {
-    this.currentSub?.unsubscribe()
+
+  ngOnDestroy() {
+    this.currentSub?.unsubscribe();
   }
 }

@@ -1,12 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription, timer } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { DataformatingService } from 'src/app/data-formatting/dataformating.service';
-import { ResultComponent } from 'src/app/data-formatting/result/result.component';
+import { EbiJobRunnerService } from 'src/app/core/ebi-job-runner.service';
+import { toggleMoreOptions, toggleFlag, clearControl } from 'src/app/core/tool-form.helpers';
 
 @Component({
   selector: 'app-pratt',
@@ -30,8 +29,7 @@ export class PrattComponent implements OnInit {
   public buttonName: any = 'More option...';
   jobStatus: any;
   jobId: any;
-  constructor(public fb: FormBuilder, private service: DataformatingService, private http: HttpClient,
-    private toaster: ToastrService, public dialog: MatDialog) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService , private toaster: ToastrService, public dialog: MatDialog, private jobRunner: EbiJobRunnerService) { }
      registrationForm = this.fb.group({
     sequence: new FormControl(''),
     format:new FormControl(''),
@@ -59,17 +57,15 @@ export class PrattComponent implements OnInit {
     DAHAAWDKFLSIVSGVLTEKYR  `);
   }
   toggleinput() {
-    this.show2 = !this.show2
-    if (this.show2)
-      this.buttonName = "See Less";
-    else
-      this.buttonName = "More option";
+    const more = toggleMoreOptions(this.show2);
+    this.show2 = more.show;
+    this.buttonName = more.label;
   }
   checkbox() {
-    this.show3 = !this.show3
+    this.show3 = toggleFlag(this.show3);
   }
   handleClear() {
-    this.registrationForm.controls.sequence.setValue('');
+    clearControl(this.registrationForm, 'sequence');
   }
 
 
@@ -85,108 +81,21 @@ export class PrattComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    this.service.emboss_pratt_Run(formdata).subscribe(
-      success => {
-        console.log(success);
-      },
-      error => {
-        console.log(error);
-        if (error.status == 200) {
-          this.jobId = error.error.text
-          if (this.jobId != null) {
-            this.getResult()
-            // this.service.getEmboss_prattStatus(this.jobId).subscribe(
-            //   data => {
-            //     this.toaster.success(data.toString())
-            //   }, (error) => {
-            //     if (error.status == 200) {
-            //       this.jobStatus = error.error.text
-            //       this.toaster.info(this.jobStatus)
-            //       setTimeout(() => {
-            //         // if (this.jobStatus != "FAILURE") {
-            //         this.service.getEmboss_prattResult(this.jobId, 'out').subscribe(
-            //           success => {
-            //             console.log(success);
-            //           },
-            //           error => {
-            //             console.log(error);
-            //             if (error.status == 200) {
-            //               let result = error.error.text;
-            //               const dialogRef = this.dialog.open(ResultComponent, {
-            //                 data: {
-            //                   text: result
-            //                 }
-            //               });
-            //             }else {
-            //               this.toaster.error(error.error)
-            //             }
-            //           }
-            //         )
-            //         // }
-            //       }, 30000);
-            //     }
-            //     else {
-            //       this.toaster.error(error.error)
-            //     }
-            //   }
-            // )
-          }
-        } else {
-          this.toaster.error(error.error)
-        }
-      })
-  }
-  getResult() {
-    this.showLoader = true;
-    this.currentSub = timer(10000).pipe(
-      mergeMap(() => 
-      this.service.getEmboss_prattStatus(this.jobId))
-    ).subscribe((response:any)=>{
-      console.log(response);
-      // this.message_arr = response.resp;
-    },(error)=>{
-      console.log(error);
-      if (error.status == 200) {
-        this.jobStatus = error.error.text
-        this.toaster.info(this.jobStatus)
-        if (this.jobStatus!= "RUNNING") {
-          this.service.getEmboss_prattResult(this.jobId, 'out').subscribe(
-            (response:any)=>{
-              console.log(response);
-              // this.message_arr = response.resp;
-            },(error)=>{
-              console.log(error);
-              if (error.status == 200) {
-                this.showLoader = false;
-                let result = error.error.text;
-                const dialogRef = this.dialog.open(ResultComponent, {
-                  data: {
-                    text: result
-                  }
-                });
-              }else {
-                this.toaster.error(error.error)
-                this.getResult()
-              }
-            }
-          )
-        } else{
-          if (this.jobStatus == "RUNNING") {
-            this.getResult()
-          }
-          else {
-            this.showLoader = false;
-            this.currentSub?.unsubscribe()
-          }
-        }
-      }else {
-        this.toaster.error(error.error)
-        this.getResult()
-      }
+    this.currentSub = this.jobRunner.submit({
+      run: this.service.emboss_pratt_Run(formdata),
+      status: (jobId) => this.service.getEmboss_prattStatus(jobId),
+      result: (jobId) => this.service.getEmboss_prattResult(jobId, 'out'),
+      pollDelayMs: 10000,
+      toaster: this.toaster,
+      dialog: this.dialog,
+      setLoading: (loading) => this.showLoader = loading,
+      onJobId: (jobId) => this.jobId = jobId,
+      onStatus: (status) => this.jobStatus = status,
     });
   }
-  ngOnDestroy () {
-    this.currentSub?.unsubscribe()
+
+  ngOnDestroy() {
+    this.currentSub?.unsubscribe();
   }
 }
 

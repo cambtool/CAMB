@@ -1,431 +1,223 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { EbiToolsService } from '../core/ebi-tools.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataformatingService {
-  baseURL: any;
-  constructor(private http: HttpClient, private toaster: ToastrService,) { }
-  getformat(format: string) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/' + format;
-    const headers = { 'content-type': 'application/json' }
-    const body = JSON.stringify(format);
-    // console.log(body)
-    let option: any = {
-      body: format,
-      oberve: "response",
-      responseType: "blob",
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Accept": "application/xml"
-      })
-    }
-    return this.http.get<any>(url)
-  }
+  constructor(private ebi: EbiToolsService) { }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.error('An error occurred:', error.error);
-    } else {
-      console.log(`Backend returned code ${error.status}, body was: `, error.error);
-    }
-    return throwError(error.error);
+  getformat(format: string) {
+    return this.ebi.getResource(format);
   }
 
   emboss_sixpack_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_sixpack', obj);
   }
   getEmboss_SixpackStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_sixpack', jobId);
   }
   getEmboss_sixpackResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_sixpack', jobId, statusType);
   }
-
-
 
   phylogency_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/simple_phylogeny/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('simple_phylogeny', obj);
   }
   getPhylogencyStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/simple_phylogeny/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('simple_phylogeny', jobId);
   }
   getPhylogencyResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_sixpack/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_sixpack', jobId, statusType);
   }
-
 
   ncbiblast_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('ncbiblast', obj);
   }
   getncbiblastStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('ncbiblast', jobId);
   }
-
   getncbiblastResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('ncbiblast', jobId, statusType);
   }
 
   FASTM_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/fastm/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('fastm', obj);
   }
   FASTMStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fastm/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('fastm', jobId);
   }
-
   FASTMResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fastm/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('fastm', jobId, statusType);
   }
 
   FASTA_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/fasta/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('fasta', obj);
   }
   FASTAStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fasta/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('fasta', jobId);
   }
-
   FASTAResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/fasta/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('fasta', jobId, statusType);
   }
 
   NewCPG_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_newcpgreport/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_newcpgreport', obj);
   }
   NewCPGStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_newcpgreport/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_newcpgreport', jobId);
   }
-
   NewCPGResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_newcpgreport/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_newcpgreport', jobId, statusType);
   }
-
 
   TRANSEQ_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_backtranseq/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_backtranseq', obj);
   }
   TRANSEQStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_backtranseq/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_backtranseq', jobId);
   }
-
   TRANSEQResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_backtranseq/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_backtranseq', jobId, statusType);
   }
-
-
 
   ETRANSEQ_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_transeq/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_transeq', obj);
   }
   ETRANSEQStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_transeq/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_transeq', jobId);
   }
-
   ETRANSEQResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_transeq/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_transeq', jobId, statusType);
   }
-
-
 
   SEQ_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/seqcksum/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('seqcksum', obj);
   }
   SEQStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/seqcksum/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('seqcksum', jobId);
   }
-
   SEQResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/seqcksum/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('seqcksum', jobId, statusType);
   }
-
-
 
   ISOCHORE_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_isochore/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_isochore', obj);
   }
   ISOCHOREStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_isochore/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_isochore', jobId);
   }
-
   ISOCHOREResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_isochore/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_isochore', jobId, statusType);
   }
-
 
   CPGPLOt_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_cpgplot/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_cpgplot', obj);
   }
   CPGPLOtStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_cpgplot/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_cpgplot', jobId);
   }
-
   CPGPLOtResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_cpgplot/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_cpgplot', jobId, statusType);
   }
-
-
 
   genewise_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/genewise/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('genewise', obj);
   }
   genewiseStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/genewise/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('genewise', jobId);
   }
-
   genewiseResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/genewise/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('genewise', jobId, statusType);
   }
-
 
   EMB_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data",
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_seqret', obj);
   }
   EMBStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_seqret', jobId);
   }
-
   EMBResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_seqret/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_seqret', jobId, statusType);
   }
-
 
   PSI_Run(obj: FormData) {
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/psiblast/run";
-    return this.http.post(url, obj, options)
+    return this.ebi.run('psiblast', obj);
   }
   PSIStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/psiblast/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('psiblast', jobId);
   }
-
   PSIResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/psiblast/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('psiblast', jobId, statusType);
   }
-
-
-
 
   emboss_pepinfo_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_pepinfo/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_pepinfo', obj);
   }
   getEmboss_pepinfoStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepinfo/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_pepinfo', jobId);
   }
   getEmboss_pepinfoResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepinfo/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_pepinfo', jobId, statusType);
   }
-
 
   emboss_pepstats_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_pepstats/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_pepstats', obj);
   }
   getEmboss_pepstatsStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepstats/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_pepstats', jobId);
   }
   getEmboss_pepstatsResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepstats/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_pepstats', jobId, statusType);
   }
-
 
   emboss_pepwindow_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_pepwindow/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_pepwindow', obj);
   }
   getEmboss_pepwindowStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepwindow/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_pepwindow', jobId);
   }
   getEmboss_pepwindowResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_pepwindow/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_pepwindow', jobId, statusType);
   }
-
 
   emboss_statists_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/saps/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('saps', obj);
   }
   getEmboss_statistsStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/saps/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('saps', jobId);
   }
   getEmboss_statistsResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/saps/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('saps', jobId, statusType);
   }
-
 
   emboss_water_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/emboss_water/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('emboss_water', obj);
   }
   getEmboss_waterStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_water/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('emboss_water', jobId);
   }
   getEmboss_waterResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/emboss_water/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('emboss_water', jobId, statusType);
   }
-
 
   emboss_pratt_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/phobius/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('phobius', obj);
   }
   getEmboss_prattStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('phobius', jobId);
   }
   getEmboss_prattResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('phobius', jobId, statusType);
   }
-
 
   emboss_ebi_Run(obj: FormData) {
-    let url = "https://www.ebi.ac.uk/Tools/services/rest/phobius/run";
-    let headers = new HttpHeaders({
-      "Content-Type": "multipart/form-data"
-    });
-    let options = { headers: headers };
-    return this.http.post(url, obj, options)
+    return this.ebi.run('phobius', obj);
   }
   getEmboss_ebitStatus(jobId: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/status/' + jobId
-    return this.http.get(url);
+    return this.ebi.status('phobius', jobId);
   }
   getEmboss_ebitResult(jobId: any, statusType: any) {
-    const url = 'https://www.ebi.ac.uk/Tools/services/rest/phobius/result/' + jobId + '/' + statusType
-    return this.http.get(url);
+    return this.ebi.result('phobius', jobId, statusType);
   }
 }

@@ -1,40 +1,25 @@
-<div class="header">
-  <div class="page-size">
-    <div class="header-logo">
-      <a routerLink="/home">
-        <img src="assets/images/CAMB-logo.png" alt="CAMB-logo" />
-      </a>
+<header class="site-header">
+  <div class="page-size header-inner">
+    <a class="brand" routerLink="/home">
+      <img src="assets/images/CAMB-logo.png" alt="CAMB" />
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/dataFormatting/Detail" routerLinkActive="active">Data Formatting</a>
+      <a routerLink="/dataAnalysis/Detail" routerLinkActive="active">DNA Analysis</a>
+      <a routerLink="/protienAnalysis/Detail" routerLinkActive="active">Protein Analysis</a>
+    </nav>
+    <div class="header-tools">
+      <a class="header-link" href="mailto:info@gmail.com">Contact</a>
+      <a class="header-link" href="#">Help</a>
     </div>
-    <div class="header-navigation">
-      <ul>
-        <li><a routerLink="/home"> Home </a></li>
-        <li><a routerLink="/dataFormatting/Detail">Data Formatting </a></li>
-        <li><a routerLink="/dataAnalysis/Detail"> DNA Analysis </a></li>
-        <li><a routerLink="/protienAnalysis/Detail"> Protien Analysis </a></li>
-      </ul>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Tools
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" routerLink="/dataFormatting/Detail" href="">Data Formatting </a>
-          <a class="dropdown-item" routerLink="/dataAnalysis/Detail" href=""> DNA Analysis </a>
-          <a class="dropdown-item" routerLink="/protienAnalysis/Detail" href=""> Protien Analysis </a>
-        </div>
-      </div>
-    </div>
-    <div class="info-navigation">
-      <ul>
-        <li><input type="search" id="gsearch"></li>
-        <li><a href="mailto:info@gmail.com"><img src="assets/images/email.png" alt="email" /></a></li>
-        <li><a href="#">Help</a></li>
-      </ul>
-    </div>
-
+    <details class="mobile-nav">
+      <summary>Menu</summary>
+      <a routerLink="/home">Home</a>
+      <a routerLink="/dataFormatting/Detail">Data Formatting</a>
+      <a routerLink="/dataAnalysis/Detail">DNA Analysis</a>
+      <a routerLink="/protienAnalysis/Detail">Protein Analysis</a>
+      <a href="mailto:info@gmail.com">Contact</a>
+    </details>
   </div>
-</div>
-<script>
-  const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
-  const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
-</script>
+</header>

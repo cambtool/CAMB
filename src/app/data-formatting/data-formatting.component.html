@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container module-page">
   <div class="row mainPadding">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <mat-tab-group animationDuration="0ms">
@@ -23,47 +23,46 @@
           <p>Users of PSI-BLAST can create and execute an NCBI BLAST search with a unique, position-specific score matrix that can be used to identify far-off evolutionary links. The PHI-BLAST functionality under "additional options" allows users to specify pattern files to limit search results.
           </p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/PSi']"
-            routerLinkActive="router-link-active">Button</button>
+            routerLinkActive="router-link-active">Open tool</button>
         </mat-tab>
         <mat-tab label="Simple Phylogeny">
           <h2>Simple Phylogeny</h2>
           <p>Phylogenetic tree generating techniques from the ClustalW2 package are accessible through this tool.
           </p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/Phylogeny']"
-            routerLinkActive="router-link-active">Button</button>
+            routerLinkActive="router-link-active">Open tool</button>
         </mat-tab>
         <mat-tab label="EMBOSS Sixpack">
           <h2>Sixpack</h2>
           <p>Sixpack reads a DNA sequence and outputs the three forward and (optionally) three reverse translations in a
             visual manner.</p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/Sixpack']"
-            routerLinkActive="router-link-active">Button</button>
+            routerLinkActive="router-link-active">Open tool</button>
         </mat-tab>
         <mat-tab label="FastA">
           <h2>FASTA</h2>
           <p>Utilizing the FASTA software suite, this application offers sequence similarity searching against protein databases. With a protein query, FASTA offers a heuristic search. A DNA query is translated by FASTX and FASTY. With SSEARCH (local), GGSEARCH (global), and GLSEARCH, you can conduct the best searches (global query, local database).</p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/fastA']"
-            routerLinkActive="router-link-active">Button</button>
+            routerLinkActive="router-link-active">Open tool</button>
         </mat-tab>
         <mat-tab label="FastM">
           <h2>FastM</h2>
           <p>Using the FASTM, FASTS, and FASTF tools, this tool offers peptide similarity searching against protein databases.</p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/fastM']"
-            routerLinkActive="router-link-active">Button</button>
+            routerLinkActive="router-link-active">Open tool</button>
         </mat-tab>
         
         <mat-tab label="NCBI BLAST">
           <h2>NCBI BLAST</h2>
           <p>BLAST stands for Basic Local Alignment Search Tool. Its main purpose is to identify areas of similarity in sequence, providing insights into the function and evolution of the sequence. This tool can be used to gain a better understanding of the structure and function of a given sequence by analyzing its similarities to other sequences.</p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/EBI']"
-            routerLinkActive="router-link-active">Button</button>
+            routerLinkActive="router-link-active">Open tool</button>
         </mat-tab>
         <mat-tab label="Emboss Seqret">
           <h2>EMBOSS Seqret</h2>
           <p>EMBOSS Seqret reads sequences and writes them (returns). It can be used for a range of activities, such as obtaining sequences from databases, displaying sequences, reformatting sequences, generating a sequence's reverse complement, obtaining sequence fragments, converting sequence case, or any combination of the aforementioned operations.</p>
           <button class="btnFormating" [routerLink]="['/dataFormatting/EmbossSeqret']"
-            routerLinkActive="router-link-active">
-            Button</button>
+            routerLinkActive="router-link-active">Open tool</button>
         </mat-tab>
         <mat-tab label="Other Tools">
           <app-other-tools></app-other-tools>

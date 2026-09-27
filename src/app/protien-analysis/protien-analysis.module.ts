@@ -16,6 +16,7 @@ import { EmbossWaterComponent } from './embossWater/embossWater.component';
 import { PrattComponent } from './pratt/pratt.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDialogModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    SharedModule,
   ],
   exports: [
     CommonModule,
