@@ -8,6 +8,7 @@
   </ng-container>
 <div class="pack-head">
   <div class="page-size">
+    <app-tool-back></app-tool-back>
     <h1>EMBOSS Pepstats</h1>
   </div>
 </div>
@@ -20,12 +21,12 @@
         <label>Step:1 - Enter your input sequence </label>
         <p>Enter or paste a PROTEIN sequence in any supported format:</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
-          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+          placeholder="Paste a sequence" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
 
       </textarea>
         <div class="btn">
           <button (click)="toggle()" id="equence-btn">
-            Use a examples equence
+            Use an example sequence
           </button>
           <button (click)="handleClear()">Clear</button>
         </div>
@@ -60,8 +61,8 @@
         </p>
         <div *ngIf="show3">
           <div class="job-frm">
-            <input id="textbox" type="text" placeholder="EMAil" formControlName="email">
-            <input id="textbox" type="text" placeholder="TITLE" formControlName="title">
+            <input id="textbox" type="text" placeholder="Email" formControlName="email">
+            <input id="textbox" type="text" placeholder="Title" formControlName="title">
             <p>
               If available, the title will be included in the subject of the notification email and can be used as a way
               to

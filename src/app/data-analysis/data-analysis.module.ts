@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DnaOtherToolsComponent } from './dna-other-tools/dna-other-tools.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    SharedModule,
   ],
   exports: [
     CommonModule,

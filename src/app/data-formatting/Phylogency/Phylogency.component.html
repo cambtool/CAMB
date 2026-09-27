@@ -8,7 +8,8 @@
   </ng-container>
   <div class="pack-head">
     <div class="page-size">
-      <h1>Simple Phylogeny</h1>
+      <app-tool-back></app-tool-back>
+    <h1>Simple Phylogeny</h1>
     </div>
   </div>
   <div class="page-size">
@@ -21,12 +22,12 @@
           <h2>Step:1 - Enter your input sequence </h2>
           <p>Enter or paste a multiple sequence alignment in any supported format:</p>
           <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
-            placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
+            placeholder="Paste a sequence" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="sequence">
   
         </textarea>
           <div class="btn">
             <button (click)="toggle()" id="equence-btn">
-              Use a examples equence
+              Use an example sequence
             </button>
             <button (click)="handleClear()">Clear</button>
           </div>

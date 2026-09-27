@@ -1,3 +1,4 @@
-<p [innerText]="result">
-</p>
-<button (click)="onClickDownloadPdf()"> Download </button>
+<div class="result-panel">
+  <pre>{{ result }}</pre>
+  <button type="button" (click)="onClickDownloadPdf()">Download</button>
+</div>

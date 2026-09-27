@@ -8,6 +8,7 @@
   </ng-container>
 <div class="pack-head">
   <div class="page-size">
+    <app-tool-back></app-tool-back>
     <h1>GENE WISE</h1>
   </div>
 </div>
@@ -22,16 +23,16 @@
         <p>Enter or paste a DNA/RNA sequence in any supported format:</p>
         <p>A sequence :</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
-          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="asequence">
+          placeholder="Paste a sequence" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="asequence">
 
         </textarea>
         <p>B sequence :</p>
         <textarea style="width: 99%; resize: vertical; height: 200px; outline-color: #014371;" matInput
-          placeholder="Your Message" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="bsequence">
+          placeholder="Paste a sequence" cdkTextareaAutosize cdkAutosizeMinRows="6" formControlName="bsequence">
         </textarea>
         <div class="btn">
           <button (click)="toggle()" id="equence-btn">
-            Use a examples equence
+            Use an example sequence
           </button>
           <button (click)="handleClear()">Clear</button>
         </div>

@@ -20,6 +20,7 @@ import { DataFormattingComponent } from './data-formatting.component';
 import { OtherToolsComponent } from './other-tools/other-tools.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -46,11 +47,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDialogModule,
     NgxSpinnerModule,
     MatProgressSpinnerModule,
+    SharedModule,
 
   ],
   exports: [
     CommonModule,
     MatSelectModule,
+    ResultComponent,
   ],
   providers: [DataformatingService]
 })

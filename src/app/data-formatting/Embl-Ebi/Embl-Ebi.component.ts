@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription, timer } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { DataformatingService } from '../dataformating.service';
-import { ResultComponent } from '../result/result.component';
+import { EbiJobRunnerService } from 'src/app/core/ebi-job-runner.service';
+import { toggleFlag, clearControl } from 'src/app/core/tool-form.helpers';
 
 @Component({
   selector: 'app-Embl-Ebi',
@@ -48,8 +47,7 @@ export class EmblEbiComponent implements OnInit {
   data: any = [];
   sequence:any=[]
   public buttonName: any = 'More option...';
-  constructor(public fb: FormBuilder, private service: DataformatingService,
-     private toaster: ToastrService, public dialog: MatDialog, private spinner: NgxSpinnerService) { }
+  constructor(public fb: FormBuilder, private service: DataformatingService, private toaster: ToastrService, public dialog: MatDialog, private jobRunner: EbiJobRunnerService) { }
   registrationForm = this.fb.group({
     matrix: new FormControl(''),
     sequence: new FormControl(''),
@@ -109,10 +107,10 @@ export class EmblEbiComponent implements OnInit {
     this.registrationForm.controls.sequence.setValue("ATGCCCCCCTACACCGTGGTGTACTTCCCCGTGAGAGGCAGATGCGCCGCCCTGAGAATGCTGCTGGCCGACCAGGGCCAGAGCTGGAAGGAGGAGGTGGTGACCGTGGAGACCT GGCAGGAGGGCAGCCTGAAGGCCAGCTGCCTGTACGGCCAGCTGCCCAAGTTCCAGGACGGCGACCTGACCCTGTACCAGAGCAACACCATCCTGAGACACCTGGGCAGAACCCT GGGCCTGTACGGCAAGGACCAGCAGGAGGCCGCCCTGGTGGACATGGTGAACGACGGCGTGGAGGACCTGAGATGCAAGTACATCAGCCTGATCTACACCAACTACGAGGCCGGCAAGGACGACT ACGTGAAGGCCCTGCCCGGCCAGCTGAAGCCCTTCGAGACCCTGCTGAGCCAGAACCAGGGCGGCAAGACCTTCATCGTGGGCGACCAGATCAGCTTCGCCGACTACAACCTGCTGGACCTGCT GCTGATCCACGAGGTGCTGGCCCCCGGCTGCCTGGACGCCTTCCCCCTGCTGAGCGCCTACGTGGGCAGACTGAGCGCCAGACCCAAGCTGAAGGCCTTCCTGGCCAGCCCCGAGTACGTGAACCT GCCCATCAACGGCAACGGCAAGCAGTAG");
   }
   checkbox() {
-    this.show3 = !this.show3
+    this.show3 = toggleFlag(this.show3);
   }
   handleClear() {
-    this.registrationForm.controls.sequence.setValue('');
+    clearControl(this.registrationForm, 'sequence');
   }
   onSubmit(xml: any): void {
     console.log(this.registrationForm.value);
@@ -145,99 +143,20 @@ export class EmblEbiComponent implements OnInit {
     if (!this.registrationForm.valid) {
       false;
     }
-    
-    this.service.ncbiblast_Run(formdata).subscribe(
-      success => {
-        console.log(success);
-      },
-      error => {
-        console.log(error);
-        if (error.status == 200) {
-          debugger
-          ;
-          this.jobId = error.error.text
-          if (this.jobId != null) {
-            this.getResult()
-          //   this.service.getncbiblastStatus(this.jobId).subscribe(
-          //     data => {
-          //       this.toaster.success(data.toString())
-          //     }, (error) => {
-          //       if (error.status == 200) {
-          //         this.jobStatus = error.error.text
-          //         this.toaster.info(this.jobStatus)
-          //         // setTimeout(() => {
-          //           // if (this.jobStatus != "FAILURE") {
-          //           this.getResult()
-                    
-          //           // }
-          //         // }, 30000);
-          //       }
-          //       else {
-          //         this.toaster.error(error.error)
-          //       }
-          //     }
-          //   )
-          }
-        }
-         else {
-          this.toaster.error(error.error)
-        }
-      })
-
-
-  }
-  getResult(){
-    this.showLoader = true;
-
-    this.currentSub = timer(20000).pipe(
-      mergeMap(() => 
-      this.service.getncbiblastStatus(this.jobId))
-    ).subscribe((response:any)=>{
-      console.log(response);
-      // this.message_arr = response.resp;
-    },(error)=>{
-      console.log(error);
-      if (error.status == 200) {
-        this.jobStatus = error.error.text
-        this.toaster.info(this.jobStatus)
-        if (this.jobStatus!= "RUNNING") {
-          this.service.getncbiblastResult(this.jobId, 'out').subscribe(
-            (response:any)=>{
-              console.log(response);
-              // this.message_arr = response.resp;
-            },(error)=>{
-              console.log(error);
-              if (error.status == 200) {
-                this.showLoader = false;
-                let result = error.error.text;
-                const dialogRef = this.dialog.open(ResultComponent, {
-                  data: {
-                    text: result
-                  }
-                });
-              }else {
-                this.toaster.error(error.error)
-                this.getResult()
-              }
-            }
-          )
-        } else{
-          if (this.jobStatus == "RUNNING") {
-            this.getResult()
-          }
-          else {
-            this.showLoader = false;
-            this.currentSub?.unsubscribe()
-          }
-        }
-      }else {
-        this.toaster.error(error.error)
-        this.getResult()
-      }
+    this.currentSub = this.jobRunner.submit({
+      run: this.service.ncbiblast_Run(formdata),
+      status: (jobId) => this.service.getncbiblastStatus(jobId),
+      result: (jobId) => this.service.getncbiblastResult(jobId, 'out'),
+      pollDelayMs: 20000,
+      toaster: this.toaster,
+      dialog: this.dialog,
+      setLoading: (loading) => this.showLoader = loading,
+      onJobId: (jobId) => this.jobId = jobId,
+      onStatus: (status) => this.jobStatus = status,
     });
-
   }
-  ngOnDestroy () {
-    this.currentSub?.unsubscribe()
+
+  ngOnDestroy() {
+    this.currentSub?.unsubscribe();
   }
 }
